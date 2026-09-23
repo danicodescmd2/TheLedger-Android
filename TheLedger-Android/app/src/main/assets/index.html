@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Ledger — Bookshop Inventory</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiVGhlIExlZGdlciBcdTIwMTQgQm9va3Nob3AgSW52ZW50b3J5Iiwic2hvcnRfbmFtZSI6IlRoZSBMZWRnZXIiLCJkZXNjcmlwdGlvbiI6IlRyYWNrIHN0b2NrIGFuZCBzYWxlcyBmb3IgYSBib29rc2hvcC4iLCJzdGFydF91cmwiOiIuIiwic2NvcGUiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0LXByaW1hcnkiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI0YzRUVERCIsInRoZW1lX2NvbG9yIjoiI0E5N0UyRiIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFFWDBsRVFWUjRuTzNhelZYYlFBQ0ZVWm1UYlRwZ3haWnlLQ1YxcEpTVXc1WVZIYVFBc2dqT2NSSkx0a2FqbjVsMzd6Ym4yQXE4VHlNRHArRmdIcCtmUHZhK0J0YjEvdnAyMnZzYXpuYTlFR1BuYks4b05uOVRvK2VXTFdQWTdJME1uN20yQ0dIMU56QjhsbG96aE5WZTJQQ3BiWTBRcXIrZzRiTzJtaUU4MUhxaFlUQit0bEZ6WjFWS01uejJzdlEwV0h3Q0dEOTdXcnEvUlFFWVAwZXdaSWZGQVJnL1IxSzZ4NklBako4akt0bmw3QUNNbnlPYnU4OVpBUmcvTFppejA3c0RNSDVhY3U5ZTd3ckErR25SUGJ1OUdZRHgwN0piKzYzNnB4RFFtc2tBM1AzcHdkU09Sd013Zm5veXRtZVBRRVM3R29DN1B6MjZ0bXNuQU5IK0M4RGRuNTc5dTI4bkFOSCtDc0RkbndTWE8zY0NFTzFQQU83K0pEbnYzUWxBTkFFUTdUUU1Ibi9JNVFRZ21nQ0lKZ0NpQ1lCb0R6NEFrOHdKUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFSzNaQUw2L2ZOMzdFdmpVOHZmaXk5NFhzTVRZRi83Ymo1OGJYMG1HbG9jK3B1a0F4Z2hqbVI2SFBxYUxBQzZIUGZYTm0vcTN4RGhLaG43djE3b1ZYUVJ3YVdySUpYSDBFTWJTb2Zlc3V3Q21qSDFUZXdpajlHNTh0UC9IMXFJQ0dOTlNHTzdtZFFsZ1FzMHdwbDV2N3V2VWVIMStFMENCMnA4emFyNC84d2lnc3BKVFkrNXJVWThBTm5KdHpKZFJHUHMrbXYxVENLaEJBRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRVFFCRUV3RFJCRUEwQVJCTkFFUVRBTkVFUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRN2N2ZUY1RGkrOHZYMmYvKzdjZlB0UzZIVHdLbzdOYlFhN3lXTU9vUlFJSFNrYzhaN3RSN0NLTWVBVXdvR1hxdEVZNjlqakRxRXNDdzc5QnJ2VzlKR0ZPdmx5SXFnSmFHUHRmVWRUbzF4blVYd0JiUDU2M3hPRFh1OVBqODlMSDNSWlRvK1c2K3Q2U3ZiWGNud0RDMCs4MDRpcElUbzFWTkIyRG8yK294akdZZmdhQUdmd3RFTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRVFFCRUV3RFJCRUEwQVJCTkFFUVRBTkVFUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFZTNoL2ZUdnRmUkd3RnljQTBRUkFOQUVRVFFCRWV4aUdZZkJCbUVUdnIyOG5Kd0RSQkVDMFB3RjREQ0xKZWU5T0FLTDlGWUJUZ0FTWE8zY0NFTzIvQUp3QzlPemZmVHNCaUhZMUFLY0FQYnEyYXljQTBVWURjQXJRazdFOVQ1NEFJcUFIVXp2MkNFUzBtd0U0QldqWnJmM2VkUUtJZ0JiZHM5dTdINEZFUUV2dTNldXN6d0Fpb0FWemRqcjdRN0FJT0xLNSt5ejZLWkFJT0tLU1hSYi9HRlFFSEVucEhoZjlIa0FFSE1HU0hTNytSWmdJMk5QUy9WVWQ3K1B6MDBmTjE0TXh0VzY4VmY4VXdtbkFGbXJ1YkxYQk9nMm9iWTBiN09wM2JDR3cxSnBQRnBzOXNnaUJ1Ylo0cE43OG1WMEkzTExsWjhsZFA3U0tnYk85Zm9EeUMwQ29VY0dUc2RTdEFBQUFBRWxGVGtTdVFtQ0MiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0seyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFPWEVsRVFWUjRuTzNjdlpYYjFnS0ZVWXlXVTNlZ3lLbktjU211dzZXNEhLV0sxSUVMa0lOWnRFYWNBVW1BOS8vc25UOC9FcVI0UGw1UWV0a1kwdWN2Zi96by9SZ0FTdm4rOWR0TDc4ZkFyN3dnblJoNGdKOEVRbnN1ZUFQR0h1QTRVVkNYaTF1QndRY29UeENVNVdJV1lQQUIyaE1FejNIeFRqTDZBT01RQThlNVlBY1lmWUR4aVlISHVFaDNHSDJBZVltQmZTN01Ec01Qc0E0aDhKNEw4b2JSQjFpZkdIamxJbXlHSHlCUmVnaEVQM25ERDBCcUNFUSthY01Qd0xXMEVJaDZzb1lmZ0h0U1FpRGlTUnArQUk1YVBRUSs5WDRBdFJsL0FNNVlmVCtXclp2Vlh6Z0EybG54TkdDNUoyVDRBYWhscFJCWTZoYUE4UWVncHBWMlpvbVNXZWtGQVdBT3M1OEdUSDhDWVB3QjZHSDIvWms2QUdhLytBRE1iZVlkbXZMNFl1WUxEc0NhWnJzbE1OMEpnUEVIWUVTejdkTlVBVERieFFVZ3kwdzdOY1Z4eFV3WEZBQzJiZnhiQXNPZkFCaC9BR1kwK240TkhRQ2pYendBdUdYa0hSczJBRWErYUFEd3FGSDNiTWdBR1BWaUFjQVpJKzdhY0FFdzRrVUNnR2VOdG05REJjQm9Gd2NBU2hwcDU0WUpnSkV1Q2dEVU1zcmVEUkVBbzF3TUFHaGhoTjNySGdBalhBUUFhSzMzL25VTmdONVBIZ0I2NnJtRDNRTEErQU5Bdnozc0VnREdId0IrNnJHTHpRUEErQVBBZTYzM3NXa0FHSDhBMk5keUo1c0ZnUEVIZ1B0YTdXV1RBREQrQVBDNEZydlovZDhCQUFEYXF4NEF2djBEd0hHMTk3TnFBQmgvQURpdjVvNVdDd0RqRHdEUHE3V25mZ01BQUlHcUJJQnYvd0JRVG8xZExSNEF4aDhBeWl1OXIwVUR3UGdEUUQwbGQ5WnZBQUFnVUxFQThPMGZBT29ydGJkRkFzRDRBMEE3SlhiWExRQUFDUFIwQVBqMkR3RHRQYnUvVGdBQUlOQlRBZURiUHdEMDg4d09udzRBNHc4QS9aM2RZN2NBQUNEUXFRRHc3UjhBeG5GbWw1MEFBRUNnd3dIZzJ6OEFqT2ZvUGpzQkFJQkFod0xBdDM4QUdOZVJuWFlDQUFDQkhnNEEzLzRCWUh5UDdyVVRBQUFJOUZBQStQWVBBUE40WkxlZEFBQkFJQUVBQUlIdUJvRGpmd0NZejczOWRnSUFBSUZ1Qm9Cdi93QXdyMXM3N2dRQUFBSUpBQUFJdEJzQWp2OEJZSDU3ZSs0RUFBQUNDUUFBQ1BSaEFEaitCNEIxZkxUclRnQUFJSkFBQUlCQTd3TEE4VDhBck9kNjM1MEFBRUFnQVFBQWdRUUFBQVQ2SlFEYy93ZUFkYjNkZVNjQUFCQklBQUJBSUFFQUFJSCtEd0QzL3dGZ2ZaZTlkd0lBQUlFRUFBQUVFZ0FBRUVnQUFFQ2dsMjN6QTBBQVNPTUVBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJTkFuL3dZQUFPUnhBZ0FBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJFQ0l2Ly84dmZkREFDYmdzeUxIYjcwZkFPM3MvY0grNjU5L0d6OFNvRGREandEZzVnZUJPSUI1R1hsdUVRRGM1TlFBeG1mb09VTUFjSXBUQTJqUDBGT1NBS0E0cHdad25wR25GUUZBTThJQWZqTDA5Q1lBNk03dEJGWm02Qm1WQUdCb1RnMllnWkZuUmdLQUtRa0RlakQwckVRQXNCUzNFeWpCMEpOQUFQQ0x5MGl1K0FIbzFJQzNWbnlQNzFuNXp6WG5DUUErdERlS0szNkFPRFZZMjRydjJUM2VyeHdoQURqazFnZk1paCswVGczbXNlTDdiNC8zSHlVSUFJcHhhdUNEdWJZVjMwdDd2SmVvVFFCUW5UQjQ1UVA5Y1N1K04vWjRYOUNMQUtBYnR4TmVKUS9BaXEvem51VFhtVEVKQUliazFHQ2R3Vmp4TmR1enltdEdCZ0hBVklUQnF4R0hac1hYWU0rSTF4K09FZ0Fzd2UyRVZ5MkdhY1hydWNmUXN6SUJ3UEtjR3J3Nk1tWXJYcHM5UnA1VUFvQllUZzJ5R0hyNGxRQ0FEeVNkR3F6RzBNTmpCQUFjSUF6R1lPVGhlUUlBQ2tpN25kQ0tvWWQ2QkFCVTV0VGdQa01QN1FrQTZDUXRESXc4akVVQXdHQm12NTFnNkdFT0FnQW1NdEtwZ2FHSHVRa0FXRUN0VXdNakQrc1NBTEM0dHlQK2FBd1lmbGpmcDk0UEFBQm9Ud0FBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRis2LzBBZ0xyKy92UDMwLytidi83NXQvVERBUVloQUdBQlowYisyZit1T0lDNUNRQ1lTSzJoUDJQdnNRZ0RtSU1BZ01HTU5QSm5DQU9ZZ3dDQVRtWWYrcVBjVG9DeENBQ29MRzNvejNCcUFPMEpBQ2pBeU5jaERLQWVBUUFIR1BveHVKMEF6eE1BOEFGRFB5K25CdkFZQVVDc3RKRS9Nb0FyWGh0aEFMOFNBQ3h2eFRIYlUyck1idjEzVnJ1ZWJpZVFTZ0N3aE5WRzZaNmV3N1QzLzczaWErRFVnSlVKQUtheTRzanNtVzFraE1GOHJ4blpCQUJEV25FMDlxdytHbTRudkZyOWRXWStBb0J1VnZ2d3Y4Y0F2T2ZVd1B1Q2ZnUUExYTM0WWI3SGgza1p3c0I3aWZvRUFNV3MrT0c4eDRkekgyNG52UEwrb3dRQndDR3JmY2plNDROMkhrNE52Rjg1UmdEd29SVS9OUGY0MEZ5Yk1QQWU1Mk12bjcvODhhUDNnNkMrRlQvc2p2SWh5S1BTLzd6NHM1TEJDUUJMOGNGRkNVbW5CdVFTQUV6SjBOT0RNR0FsQW9DaEdYcG1rUFMzRTFpSEFLQTdJOC9LbkJvd0tnRkFNNFllZmhJRzlDWUFLTTdRdzNsdUo5Q0tBT0FVSXcvdE9UV2dKQUhBVFlZZXhpY01PRU1BWU9SaFVXNG5jSXNBQ0dMb2dRdW5CdmluZ0FFZzBLZmVEd0FBYUU4QUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRS0JQMzc5K2UrbjlJQUNBdHB3QUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJQcTBiZHZtM3dJQWdCemZ2MzU3Y1FJQUFJRUVBQUFFRWdBQUVFZ0FBRUNnL3dQQUR3RUJZSDJYdlhjQ0FBQ0JCQUFBQkJJQUFCRG9sd0R3T3dBQVdOZmJuWGNDQUFDQkJBQUFCQklBQUJEb1hRRDRIUUFBck9kNjM1MEFBRUFnQVFBQWdUNE1BTGNCQUdBZEgrMjZFd0FBQ0NRQUFDRFFiZ0M0RFFBQTg5dmJjeWNBQUJCSUFBQkFvSnNCNERZQUFNenIxbzQ3QVFDQVFIY0R3Q2tBQU16bjNuNDdBUUNBUUFJQUFBSTlGQUJ1QXdEQVBCN1piU2NBQUJEbzRRQndDZ0FBNDN0MHI1MEFBRUNnUXdIZ0ZBQUF4blZrcDUwQUFFQ2d3d0hnRkFBQXhuTjBuNTBBQUVDZ1V3SGdGQUFBeG5GbWw1MEFBRUNnMHdIZ0ZBQUEranU3eDArZEFJZ0FBT2pubVIxMkN3QUFBajBkQUU0QkFLQzlaL2ZYQ1FBQUJDb1NBRTRCQUtDZEVydGI3QVJBQkFCQWZhWDIxaTBBQUFoVU5BQ2NBZ0JBUFNWM3R2Z0pnQWdBZ1BKSzcydVZXd0FpQUFES3FiR3JmZ01BQUlHcUJZQlRBQUI0WHEwOXJYb0NJQUlBNEx5YU8xcjlGb0FJQUlEamF1K24zd0FBUUtBbUFlQVVBQUFlMTJJM201MEFpQUFBdUsvVlhqYTlCU0FDQUdCZnk1MXMvaHNBRVFBQTc3WGV4eTQvQWhRQkFQQlRqMTNzOXJjQVJBQUE5TnZEcm44TlVBUUFrS3puRG5iL2R3QkVBQUNKZXU5Zjl3RFl0djRYQVFCYUdtSDNoZ2lBYlJ2allnQkFiYVBzM1RBQnNHM2pYQlFBcUdHa25Sc3FBTFp0cklzREFLV010bS9EQmNDMmpYZVJBT0FaSSs3YWtBR3diV05lTEFBNGF0UTlHellBdG0zY2l3WUFqeGg1eDRZT2dHMGIrK0lCd0o3Ujkydm9CM2Z0ODVjL2Z2UitEQUJ3eStqRGZ6SDhDY0JiczF4VUFETE50Rk5UQmNDMnpYVnhBY2d4Mno1TjlXQ3Z1U1VBUUcrekRmL0ZkQ2NBYjgxNjBRRll3OHc3TkhVQWJOdmNGeCtBZWMyK1AxTS8rR3R1Q1FCUTIrekRmekg5Q2NCYnE3d29BSXhwcFoxWjVvbGNjeG9BUUNrckRmL0Zjay9vbWhBQTRLd1ZoLzlpcVZzQUgxbjV4UU9nbnRYM1kra25kODFwQUFEM3JENzhGeEZQOHBvUUFPQmF5dkJmUkQzWmEwSUFnTFRodjRoODB0ZUVBRUNlMU9HL2lIN3kxNFFBd1ByU2gvL0NSZGdoQmdEV1lmVGZjMEh1RUFJQTh6TDgrMXlZQThRQXdQaU0vbU5jcEpQRUFNQTRqUDV4TGxnQllnQ2dQYVAvSEJldkFrRUFVSjdCTDh2RmJFQVFBQnhuOE90eWNUc1JCUUEvR2Z2Mi9nUHU5MzJYQldzSlJRQUFBQUJKUlU1RXJrSmdnZz09Iiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FZQUFBRDBlTlQ2QUFBTi9FbEVRVlI0bk8zY3daSGsxQlpGVVRYQkZBOFlNY1VjVE1FT1RNRWNwb3p3QUFOZ1VMOS9kOUdWVlpsS1NlL2VlOWFhUTJmb0NaMGRFdEhiQmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUF6L3EwK2dkUXk0OC8vL1RQNnQ4QW5PZXZQLzcwM0dmYk5nRVF4OEFEN3hFSU9SejBZTVllT0lJb21NbWhEbUx3Z1NzSWdoa2NZbU1HSDZoQUVQVGswSm94K2tCbFlxQVBCOVdBMFFjNkVnTzFPWnlpakQ0d2lSaW94NEVVWS9pQnlZUkFIUTZpQUtNUEpCSURhN240Q3hsK0FDR3dpb3UrZ09FSCtKWVF1SmFMZlNIREQvQXhJWEFORi9rQ2hoL2djVUxnWEM3dWlRdy93UE9Fd0RtK1cvMERwakwrQU1md1BEMkhxanFZR3hYZ1BONEdITWVGUElqaEI3aU9FSGllVHdBSE1QNEExL0xjZlo2Q2VvSWJFR0E5YndQMjhRWmdKK01QVUlQbjhUNENZQWMzRzBBdG5zdVA4OXJrQVc0d2dQcDhFcmlQTndCM012NEFQWGhlMzBjQTNNSE5CTkNMNS9iSHZDWjVoeHNJb0QrZkJON21EY0FOeGg5Z0JzL3p0d21BTjdoWkFHYnhYUCtXQVBnUE53bkFUSjd2cndtQXI3ZzVBR2J6blA5Q0FQeVBtd0lnZytmOUN3R3d1UmtBMG5qdUN3QTNBVUNvOU9kL2RBQ2tIejVBdXVRZGlBMkE1RU1INEl2VVBZZ01nTlREQnVCdGlic1FGd0NKaHd6QXg5TDJJU29BMGc0WGdNY2s3VVJNQUNRZEtnRDdwZXhGUkFDa0hDWUF4MGpZamZFQmtIQ0lBQnh2K242TURvRHBod2ZBdVNidnlPZ0FBQURlTmpZQUpsY2JBTmVadWljakEyRHFZUUd3eHNSZEdSY0FFdzhKZ1BXbTdjdTRBQUFBUGpZcUFLYlZHUUMxVE5xWk1RRXc2VkFBcUd2SzNvd0lnQ21IQVVBUEUzWm5SQUFBQUk5cEh3QVRLZ3lBZnJydlQrc0E2SDd4QWVpdDh3NjFEZ0FBWUorMkFkQzV1Z0NZbytzZXRRMEFBR0MvbGdIUXRiWUFtS25qTHJVTGdJNFhHWUQ1dXUxVHV3QUFBSjdYS2dDNjFSVUFXVHJ0VktzQUFBQ08wU1lBT2xVVkFMbTY3RldiQUFBQWp0TWlBTHJVRkFCc1c0L2RhaEVBQU1DeHlnZEFoNG9DZ1ArcXZsL2xBd0FBT0Y3cEFLaGVUd0R3bnNvN1Zqb0FBSUJ6Q0FBQUNGUTJBQ3EvTmdHQWUxWGRzN0lCQUFDY3AyUUFWSzBsQU5pajRxNlZEQUFBNEZ3Q0FBQUNsUXVBaXE5SkFPQloxZmF0WEFBQUFPY1RBQUFRcUZRQVZIczlBZ0JIcXJSenBRSUFBTGlHQUFDQVFHVUNvTkpyRVFBNFM1VzlLeE1BQU1CMUJBQUFCQklBQUJDb1JBQlUrUjRDQUZlb3NIc2xBZ0FBdUpZQUFJQkFBZ0FBQWkwUGdBcmZRUURnYXF2M2Iza0FBQURYRXdBQUVFZ0FBRUFnQVFBQWdaWUd3T3IvQVFJQVZscTVnOTRBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkZvV0FQNE9BQUJZdDRmZUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBSVg3NzVZZlZQd0Zvd0xNaXgvZXJmd0RYdWZVZjlxKy8vMzN4THdGV00vUUlBTjU5RUlnRDZNdkk4eDRCd0x1OE5ZRDZERDE3Q0FCMjhkWUFybWZvT1pJQTRIRGVHc0IrUnA2ckNBQXVJd3pnQzBQUGFnS0E1WHhPWURKRFQxVUNnTks4TmFBREkwOUhBb0NXaEFFckdIb21FUUNNNG5NQ1J6RDBKQkFBdlBKNUpDYytBTDAxNEdzVDcvRmJKdjkzelg0Q2dEZmRHc1dKRHhCdkRXYWJlTS9lNG43bEVRS0FoN3ozZ0puNG9QWFdvSStKOTk4dDdqK09JQUE0akxjR0hzeG5tM2d2M2VKZTRtd0NnTk1KZ3hjZTZQZWJlRy9jNHI1Z0ZRSEFNajRudkVnZWdJbm5mRXZ5T1ZPVEFLQWtidzNtRE1iRU03dGx5cG1SUVFEUWlqQjRVWEZvSnA3QkxSV3ZQenhLQURDQ3p3a3ZyaGltaWRmekZrUFBaQUtBOGJ3MWVQSEltRTI4TnJjWWVWSUpBR0o1YTVERjBNTnJBZ0Rla1BUV1lCcEREL2NSQVBBQVlWQ0RrWWZuQ1FBNFFOcm5oS3NZZWppUEFJQ1RlV3Z3TVVNUDF4TUFzRWhhR0JoNXFFVUFRREhkUHljWWV1aEJBRUFqbGQ0YUdIcm9UUURBQUdlOU5URHlNSmNBZ09HK0h2RjdZOER3dzN6ZnJmNEJBTUQxQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFT2o3MVQ4QU9OZHZ2L3l3KzUvNTlmZS9qLzQ1UUJFQ0FBYllNL0xQL252RkFmUW1BS0NSczRaK2oxdS9SUmhBRHdJQWlxazA4bnNJQStoQkFNQWkzWWYrVVQ0blFDMENBRTZXTnZSN2VHc0ExeE1BY0FBamZ3NWhBT2NSQVBBQVExK0R6d253UEFFQWJ6RDBmWGxyQVBjUkFNUktHL2xIQm5EaXRSRUc4Sm9BWUx5SlkzYkxVV1AyM3I5bjJ2WDBPWUZVQW9BUnBvM1NSMVlPMDYwL2UrSVplR3ZBWkFLQVZpYU96QzNkUmtZWTlEc3pzZ2tBU3BvNEdyZE1IdzJmRTE1TVAyZjZFUUFzTSszaC94RUQ4QzF2RGR3WHJDTUFPTjNFaC9rdEh1YkhFQWJ1SmM0bkFEak14SWZ6TFI3T2EvaWM4TUw5eHhFRUFBK1o5cEQ5aUFkdEg5NGF1Rjk1akFEZ1RSTWZtcmQ0YU00bUROemp2RTBBOE1yRWgrSm5Ib0o4emVjRTBna0FSakh5SENIcHJRRzVCQUF0R1hwV0VBWk1JZ0FvemREVFFkTG5CT1lRQUN4bjVKbk1Xd09xRWdCY3h0RERGOEtBMVFRQWh6UDBzSi9QQ1Z4RkFMQ0xrWWZyZVd2QWtRUUE3ekwwVUo4d1lBOEJnSkdIb1h4TzREMENJSWloQno3ejFvQlBxLzdnSDMvKzZaOVZmellBVlBMWEgzOWV2c2ZmWGYwSEFnRHJDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VETEF1Q3ZQLzc4dE9yUEJvQXFWdTJoTndBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQmxnYUF2d3NBZ0dRcmQ5QWJBQUFJSkFBQUlKQUFBSUJBQWdBQUFpMFBBUDhqSUFDSlZ1L2Y4Z0FBQUs0bkFBQWdrQUFBZ0VBbEFtRDFkeEFBdUZLRjNTc1JBQURBdFFRQUFBUVNBQUFRcUV3QVZQZ2VBZ0JucTdKM1pRSUFBTGlPQUFDQVFLVUNvTXByRVFBNFE2V2RLeFVBQU1BMUJBQUFCQ29YQUpWZWp3REFVYXJ0VzdrQUFBRE9Kd0FBSUZESkFLajJtZ1FBbmxGeDEwb0dBQUJ3cnJJQlVMR1dBT0JSVmZlc2JBQUFBT2NSQUFBUXFIUUFWSDF0QWdEM3FMeGpwUU1BQURoSCtRQ29YRThBY0V2MS9Tb2ZBQURBOFZvRVFQV0tBb0N2ZGRpdEZnRUFBQnlyVFFCMHFDa0E2TEpYYlFJQUFEaE9xd0RvVWxVQVpPcTBVNjBDQUFBNFJyc0E2RlJYQU9Ub3RrL3RBbURiK2wxa0FHYnJ1RXN0QXdBQWVFN2JBT2hZV3dETTAzV1AyZ1lBQUxCZjZ3RG9XbDBBek5CNWgxb0h3TGIxdnZnQTlOVjlmOW9IQUFEd3VCRUIwTDNDQU9obHd1Nk1DSUJ0bTNFWUFOUTNaVy9HQk1DMnpUa1VBR3FhdERPakFnQUF1TSs0QUpoVVp3RFVNVzFmeGdYQXRzMDdKQURXbXJnckl3TmcyMlllRmdEWG03b25Zd01BQUxodGRBQk1yVFlBcmpGNVIwWUh3TGJOUGp3QXpqTjlQOFlId0xiTlAwUUFqcFd3R3hFQnNHMFpod25BODFMMklpWUF0aTNuVUFIWUoya25vZ0pnMjdJT0Y0RDdwZTFEWEFCc1c5NGhBL0MreEYySURJQnR5enhzQUw2VnVnZXhBYkJ0dVljT3dJdmtIWWdPZ0czTFBueUFaT25QLy9nQTJEWTNBVUFhejMwQjhIOXVCb0FNbnZjdkJNQlgzQlFBczNuT2Z5RUEvc1BOQVRDVDUvdHJBdUFOYmhLQVdUelh2eVVBYm5DekFNemdlZjQyRitVT1AvNzgweityZndNQWp6SDg3L01HNEE1dUlvQmVQTGMvSmdEdTVHWUM2TUh6K2o0dTBnNCtDUURVWS9nZjR3M0FEbTR5Z0ZvOGx4OG5BSFp5c3dIVTRIbThqNHQyQUo4RUFLNW4rSi9qRGNBQjNJUUExL0xjZlo0TGVEQnZBd0RPWS9pUDQwS2VSQWdBSE1md0g4OG5nSk80V1FHTzRYbDZEaGYxQXQ0R0FEek84Si9MeGIyUUVBRDRtT0cvaG91OGdCQUErSmJodjVhTHZaQVFBREQ4cTdqb0JRZ0JJSkhoWDh2RkwwWU1BSk1aL1RvY1JGRkNBSmpFOE5malFCb1FBMEJIUnI4Mmg5T01HQUFxTS9wOU9Lakd4QUJRZ2RIdnlhRU5JZ2lBS3hqOEdSemlZSUlBT0lMQm44bWhoaEVGd0h1TWZRNEh6U3NDQVdZejhBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBTUJwL2dWb1E0aXBPV3ErQkFBQUFBQkpSVTVFcmtKZ2dnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6Im1hc2thYmxlIn1dfQ==">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEX0lEQVR4nO3azVXbQACFUZmTbTpgxZZyKCV1pJSUw5YVHaQAsgjOcRJLtkajn5l37zbn2Aq8TyMDp+FgHp+fPva+Btb1/vp22vsazna9EGPnbK8oNn9To+eWLWPY7I0Mn7m2CGH1NzB8llozhNVe2PCpbY0Qqr+g4bO2miE81HqhYTB+tlFzZ1VKMnz2svQ0WHwCGD97Wrq/RQEYP0ewZIfFARg/R1K6x6IAjJ8jKtnl7ACMnyObu89ZARg/LZiz07sDMH5acu9e7wrA+GnRPbu9GYDx07Jb+636pxDQmskA3P3pwdSORwMwfnoytmePQES7GoC7Pz26tmsnANH+C8Ddn579u28nANH+CsDdnwSXO3cCEO1PAO7+JDnv3QlANAEQ7TQMHn/I5QQgmgCIJgCiCYBoDz4Ak8wJQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEK3ZAL6/fN37EvjU8vfiy94XsMTYF/7bj58bX0mGloc+pukAxghjmR6HPqaLAC6HPfXNm/q3xDhKhn7v17oVXQRwaWrIJXH0EMbSofesuwCmjH1Tewij9G58tP/H1qICGNNSGO7mdQlgQs0wpl5v7uvUeH1+E0CB2p8zar4/8wigspJTY+5rUY8ANnJtzJdRGPs+mv1TCKhBAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQ7cveF5Di+8vX2f/+7cfPtS6HTwKo7NbQa7yWMOoRQIHSkc8Z7tR7CKMeAUwoGXqtEY69jjDqEsCw79BrvW9JGFOvlyIqgJaGPtfUdTo1xnUXwBbP563xODXu9Pj89LH3RZTo+W6+t6SvbXcnwDC0+804ipITo1VNB2Do2+oxjGYfgaAGfwtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEe3h/fTvtfRGwFycA0QRANAEQTQBEexiGYfBBmETvr28nJwDRBEC0PwF4DCLJee9OAKL9FYBTgASXO3cCEO2/AJwC9OzffTsBiHY1AKcAPbq2aycA0UYDcArQk7E9T54AIqAHUzv2CES0mwE4BWjZrf3edQKIgBbds9u7H4FEQEvu3euszwAioAVzdjr7Q7AIOLK5+yz6KZAIOKKSXRb/GFQEHEnpHhf9HkAEHMGSHS7+RZgI2NPS/VUd7+Pz00fN14MxtW68Vf8UwmnAFmrubLXBOg2obY0b7Op3bCGw1JpPFps9sgiBubZ4pN78mV0I3LLlZ8ldP7SKgbO9foDyC0CoUcGTsdStAAAAAElFTkSuQmCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Ledger">
+<meta name="theme-color" content="#F3EEDD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171C15" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --ink: #1C2B22;
+    --ink-soft: #3C4A3F;
+    --paper: #F3EEDD;
+    --paper-alt: #EAE2C8;
+    --paper-raised: #FBF8EE;
+    --gold: #A97E2F;
+    --gold-soft: #C9A559;
+    --rust: #A2402A;
+    --sage: #4C6B4F;
+    --line: #C9BFA0;
+    --line-soft: #DCD4B8;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --glass-bg: rgba(255, 255, 255, 0.38);
+    --glass-bg-strong: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --glass-shadow: 0 8px 32px rgba(28, 43, 34, 0.14);
+    --glass-blur: 18px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); height: 100%; }
+  body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  /* Blurred colour blobs behind the glass surfaces */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(38vmax 38vmax at 8% 8%, rgba(169, 126, 47, 0.32), transparent 60%),
+      radial-gradient(42vmax 42vmax at 92% 18%, rgba(76, 107, 79, 0.30), transparent 60%),
+      radial-gradient(46vmax 46vmax at 28% 94%, rgba(162, 64, 42, 0.22), transparent 60%),
+      radial-gradient(36vmax 36vmax at 90% 92%, rgba(201, 165, 89, 0.28), transparent 60%);
+  }
+  header.top, main, .toast { position: relative; z-index: 1; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #EDE7D4;
+      --ink-soft: #C7BEA0;
+      --paper: #171C15;
+      --paper-alt: #1F251C;
+      --paper-raised: #21271E;
+      --gold: #D4AA5C;
+      --gold-soft: #B68F42;
+      --rust: #D9694E;
+      --sage: #7FA179;
+      --line: #3A3F30;
+      --line-soft: #2A2F22;
+      --glass-bg: rgba(23, 28, 21, 0.42);
+      --glass-bg-strong: rgba(23, 28, 21, 0.62);
+      --glass-border: rgba(237, 231, 212, 0.14);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #EDE7D4;
+    --ink-soft: #C7BEA0;
+    --paper: #171C15;
+    --paper-alt: #1F251C;
+    --paper-raised: #21271E;
+    --gold: #D4AA5C;
+    --gold-soft: #B68F42;
+    --rust: #D9694E;
+    --sage: #7FA179;
+    --line: #3A3F30;
+    --line-soft: #2A2F22;
+    --glass-bg: rgba(23, 28, 21, 0.42);
+    --glass-bg-strong: rgba(23, 28, 21, 0.62);
+    --glass-border: rgba(237, 231, 212, 0.14);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  a { color: inherit; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    position: sticky;
+    top: 0;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 10;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header.top { background: var(--paper); }
+  }
+  .top-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 22px 20px 0 20px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 32px);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .brand .tagline {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+  .shop-name-edit {
+    background: none;
+    border: none;
+    font: inherit;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 32px);
+    color: var(--ink);
+    padding: 0;
+    border-bottom: 1px dashed transparent;
+    max-width: 60vw;
+  }
+  .shop-name-edit:focus { outline: none; border-bottom-color: var(--gold); }
+
+  nav.tabs {
+    max-width: 980px;
+    margin: 18px auto 0 auto;
+    display: flex;
+    gap: 4px;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+  nav.tabs button {
+    appearance: none;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 10px 14px 12px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  nav.tabs button.active {
+    color: var(--ink);
+    border-bottom-color: var(--gold);
+  }
+  nav.tabs button:hover:not(.active) { color: var(--ink); }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 20px 64px 20px;
+  }
+  section.pane { display: none; }
+  section.pane.active { display: block; }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 4px 0;
+  }
+  p.section-sub {
+    margin: 0 0 22px 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  /* ---------- Ledger stat row ---------- */
+  .ledger-row {
+    display: flex;
+    flex-wrap: wrap;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .ledger-row { background: var(--paper-raised); }
+  }
+  .ledger-stat {
+    flex: 1 1 160px;
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+  }
+  .ledger-stat:last-child { border-right: none; }
+  .ledger-stat .num {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .ledger-stat .num.rust { color: var(--rust); }
+  .ledger-stat .label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ---------- Blocks ---------- */
+  .block { margin-bottom: 36px; }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .block-head h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0;
+  }
+  .block-head .count {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .empty-note {
+    padding: 18px 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap {
+    overflow-x: auto;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    padding: 4px 14px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .tbl-wrap { background: var(--paper-raised); }
+  }
+  table.ledger {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  table.ledger th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.ledger td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+  }
+  table.ledger tbody tr:hover { background: var(--paper-alt); }
+  table.ledger td.num, table.ledger th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .title-cell { font-weight: 600; }
+  .author-cell { color: var(--ink-soft); font-size: 12.5px; }
+  .cat-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--sage);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .stock-badge {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .stock-badge.low { color: var(--rust); }
+  .row-actions { display: flex; gap: 10px; }
+  .row-actions button {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 2px 0;
+  }
+  .row-actions button.danger { color: var(--rust); }
+  .row-actions button:hover { text-decoration: underline; }
+
+  /* ---------- Controls ---------- */
+  .controls-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  input[type="text"], input[type="number"], input[type="search"], select {
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 9px 11px;
+    color: var(--ink);
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .search-input { flex: 1 1 220px; }
+
+  button.btn {
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    transition: border-radius 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+                transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+  }
+  button.btn:hover {
+    border-radius: 62% 38% 55% 45% / 45% 55% 38% 62%;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(169, 126, 47, 0.32);
+    background: var(--ink-soft);
+  }
+  button.btn:active {
+    border-radius: 999px;
+    transform: translateY(0) scale(0.94);
+    box-shadow: 0 2px 8px rgba(169, 126, 47, 0.24);
+  }
+  button.btn.secondary {
+    background: none;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  button.btn.secondary:hover {
+    background: var(--paper-alt);
+    box-shadow: 0 10px 26px rgba(76, 107, 79, 0.22);
+  }
+  .btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    pointer-events: none;
+    animation: rippleAnim 0.6s ease-out;
+  }
+  @keyframes rippleAnim {
+    to { transform: scale(2.6); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    button.btn, button.btn:hover, button.btn:active { transition: none; transform: none; border-radius: 999px; }
+    .btn-ripple { animation: none; display: none; }
+  }
+  button.btn.secondary:hover { background: var(--paper-alt); }
+  button.btn:focus-visible, input:focus-visible, select:focus-visible, nav.tabs button:focus-visible, .row-actions button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Form panel ---------- */
+  .panel {
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    padding: 18px;
+    margin-bottom: 24px;
+    display: none;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .panel { background: var(--paper-raised); }
+  }
+  .panel.open { display: block; }
+  .panel h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 14px 0;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .field input, .field select { width: 100%; }
+  .panel-actions { display: flex; gap: 10px; }
+
+  /* ---------- Sale panel ---------- */
+  .sale-picker {
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .sale-picker { background: var(--paper-raised); }
+  }
+  .sale-picker .field { margin-bottom: 14px; }
+  .qty-row { display: flex; align-items: center; gap: 10px; }
+  .qty-row button {
+    position: relative;
+    overflow: hidden;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .qty-row button:hover {
+    background: var(--paper-alt);
+    box-shadow: 0 6px 16px rgba(169, 126, 47, 0.28);
+    transform: translateY(-1px);
+  }
+  .qty-row button:active {
+    transform: scale(0.88);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .qty-row button { transition: none; transform: none; }
+  }
+  .qty-row input { width: 70px; text-align: center; }
+  .sale-total {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    margin: 4px 0 16px 0;
+  }
+  .sale-total .cur { color: var(--ink-soft); font-size: 15px; font-family: var(--font-body); }
+  .stock-hint { font-size: 12px; color: var(--ink-soft); margin-top: -6px; margin-bottom: 14px; }
+  .stock-hint.low { color: var(--rust); }
+
+  .toast {
+    position: fixed;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 10px;
+    box-shadow: var(--glass-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 50;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .low-list { list-style: none; margin: 0; padding: 0; }
+  .low-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .low-list li:last-child { border-bottom: none; }
+  .low-list .amt { color: var(--rust); font-weight: 600; }
+
+  .offline-banner {
+    display: none;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .offline-banner.show { display: block; }
+
+  /* ---------- Auth screen ---------- */
+  .app-root { display: none; }
+  .app-root.show { display: block; }
+
+  .auth-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px));
+    padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  }
+  .auth-screen.hidden { display: none; }
+
+  .auth-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 360px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 30px 26px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .auth-card { background: var(--paper-raised); }
+  }
+  .auth-brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .auth-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0 0 4px 0;
+  }
+  .auth-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 20px 0;
+  }
+  .auth-card .field { margin-bottom: 14px; }
+  .auth-card .field input { width: 100%; }
+  .auth-submit { width: 100%; margin-top: 4px; }
+  .auth-error {
+    color: var(--rust);
+    font-size: 12.5px;
+    margin: -6px 0 12px 0;
+  }
+  .auth-toggle {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 18px 0 0 0;
+  }
+  .auth-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin: 14px 0 0 0;
+    line-height: 1.4;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: inherit;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+  .link-btn:hover { color: var(--gold); }
+
+  .session-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    font-size: 12.5px;
+  }
+  .top-inner { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .session-name {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ---------- Logo control ---------- */
+  .logo-wrap { position: relative; display: inline-flex; }
+  .logo-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  .logo-btn:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(169, 126, 47, 0.3);
+  }
+  .logo-btn:active { transform: scale(0.92); }
+  .logo-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 20;
+    width: 220px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    padding: 14px;
+  }
+  .logo-panel.open { display: block; }
+  .logo-panel label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .logo-panel input[type="text"] { width: 100%; margin-bottom: 10px; font-size: 18px; text-align: center; }
+  .logo-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .logo-suggestions button {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .logo-suggestions button:hover { background: var(--paper-alt); }
+  .logo-panel .panel-actions { display: flex; gap: 8px; margin-bottom: 0; }
+  .logo-panel .btn { padding: 8px 14px; font-size: 12.5px; }
+
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-brand"><span id="authBrandLogo">📚</span> <span id="authBrandName">The Ledger</span></div>
+    <h2 class="auth-heading" id="authHeading">Welcome back</h2>
+    <p class="auth-sub" id="authSub">Log in to record sales and manage stock.</p>
+    <form id="authForm" autocomplete="on">
+      <div class="field">
+        <label for="authName">Name</label>
+        <input type="text" id="authName" autocomplete="username" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="authPass">Password</label>
+        <input type="password" id="authPass" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <div class="field" id="authConfirmField" style="display:none;">
+        <label for="authConfirm">Confirm password</label>
+        <input type="password" id="authConfirm" autocomplete="new-password" placeholder="••••••••">
+      </div>
+      <p class="auth-error" id="authError" style="display:none;"></p>
+      <button type="submit" class="btn auth-submit" id="authSubmit">Log in</button>
+    </form>
+    <p class="auth-toggle">
+      <span id="authToggleLead">New here?</span>
+      <button type="button" class="link-btn" id="authToggleBtn">Create an account</button>
+    </p>
+    <p class="auth-note">A private login for the people who work here — kept on this device, not a secure enterprise login.</p>
+  </div>
+</div>
+
+<div id="appRoot" class="app-root">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="logo-wrap">
+        <button type="button" class="logo-btn" id="logoBtn" title="Change logo" aria-label="Change store logo">📚</button>
+        <div class="logo-panel" id="logoPanel">
+          <label for="logoInput">Logo</label>
+          <input type="text" id="logoInput" maxlength="4" placeholder="📚" inputmode="text">
+          <div class="logo-suggestions">
+            <button type="button" data-emoji="📚">📚</button>
+            <button type="button" data-emoji="📖">📖</button>
+            <button type="button" data-emoji="📕">📕</button>
+            <button type="button" data-emoji="🏬">🏬</button>
+            <button type="button" data-emoji="🛍️">🛍️</button>
+            <button type="button" data-emoji="✒️">✒️</button>
+          </div>
+          <div class="panel-actions">
+            <button class="btn" id="logoSave" type="button">Save</button>
+            <button class="btn secondary" id="logoCancel" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <input class="shop-name-edit" id="shopName" value="The Ledger" spellcheck="false" aria-label="Shop name">
+      <span class="tagline">stock &amp; sales, book by book</span>
+    </div>
+    <div class="session-bar">
+      <span class="session-name" id="sessionName"></span>
+      <button type="button" class="link-btn" id="btnLogout">Log out</button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button data-pane="dashboard" class="active">Dashboard</button>
+    <button data-pane="inventory">Inventory</button>
+    <button data-pane="sale">Record Sale</button>
+    <button data-pane="log">Sales Log</button>
+  </nav>
+</header>
+
+<main>
+  <div class="offline-banner" id="offlineBanner">Working without live sync — changes stay on this device until the connection is ready.</div>
+
+  <!-- DASHBOARD -->
+  <section class="pane active" id="pane-dashboard">
+    <h2 class="section-title">This week, at a glance</h2>
+    <p class="section-sub">Titles, copies, and what's moving.</p>
+
+    <div class="ledger-row" id="statRow">
+      <div class="ledger-stat"><div class="num" id="statTitles">0</div><div class="label">titles carried</div></div>
+      <div class="ledger-stat"><div class="num" id="statCopies">0</div><div class="label">copies in stock</div></div>
+      <div class="ledger-stat"><div class="num" id="statValue">$0</div><div class="label">inventory value</div></div>
+      <div class="ledger-stat"><div class="num" id="statRevenue">$0</div><div class="label">revenue, last 7 days</div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Running low</h3><span class="count" id="lowCount">0 titles</span></div>
+      <ul class="low-list" id="lowList"></ul>
+      <p class="empty-note" id="lowEmpty" style="display:none;">Nothing below its reorder line right now.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Recent sales</h3><span class="count" id="recentCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="recentTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>When</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="recentEmpty" style="display:none;">No sales recorded yet. They'll show up here as you log them.</p>
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section class="pane" id="pane-inventory">
+    <h2 class="section-title">Inventory</h2>
+    <p class="section-sub">Every title on the shelf, and what's left of it.</p>
+
+    <div class="controls-row">
+      <input type="search" class="search-input" id="invSearch" placeholder="Search title, author, or category…">
+      <button class="btn" id="btnAddBook">Add a book</button>
+    </div>
+
+    <div class="panel" id="bookPanel">
+      <h4 id="bookPanelTitle">Add a book</h4>
+      <div class="form-grid">
+        <div class="field"><label for="fTitle">Title</label><input type="text" id="fTitle" placeholder="The Hours"></div>
+        <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" placeholder="Michael Cunningham"></div>
+        <div class="field"><label for="fCategory">Category</label><input type="text" id="fCategory" placeholder="Fiction" list="catList"><datalist id="catList"></datalist></div>
+        <div class="field"><label for="fPrice">Price</label><input type="number" id="fPrice" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label for="fStock">Stock on hand</label><input type="number" id="fStock" min="0" step="1" placeholder="0"></div>
+        <div class="field"><label for="fReorder">Reorder line</label><input type="number" id="fReorder" min="0" step="1" placeholder="5"></div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn" id="btnSaveBook">Save book</button>
+        <button class="btn secondary" id="btnCancelBook">Cancel</button>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="ledger" id="invTable">
+        <thead>
+          <tr>
+            <th>Title</th><th>Category</th><th class="num">Price</th><th class="num">Stock</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="invEmpty" style="display:none;">No books yet. Add your first one above.</p>
+  </section>
+
+  <!-- RECORD SALE -->
+  <section class="pane" id="pane-sale">
+    <h2 class="section-title">Record a sale</h2>
+    <p class="section-sub">Pick a title, set the quantity, and it comes off the shelf.</p>
+
+    <div class="sale-picker">
+      <div class="field">
+        <label for="saleBook">Book</label>
+        <select id="saleBook"></select>
+      </div>
+      <div class="stock-hint" id="saleStockHint"></div>
+      <div class="field">
+        <label>Quantity</label>
+        <div class="qty-row">
+          <button type="button" id="qtyMinus" aria-label="Decrease quantity">–</button>
+          <input type="number" id="saleQty" value="1" min="1">
+          <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <div class="sale-total"><span class="cur">Total </span><span id="saleTotal">$0.00</span></div>
+      <button class="btn" id="btnRecordSale">Record sale</button>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Sold today</h3><span class="count" id="todayCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="todayTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Time</th><th>Sold by</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="todayEmpty" style="display:none;">Nothing sold today yet.</p>
+    </div>
+  </section>
+
+  <!-- SALES LOG -->
+  <section class="pane" id="pane-log">
+    <h2 class="section-title">Sales log</h2>
+    <p class="section-sub">Full history, most recent first.</p>
+
+    <div class="controls-row">
+      <input type="search" class="search-input" id="logSearch" placeholder="Search by book title…">
+    </div>
+
+    <div class="ledger-row" id="logStatRow">
+      <div class="ledger-stat"><div class="num" id="logCountStat">0</div><div class="label">sales logged</div></div>
+      <div class="ledger-stat"><div class="num" id="logRevenueStat">$0</div><div class="label">total revenue</div></div>
+      <div class="ledger-stat"><div class="num" id="logUnitsStat">0</div><div class="label">copies sold</div></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="ledger" id="logTable">
+        <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="logEmpty" style="display:none;">No sales in the log yet.</p>
+  </section>
+</main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- State ----------
+  let books = [];   // {id, title, author, category, price, stock, reorder}
+  let sales = [];   // {id, bookId, title, qty, unitPrice, total, ts, soldBy}
+  let users = [];   // {id, name, nameLower, passHash}
+  let currentUser = null; // {id, name} once logged in
+  let db = null;
+  let editingBookId = null;
+  let ready = false;
+  let authMode = "login"; // "login" | "signup"
+  let usersLoaded = false;
+
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $all = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+  const fmtMoney = (n) => {
+    const val = Math.round((n || 0) * 100) / 100;
+    return "\u20A6" + val.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+  const fmtInt = (n) => String(Math.round(n || 0));
+
+  function toast(msg) {
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  function uid() {
+    return (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+  }
+
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.addEventListener("click", (e) => {
+    if (prefersReducedMotion) return;
+    const btn = e.target.closest("button.btn, .qty-row button");
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.4;
+    const span = document.createElement("span");
+    span.className = "btn-ripple";
+    span.style.width = span.style.height = size + "px";
+    span.style.left = (e.clientX - rect.left - size / 2) + "px";
+    span.style.top = (e.clientY - rect.top - size / 2) + "px";
+    btn.appendChild(span);
+    span.addEventListener("animationend", () => span.remove());
+  });
+
+  // ---------- Local fallback persistence (per-device, only if db capability is unavailable) ----------
+  const LOCAL_KEY = "bookshop-ledger-fallback-v1";
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        books = parsed.books || [];
+        sales = parsed.sales || [];
+        users = parsed.users || [];
+      }
+    } catch (e) { /* ignore */ }
+  }
+  function saveLocal() {
+    try {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify({ books, sales, users }));
+    } catch (e) { /* ignore */ }
+  }
+  function persistUsers() {
+    if (db) {
+      const col = db.collection("users");
+      users.forEach((u) => { col.doc(u.id).set(stripId(u)).catch(() => {}); });
+    } else {
+      saveLocal();
+    }
+  }
+
+  // ---------- Tabs ----------
+  $all("nav.tabs button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
+      $all("section.pane").forEach((p) => p.classList.remove("active"));
+      btn.classList.add("active");
+      $("#pane-" + btn.dataset.pane).classList.add("active");
+      if (btn.dataset.pane === "sale") renderSalePane();
+    });
+  });
+
+  // ---------- Rendering ----------
+  function renderAll() {
+    renderDashboard();
+    renderInventory();
+    renderSalePane();
+    renderLog();
+  }
+
+  function lowStockBooks() {
+    return books.filter((b) => (b.stock || 0) <= (b.reorder != null ? b.reorder : 5));
+  }
+
+  function renderDashboard() {
+    const titles = books.length;
+    const copies = books.reduce((s, b) => s + (b.stock || 0), 0);
+    const value = books.reduce((s, b) => s + (b.stock || 0) * (b.price || 0), 0);
+    const weekAgo = Date.now() - 7 * 24 * 3600 * 1000;
+    const revenue = sales.filter((s) => s.ts >= weekAgo).reduce((s, x) => s + (x.total || 0), 0);
+
+    $("#statTitles").textContent = fmtInt(titles);
+    $("#statCopies").textContent = fmtInt(copies);
+    $("#statValue").textContent = fmtMoney(value);
+    $("#statRevenue").textContent = fmtMoney(revenue);
+
+    const low = lowStockBooks().sort((a, b) => (a.stock || 0) - (b.stock || 0));
+    const lowList = $("#lowList");
+    lowList.innerHTML = "";
+    $("#lowCount").textContent = low.length + (low.length === 1 ? " title" : " titles");
+    $("#lowEmpty").style.display = low.length ? "none" : "block";
+    low.slice(0, 8).forEach((b) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${escapeHtml(b.title)}</span><span class="amt">${fmtInt(b.stock)} left</span>`;
+      lowList.appendChild(li);
+    });
+
+    const recent = [...sales].sort((a, b) => b.ts - a.ts).slice(0, 6);
+    const tbody = $("#recentTable tbody");
+    tbody.innerHTML = "";
+    $("#recentCount").textContent = fmtInt(sales.length);
+    $("#recentEmpty").style.display = recent.length ? "none" : "block";
+    recent.forEach((s) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? "" : str).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+
+  function relTime(ts) {
+    const d = new Date(ts);
+    const now = new Date();
+    const sameDay = d.toDateString() === now.toDateString();
+    const time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    if (sameDay) return time;
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + ", " + time;
+  }
+
+  function renderInventory() {
+    const q = ($("#invSearch").value || "").trim().toLowerCase();
+    const tbody = $("#invTable tbody");
+    tbody.innerHTML = "";
+    const filtered = books
+      .filter((b) => !q || (b.title || "").toLowerCase().includes(q) || (b.author || "").toLowerCase().includes(q) || (b.category || "").toLowerCase().includes(q))
+      .sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+
+    $("#invEmpty").style.display = books.length ? "none" : "block";
+
+    filtered.forEach((b) => {
+      const low = (b.stock || 0) <= (b.reorder != null ? b.reorder : 5);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><div class="title-cell">${escapeHtml(b.title)}</div><div class="author-cell">${escapeHtml(b.author || "")}</div></td>
+        <td>${b.category ? `<span class="cat-tag">${escapeHtml(b.category)}</span>` : ""}</td>
+        <td class="num">${fmtMoney(b.price)}</td>
+        <td class="num"><span class="stock-badge ${low ? "low" : ""}">${fmtInt(b.stock)}</span></td>
+        <td>
+          <div class="row-actions">
+            <button data-act="edit" data-id="${b.id}">Edit</button>
+            <button data-act="delete" data-id="${b.id}" class="danger">Remove</button>
+          </div>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+
+    // category datalist
+    const cats = Array.from(new Set(books.map((b) => b.category).filter(Boolean))).sort();
+    $("#catList").innerHTML = cats.map((c) => `<option value="${escapeHtml(c)}">`).join("");
+  }
+
+  $("#invTable").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.act === "edit") openBookPanel(id);
+    if (btn.dataset.act === "delete") deleteBook(id);
+  });
+
+  $("#invSearch").addEventListener("input", renderInventory);
+
+  function openBookPanel(id) {
+    editingBookId = id || null;
+    const panel = $("#bookPanel");
+    panel.classList.add("open");
+    if (id) {
+      const b = books.find((x) => x.id === id);
+      if (!b) return;
+      $("#bookPanelTitle").textContent = "Edit book";
+      $("#fTitle").value = b.title || "";
+      $("#fAuthor").value = b.author || "";
+      $("#fCategory").value = b.category || "";
+      $("#fPrice").value = b.price != null ? b.price : "";
+      $("#fStock").value = b.stock != null ? b.stock : "";
+      $("#fReorder").value = b.reorder != null ? b.reorder : "";
+    } else {
+      $("#bookPanelTitle").textContent = "Add a book";
+      ["fTitle", "fAuthor", "fCategory", "fPrice", "fStock", "fReorder"].forEach((id2) => $("#" + id2).value = "");
+    }
+    $("#fTitle").focus();
+  }
+
+  function closeBookPanel() {
+    $("#bookPanel").classList.remove("open");
+    editingBookId = null;
+  }
+
+  $("#btnAddBook").addEventListener("click", () => openBookPanel(null));
+  $("#btnCancelBook").addEventListener("click", closeBookPanel);
+
+  $("#btnSaveBook").addEventListener("click", () => {
+    const title = $("#fTitle").value.trim();
+    if (!title) { toast("A title is required."); $("#fTitle").focus(); return; }
+    const data = {
+      title,
+      author: $("#fAuthor").value.trim(),
+      category: $("#fCategory").value.trim(),
+      price: parseFloat($("#fPrice").value) || 0,
+      stock: parseInt($("#fStock").value, 10) || 0,
+      reorder: $("#fReorder").value === "" ? 5 : (parseInt($("#fReorder").value, 10) || 0),
+    };
+    if (editingBookId) {
+      updateBook(editingBookId, data);
+      toast("Book updated.");
+    } else {
+      data.id = uid();
+      addBook(data);
+      toast("Book added.");
+    }
+    closeBookPanel();
+  });
+
+  function addBook(data) {
+    books.push(data);
+    persistBooks();
+    renderAll();
+  }
+  function updateBook(id, data) {
+    const idx = books.findIndex((b) => b.id === id);
+    if (idx === -1) return;
+    books[idx] = { ...books[idx], ...data };
+    persistBooks();
+    renderAll();
+  }
+  function deleteBook(id) {
+    const b = books.find((x) => x.id === id);
+    if (!b) return;
+    if (!confirm(`Remove "${b.title}" from inventory? This won't affect past sales records.`)) return;
+    books = books.filter((x) => x.id !== id);
+    persistBooks();
+    renderAll();
+    toast("Book removed.");
+  }
+
+  function persistBooks() {
+    if (db) {
+      const col = db.collection("books");
+      books.forEach((b) => {
+        col.doc(b.id).set(stripId(b)).catch(() => {});
+      });
+    } else {
+      saveLocal();
+    }
+  }
+  function stripId(obj) {
+    const { id, ...rest } = obj;
+    return rest;
+  }
+
+  // ---------- Record Sale pane ----------
+  function renderSalePane() {
+    const sel = $("#saleBook");
+    const prev = sel.value;
+    const sellable = books.filter((b) => (b.stock || 0) > 0).sort((a, b) => a.title.localeCompare(b.title));
+    sel.innerHTML = sellable.length
+      ? sellable.map((b) => `<option value="${b.id}">${escapeHtml(b.title)} — ${fmtInt(b.stock)} in stock</option>`).join("")
+      : `<option value="">No books in stock</option>`;
+    if (prev && sellable.some((b) => b.id === prev)) sel.value = prev;
+    updateSaleHint();
+    renderTodaySales();
+  }
+
+  function currentSaleBook() {
+    return books.find((b) => b.id === $("#saleBook").value);
+  }
+
+  function updateSaleHint() {
+    const b = currentSaleBook();
+    const qtyInput = $("#saleQty");
+    if (!b) {
+      $("#saleStockHint").textContent = "Add a book with stock to record a sale.";
+      $("#saleTotal").textContent = fmtMoney(0);
+      return;
+    }
+    qtyInput.max = b.stock;
+    if (parseInt(qtyInput.value, 10) > b.stock) qtyInput.value = b.stock;
+    const hint = $("#saleStockHint");
+    hint.textContent = `${fmtInt(b.stock)} in stock at ${fmtMoney(b.price)} each`;
+    hint.classList.toggle("low", (b.stock || 0) <= (b.reorder != null ? b.reorder : 5));
+    const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    $("#saleTotal").textContent = fmtMoney(qty * (b.price || 0));
+  }
+
+  $("#saleBook").addEventListener("change", updateSaleHint);
+  $("#saleQty").addEventListener("input", updateSaleHint);
+  $("#qtyMinus").addEventListener("click", () => {
+    const inp = $("#saleQty");
+    inp.value = Math.max(1, (parseInt(inp.value, 10) || 1) - 1);
+    updateSaleHint();
+  });
+  $("#qtyPlus").addEventListener("click", () => {
+    const inp = $("#saleQty");
+    const b = currentSaleBook();
+    const max = b ? b.stock : 9999;
+    inp.value = Math.min(max, (parseInt(inp.value, 10) || 1) + 1);
+    updateSaleHint();
+  });
+
+  $("#btnRecordSale").addEventListener("click", () => {
+    const b = currentSaleBook();
+    if (!b) { toast("No book selected."); return; }
+    const qty = Math.max(1, parseInt($("#saleQty").value, 10) || 1);
+    if (qty > (b.stock || 0)) { toast("Not enough stock for that quantity."); return; }
+    const sale = {
+      id: uid(),
+      bookId: b.id,
+      title: b.title,
+      qty,
+      unitPrice: b.price || 0,
+      total: qty * (b.price || 0),
+      ts: Date.now(),
+      soldBy: currentUser ? currentUser.name : "",
+    };
+    sales.push(sale);
+    updateBook(b.id, { stock: (b.stock || 0) - qty });
+    persistSaleAdd(sale);
+    $("#saleQty").value = 1;
+    renderAll();
+    toast(`Sold ${qty} × "${b.title}".`);
+  });
+
+  function persistSaleAdd(sale) {
+    if (db) {
+      db.collection("sales").doc(sale.id).set(stripId(sale)).catch(() => {});
+    } else {
+      saveLocal();
+    }
+  }
+
+  function renderTodaySales() {
+    const start = new Date(); start.setHours(0, 0, 0, 0);
+    const todays = sales.filter((s) => s.ts >= start.getTime()).sort((a, b) => b.ts - a.ts);
+    const tbody = $("#todayTable tbody");
+    tbody.innerHTML = "";
+    $("#todayCount").textContent = fmtInt(todays.length);
+    $("#todayEmpty").style.display = todays.length ? "none" : "block";
+    todays.forEach((s) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td><td>${escapeHtml(s.soldBy || "—")}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ---------- Sales Log pane ----------
+  function renderLog() {
+    const q = ($("#logSearch").value || "").trim().toLowerCase();
+    const filtered = sales.filter((s) => !q || (s.title || "").toLowerCase().includes(q)).sort((a, b) => b.ts - a.ts);
+    const tbody = $("#logTable tbody");
+    tbody.innerHTML = "";
+    $("#logEmpty").style.display = filtered.length ? "none" : "block";
+    filtered.forEach((s) => {
+      const d = new Date(s.ts);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.unitPrice)}</td><td class="num">${fmtMoney(s.total)}</td><td>${d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })} ${d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}</td><td>${escapeHtml(s.soldBy || "—")}</td>`;
+      tbody.appendChild(tr);
+    });
+    $("#logCountStat").textContent = fmtInt(sales.length);
+    $("#logRevenueStat").textContent = fmtMoney(sales.reduce((s, x) => s + (x.total || 0), 0));
+    $("#logUnitsStat").textContent = fmtInt(sales.reduce((s, x) => s + (x.qty || 0), 0));
+  }
+  $("#logSearch").addEventListener("input", renderLog);
+
+  // ---------- Store name & logo (editable; also drives the app's title, favicon, and install manifest) ----------
+  const NAME_KEY = "bookshop-ledger-name";
+  const LOGO_KEY = "bookshop-ledger-logo";
+  const DEFAULT_LOGO = "📚";
+
+  function getCssVar(name) {
+    try { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); } catch (e) { return ""; }
+  }
+
+  function roundedRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawIcon(size, emoji, maskable) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    const pad = maskable ? size * 0.08 : 0;
+    const bg = getCssVar("--ink") || "#1C2B22";
+    ctx.fillStyle = bg;
+    roundedRectPath(ctx, pad, pad, size - 2 * pad, size - 2 * pad, size * 0.22);
+    ctx.fill();
+    ctx.font = `${Math.floor(size * (maskable ? 0.42 : 0.55))}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(emoji || DEFAULT_LOGO, size / 2, size / 2 + size * 0.03);
+    return canvas.toDataURL("image/png");
+  }
+
+  function setLinkHref(rel, href) {
+    let link = document.querySelector(`link[rel="${rel}"]`);
+    if (!link) { link = document.createElement("link"); link.rel = rel; document.head.appendChild(link); }
+    link.href = href;
+  }
+
+  function currentBrand() {
+    return {
+      name: ($("#shopName").value || "The Ledger").trim() || "The Ledger",
+      logo: ($("#logoBtn").textContent || DEFAULT_LOGO).trim() || DEFAULT_LOGO,
+    };
+  }
+
+  function applyBrandToUi(name, logo) {
+    document.title = name;
+    $("#authBrandName").textContent = name;
+    $("#authBrandLogo").textContent = logo;
+    try {
+      const appleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+      if (appleTitle) appleTitle.setAttribute("content", name);
+    } catch (e) { /* ignore */ }
+  }
+
+  function regenerateManifest() {
+    const { name, logo } = currentBrand();
+    let icon192, icon512, icon512mask;
+    try {
+      icon192 = drawIcon(192, logo, false);
+      icon512 = drawIcon(512, logo, false);
+      icon512mask = drawIcon(512, logo, true);
+    } catch (e) {
+      return; // canvas unavailable — keep the existing manifest/icons as-is
+    }
+    const manifest = {
+      name: name + " — Bookshop Inventory",
+      short_name: name,
+      description: "Track stock and sales for " + name + ".",
+      start_url: ".",
+      scope: ".",
+      display: "standalone",
+      orientation: "portrait-primary",
+      background_color: getCssVar("--paper") || "#F3EEDD",
+      theme_color: getCssVar("--gold") || "#A97E2F",
+      icons: [
+        { src: icon192, sizes: "192x192", type: "image/png" },
+        { src: icon512, sizes: "512x512", type: "image/png" },
+        { src: icon512mask, sizes: "512x512", type: "image/png", purpose: "maskable" },
+      ],
+    };
+    try {
+      const manifestJson = JSON.stringify(manifest);
+      const manifestHref = "data:application/manifest+json;base64," + btoa(unescape(encodeURIComponent(manifestJson)));
+      setLinkHref("manifest", manifestHref);
+      setLinkHref("apple-touch-icon", icon192);
+      setLinkHref("icon", icon192);
+    } catch (e) { /* ignore */ }
+  }
+
+  function applyBranding() {
+    const { name, logo } = currentBrand();
+    applyBrandToUi(name, logo);
+    regenerateManifest();
+  }
+
+  // Load any saved name/logo before first render
+  try {
+    const savedName = localStorage.getItem(NAME_KEY);
+    if (savedName) $("#shopName").value = savedName;
+  } catch (e) {}
+  try {
+    const savedLogo = localStorage.getItem(LOGO_KEY);
+    if (savedLogo) $("#logoBtn").textContent = savedLogo;
+  } catch (e) {}
+  applyBranding();
+
+  $("#shopName").addEventListener("change", () => {
+    const val = $("#shopName").value.trim() || "The Ledger";
+    $("#shopName").value = val;
+    try { localStorage.setItem(NAME_KEY, val); } catch (e) {}
+    applyBranding();
+  });
+
+  // ---------- Logo picker ----------
+  $("#logoBtn").addEventListener("click", () => {
+    $("#logoInput").value = $("#logoBtn").textContent.trim();
+    $("#logoPanel").classList.add("open");
+    $("#logoInput").focus();
+  });
+  $all(".logo-suggestions button").forEach((b) => {
+    b.addEventListener("click", () => { $("#logoInput").value = b.dataset.emoji; });
+  });
+  $("#logoCancel").addEventListener("click", () => { $("#logoPanel").classList.remove("open"); });
+  $("#logoSave").addEventListener("click", () => {
+    const val = ($("#logoInput").value || "").trim() || DEFAULT_LOGO;
+    $("#logoBtn").textContent = val;
+    try { localStorage.setItem(LOGO_KEY, val); } catch (e) {}
+    applyBranding();
+    $("#logoPanel").classList.remove("open");
+    toast("Logo updated.");
+  });
+  document.addEventListener("click", (e) => {
+    const panel = $("#logoPanel");
+    if (!panel.classList.contains("open")) return;
+    if (e.target.closest("#logoPanel") || e.target.closest("#logoBtn")) return;
+    panel.classList.remove("open");
+  });
+
+  // ---------- Auth ----------
+  const SESSION_KEY = "bookshop-ledger-session";
+
+  async function hashPassword(pw) {
+    try {
+      const enc = new TextEncoder().encode(pw);
+      const buf = await crypto.subtle.digest("SHA-256", enc);
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    } catch (e) {
+      // Fallback for contexts without SubtleCrypto (e.g. some offline/file:// views).
+      // Not cryptographically secure — a basic screen lock only.
+      let h = 0;
+      for (let i = 0; i < pw.length; i++) h = (Math.imul(31, h) + pw.charCodeAt(i)) | 0;
+      return "fb_" + (h >>> 0).toString(16);
+    }
+  }
+
+  const normalizeName = (s) => (s || "").trim().toLowerCase();
+  const findUserByName = (name) => users.find((u) => u.nameLower === normalizeName(name));
+
+  function showApp() {
+    $("#authScreen").classList.add("hidden");
+    $("#appRoot").classList.add("show");
+  }
+  function showAuth() {
+    $("#authScreen").classList.remove("hidden");
+    $("#appRoot").classList.remove("show");
+  }
+  function setSessionName() {
+    $("#sessionName").textContent = currentUser ? currentUser.name : "";
+  }
+
+  function updateAuthHeading() {
+    const confirmField = $("#authConfirmField");
+    if (authMode === "signup") {
+      $("#authHeading").textContent = users.length ? "Create your account" : "Welcome — set up the first account";
+      $("#authSub").textContent = "Add your name and a password to get started.";
+      $("#authSubmit").textContent = "Create account";
+      confirmField.style.display = "block";
+      $("#authToggleLead").textContent = "Already have an account?";
+      $("#authToggleBtn").textContent = "Log in";
+    } else {
+      $("#authHeading").textContent = "Welcome back";
+      $("#authSub").textContent = "Log in to record sales and manage stock.";
+      $("#authSubmit").textContent = "Log in";
+      confirmField.style.display = "none";
+      $("#authToggleLead").textContent = "New here?";
+      $("#authToggleBtn").textContent = "Create an account";
+    }
+  }
+
+  function attemptAutoLogin() {
+    try {
+      const raw = localStorage.getItem(SESSION_KEY);
+      if (raw) {
+        const sess = JSON.parse(raw);
+        const u = users.find((x) => x.id === sess.id);
+        if (u) {
+          currentUser = { id: u.id, name: u.name };
+          setSessionName();
+          showApp();
+          return true;
+        }
+      }
+    } catch (e) { /* ignore */ }
+    return false;
+  }
+
+  function onUsersReady() {
+    if (usersLoaded) return;
+    usersLoaded = true;
+    if (!attemptAutoLogin()) {
+      authMode = users.length ? "login" : "signup";
+      updateAuthHeading();
+      showAuth();
+    }
+  }
+
+  $("#authForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("#authName").value.trim();
+    const pass = $("#authPass").value;
+    const errEl = $("#authError");
+    errEl.style.display = "none";
+
+    if (!name) { errEl.textContent = "Enter your name."; errEl.style.display = "block"; return; }
+    if (!pass) { errEl.textContent = "Enter a password."; errEl.style.display = "block"; return; }
+
+    if (authMode === "signup") {
+      const confirmPass = $("#authConfirm").value;
+      if (findUserByName(name)) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+      if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+      if (pass !== confirmPass) { errEl.textContent = "Passwords don't match."; errEl.style.display = "block"; return; }
+      const passHash = await hashPassword(pass);
+      const u = { id: uid(), name, nameLower: normalizeName(name), passHash };
+      users.push(u);
+      persistUsers();
+      currentUser = { id: u.id, name: u.name };
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
+      setSessionName();
+      showApp();
+      $("#authForm").reset();
+      toast(`Welcome, ${name}.`);
+    } else {
+      const u = findUserByName(name);
+      if (!u) { errEl.textContent = "No account with that name yet — create one below."; errEl.style.display = "block"; return; }
+      const passHash = await hashPassword(pass);
+      if (passHash !== u.passHash) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
+      currentUser = { id: u.id, name: u.name };
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
+      setSessionName();
+      showApp();
+      $("#authForm").reset();
+      toast(`Welcome back, ${u.name}.`);
+    }
+  });
+
+  $("#authToggleBtn").addEventListener("click", () => {
+    authMode = authMode === "login" ? "signup" : "login";
+    $("#authError").style.display = "none";
+    $("#authForm").reset();
+    updateAuthHeading();
+    $("#authName").focus();
+  });
+
+  $("#btnLogout").addEventListener("click", () => {
+    currentUser = null;
+    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+    authMode = users.length ? "login" : "signup";
+    updateAuthHeading();
+    showAuth();
+    $("#authName").focus();
+  });
+
+  // ---------- DB wiring ----------
+  async function initDb() {
+    try {
+      db = await claude.use("db");
+    } catch (e) {
+      db = null;
+    }
+    if (!db) {
+      loadLocal();
+      renderAll();
+      onUsersReady();
+      $("#offlineBanner").classList.add("show");
+      return;
+    }
+    let booksLoaded = false, salesLoaded = false;
+    db.collection("books").onSnapshot(
+      (snap) => {
+        books = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        booksLoaded = true;
+        renderAll();
+      },
+      () => { $("#offlineBanner").classList.add("show"); }
+    );
+    db.collection("sales").onSnapshot(
+      (snap) => {
+        sales = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        salesLoaded = true;
+        renderAll();
+      },
+      () => { $("#offlineBanner").classList.add("show"); }
+    );
+    db.collection("users").onSnapshot(
+      (snap) => {
+        users = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        onUsersReady();
+        renderAll();
+      },
+      () => { $("#offlineBanner").classList.add("show"); }
+    );
+  }
+
+  renderAll();
+  initDb();
+})();
+</script>
+</body>
+</html>
