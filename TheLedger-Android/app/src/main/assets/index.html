@@ -1206,14 +1206,23 @@
     persistBooks();
     renderAll();
   }
-  function deleteBook(id) {
+  async function deleteBook(id) {
     const b = books.find((x) => x.id === id);
     if (!b) return;
     if (!confirm(`Remove "${b.title}" from inventory? This won't affect past sales records.`)) return;
-    books = books.filter((x) => x.id !== id);
-    persistBooks();
-    renderAll();
-    toast("Book removed.");
+
+    try {
+      if (db) {
+        await db.collection("books").doc(id).delete();
+      }
+      books = books.filter((x) => x.id !== id);
+      if (!db) saveLocal();
+      renderAll();
+      toast("Book removed.");
+    } catch (error) {
+      console.error("Failed to remove book:", error);
+      toast("Could not remove book.");
+    }
   }
 
   function persistBooks() {
