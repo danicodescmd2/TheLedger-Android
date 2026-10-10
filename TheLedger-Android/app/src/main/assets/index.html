@@ -1122,7 +1122,7 @@
         <td>
           <div class="row-actions">
             <button data-act="edit" data-id="${b.id}">Edit</button>
-            <button data-act="delete" data-id="${b.id}" class="danger">Remove</button>
+            <button type="button" data-act="delete" data-id="${b.id}" class="danger" onclick="deleteBook(this.dataset.id)">Remove</button>
           </div>
         </td>`;
       tbody.appendChild(tr);
@@ -1224,6 +1224,8 @@
       toast("Could not remove book.");
     }
   }
+window.deleteBook = deleteBook;
+
 
   function persistBooks() {
     if (db) {
