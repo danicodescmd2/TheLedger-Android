@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="The Ledger">
-<meta name="theme-color" content="#E6D8C1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#3D2B1F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#EAF2FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1520" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,25 +21,25 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
 
-    --ink: #3D2B1F;
-    --ink-soft: #5E5147;
-    --paper: #E6D8C1;
-    --paper-alt: #DCCBB0;
-    --paper-raised: #F3E8D4;
-    --gold: #D9B382;
-    --gold-soft: #C89B68;
-    --rust: #A37C76;
-    --sage: #8E9680;
-    --line: #C8B79E;
-    --line-soft: #E0D2BC;
+    --ink: #0F2439;
+    --ink-soft: #46607A;
+    --paper: #EAF2FB;
+    --paper-alt: #DCE9F7;
+    --paper-raised: #F5F9FE;
+    --gold: #2F7DE1;
+    --gold-soft: #5B9EEF;
+    --rust: #E0473A;
+    --sage: #16A6A0;
+    --line: #B9CFE6;
+    --line-soft: #D3E2F2;
     --font-display: "Fraunces", Georgia, serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
-    --glass-bg: rgba(255, 255, 255, 0.38);
-    --glass-bg-strong: rgba(255, 255, 255, 0.55);
-    --glass-border: rgba(255, 255, 255, 0.55);
-    --glass-shadow: 0 8px 32px rgba(61, 43, 31, 0.14);
-    --glass-blur: 18px;
+    --glass-bg: rgba(255, 255, 255, 0.30);
+    --glass-bg-strong: rgba(255, 255, 255, 0.50);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-shadow: 0 10px 34px rgba(15, 36, 57, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    --glass-blur: 30px;
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); height: 100%; }
@@ -61,48 +61,48 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(38vmax 38vmax at 8% 8%, rgba(217, 179, 130, 0.34), transparent 60%),
-      radial-gradient(42vmax 42vmax at 92% 18%, rgba(142, 150, 128, 0.30), transparent 60%),
-      radial-gradient(46vmax 46vmax at 28% 94%, rgba(163, 124, 118, 0.24), transparent 60%),
-      radial-gradient(36vmax 36vmax at 90% 92%, rgba(230, 216, 193, 0.34), transparent 60%);
+      radial-gradient(38vmax 38vmax at 8% 8%, rgba(47, 125, 225, 0.34), transparent 60%),
+      radial-gradient(42vmax 42vmax at 92% 18%, rgba(22, 166, 160, 0.32), transparent 60%),
+      radial-gradient(46vmax 46vmax at 28% 94%, rgba(123, 92, 255, 0.24), transparent 60%),
+      radial-gradient(36vmax 36vmax at 90% 92%, rgba(77, 163, 255, 0.30), transparent 60%);
   }
   header.top, main, .toast { position: relative; z-index: 1; }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ink: #F2E7D5;
-      --ink-soft: #D7C8B3;
-      --paper: #3D2B1F;
-      --paper-alt: #4A3528;
-      --paper-raised: #503A2C;
-      --gold: #D9B382;
-      --gold-soft: #C89B68;
-      --rust: #C99A91;
-      --sage: #A8B09A;
-      --line: #665345;
-      --line-soft: #574537;
-      --glass-bg: rgba(61, 43, 31, 0.42);
-      --glass-bg-strong: rgba(61, 43, 31, 0.68);
-      --glass-border: rgba(230, 216, 193, 0.18);
-      --glass-shadow: 0 8px 32px rgba(61, 43, 31, 0.32);
+      --ink: #DCEAFB;
+      --ink-soft: #9FB7D1;
+      --paper: #0A1520;
+      --paper-alt: #101E2C;
+      --paper-raised: #142535;
+      --gold: #4DA3FF;
+      --gold-soft: #7CC0FF;
+      --rust: #FF6B57;
+      --sage: #2FD1C9;
+      --line: #223246;
+      --line-soft: #1A2735;
+      --glass-bg: rgba(8, 18, 28, 0.46);
+      --glass-bg-strong: rgba(8, 18, 28, 0.68);
+      --glass-border: rgba(220, 234, 251, 0.16);
+      --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
   }
   :root[data-theme="dark"] {
-    --ink: #F2E7D5;
-    --ink-soft: #D7C8B3;
-    --paper: #3D2B1F;
-    --paper-alt: #4A3528;
-    --paper-raised: #503A2C;
-    --gold: #D9B382;
-    --gold-soft: #C89B68;
-    --rust: #C99A91;
-    --sage: #A8B09A;
-    --line: #665345;
-    --line-soft: #574537;
-    --glass-bg: rgba(61, 43, 31, 0.42);
-    --glass-bg-strong: rgba(61, 43, 31, 0.68);
-    --glass-border: rgba(230, 216, 193, 0.18);
-    --glass-shadow: 0 8px 32px rgba(61, 43, 31, 0.32);
+    --ink: #DCEAFB;
+    --ink-soft: #9FB7D1;
+    --paper: #0A1520;
+    --paper-alt: #101E2C;
+    --paper-raised: #142535;
+    --gold: #4DA3FF;
+    --gold-soft: #7CC0FF;
+    --rust: #FF6B57;
+    --sage: #2FD1C9;
+    --line: #223246;
+    --line-soft: #1A2735;
+    --glass-bg: rgba(8, 18, 28, 0.46);
+    --glass-bg-strong: rgba(8, 18, 28, 0.68);
+    --glass-border: rgba(220, 234, 251, 0.16);
+    --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   }
 
   a { color: inherit; }
@@ -113,8 +113,8 @@
     top: 0;
     padding-top: env(safe-area-inset-top, 0px);
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border-bottom: 1px solid var(--glass-border);
     z-index: 10;
   }
@@ -212,10 +212,10 @@
     display: flex;
     flex-wrap: wrap;
     background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 22px;
     box-shadow: var(--glass-shadow);
     margin-bottom: 32px;
     overflow: hidden;
@@ -275,10 +275,10 @@
   .tbl-wrap {
     overflow-x: auto;
     background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 22px;
     box-shadow: var(--glass-shadow);
     padding: 4px 14px;
   }
@@ -378,13 +378,13 @@
   button.btn:hover {
     border-radius: 62% 38% 55% 45% / 45% 55% 38% 62%;
     transform: translateY(-2px);
-    box-shadow: 0 10px 26px rgba(169, 126, 47, 0.32);
+    box-shadow: 0 10px 26px rgba(47, 125, 225, 0.34);
     background: var(--ink-soft);
   }
   button.btn:active {
     border-radius: 999px;
     transform: translateY(0) scale(0.94);
-    box-shadow: 0 2px 8px rgba(169, 126, 47, 0.24);
+    box-shadow: 0 2px 8px rgba(47, 125, 225, 0.26);
   }
   button.btn.secondary {
     background: none;
@@ -393,7 +393,7 @@
   }
   button.btn.secondary:hover {
     background: var(--paper-alt);
-    box-shadow: 0 10px 26px rgba(76, 107, 79, 0.22);
+    box-shadow: 0 10px 26px rgba(22, 166, 160, 0.26);
   }
   .btn-ripple {
     position: absolute;
@@ -419,10 +419,10 @@
   /* ---------- Form panel ---------- */
   .panel {
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 22px;
     box-shadow: var(--glass-shadow);
     padding: 18px;
     margin-bottom: 24px;
@@ -457,10 +457,10 @@
   /* ---------- Sale panel ---------- */
   .sale-picker {
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 22px;
     box-shadow: var(--glass-shadow);
     padding: 20px;
     margin-bottom: 28px;
@@ -484,7 +484,7 @@
   }
   .qty-row button:hover {
     background: var(--paper-alt);
-    box-shadow: 0 6px 16px rgba(169, 126, 47, 0.28);
+    box-shadow: 0 6px 16px rgba(47, 125, 225, 0.30);
     transform: translateY(-1px);
   }
   .qty-row button:active {
@@ -510,14 +510,14 @@
     left: 50%;
     transform: translateX(-50%) translateY(12px);
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
     color: var(--ink);
     font-size: 13px;
     font-weight: 600;
     padding: 11px 18px;
-    border-radius: 10px;
+    border-radius: 14px;
     box-shadow: var(--glass-shadow);
     opacity: 0;
     pointer-events: none;
@@ -542,10 +542,10 @@
   .offline-banner {
     display: none;
     background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 10px;
+    border-radius: 14px;
     padding: 10px 14px;
     font-size: 12.5px;
     color: var(--ink-soft);
@@ -575,8 +575,8 @@
     width: 100%;
     max-width: 360px;
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: var(--glass-shadow);
@@ -609,25 +609,22 @@
   .auth-card .field { margin-bottom: 14px; }
   .auth-card .field input { width: 100%; }
   .password-wrap { position: relative; }
-  .password-wrap input { padding-right: 52px; }
-  .password-toggle {
+  .password-wrap input { padding-right: 56px; }
+  .pw-toggle {
     position: absolute;
-    right: 10px;
+    right: 4px;
     top: 50%;
     transform: translateY(-50%);
-    border: 0;
-    background: transparent;
-    color: var(--ink-soft);
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sage);
     cursor: pointer;
-    font-size: 18px;
-    display: grid;
-    place-items: center;
+    padding: 6px 8px;
   }
-  .password-toggle:hover { background: var(--paper-alt); color: var(--ink); }
-  .password-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .pw-toggle:hover { color: var(--gold); }
   .auth-submit { width: 100%; margin-top: 4px; }
   .auth-error {
     color: var(--rust);
@@ -681,8 +678,8 @@
     border-radius: 50%;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     font-size: 20px;
     line-height: 1;
     cursor: pointer;
@@ -693,7 +690,7 @@
   }
   .logo-btn:hover {
     transform: translateY(-1px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(169, 126, 47, 0.3);
+    box-shadow: 0 8px 20px rgba(47, 125, 225, 0.32);
   }
   .logo-btn:active { transform: scale(0.92); }
   .logo-panel {
@@ -704,10 +701,10 @@
     z-index: 20;
     width: 220px;
     background: var(--glass-bg-strong);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 22px;
     box-shadow: var(--glass-shadow);
     padding: 14px;
   }
@@ -733,10 +730,96 @@
   .logo-panel .panel-actions { display: flex; gap: 8px; margin-bottom: 0; }
   .logo-panel .btn { padding: 8px 14px; font-size: 12.5px; }
 
+  /* ---------- Trial lock ---------- */
+  .trial-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px));
+    padding-top: calc(24px + env(safe-area-inset-top, 0px));
+    background: var(--paper);
+  }
+  .trial-screen.show { display: flex; }
+
+  .trial-banner {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 9px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .trial-banner.show { display: flex; }
+  .trial-banner .link-btn { font-size: 12px; white-space: nowrap; }
+
+  /* ---------- Confirm modal (replaces native confirm(), which packaged Android apps often block) ---------- */
+  .confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 21, 32, 0.45);
+  }
+  .confirm-overlay.open { display: flex; }
+  .confirm-card {
+    width: 100%;
+    max-width: 340px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow: var(--glass-shadow);
+    padding: 22px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .confirm-card { background: var(--paper-raised); }
+  }
+  .confirm-card p {
+    margin: 0 0 18px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .confirm-card .panel-actions { margin-bottom: 0; }
+
   ::selection { background: var(--gold-soft); color: var(--ink); }
 </style>
 </head>
 <body>
+
+<div id="trialScreen" class="trial-screen">
+  <div class="auth-card">
+    <div class="auth-brand"><span id="trialBrandLogo">📚</span> <span id="trialBrandName">The Ledger</span></div>
+    <h2 class="auth-heading" id="trialHeading">Your trial has ended</h2>
+    <p class="auth-sub" id="trialSub">This copy was a free trial. Enter your unlock code to keep using it.</p>
+    <form id="trialForm" autocomplete="off">
+      <div class="field">
+        <label for="trialCode">Unlock code</label>
+        <input type="text" id="trialCode" autocomplete="off" placeholder="XXXX-XXXX-XXXX-XXXX">
+      </div>
+      <p class="auth-error" id="trialError" style="display:none;"></p>
+      <button type="submit" class="btn auth-submit">Unlock</button>
+    </form>
+    <p class="auth-note">Don't have a code yet? Contact the person you got this app from.</p>
+    <p class="auth-toggle" id="trialCancelRow" style="display:none;">
+      <button type="button" class="link-btn" id="trialCancel">Not now, keep using the trial</button>
+    </p>
+  </div>
+</div>
 
 <div id="authScreen" class="auth-screen">
   <div class="auth-card">
@@ -752,14 +835,14 @@
         <label for="authPass">Password</label>
         <div class="password-wrap">
           <input type="password" id="authPass" autocomplete="current-password" placeholder="••••••••">
-          <button type="button" class="password-toggle" id="toggleAuthPass" aria-label="Show password" aria-pressed="false">👁</button>
+          <button type="button" class="pw-toggle" data-target="authPass" aria-label="Show password">Show</button>
         </div>
       </div>
       <div class="field" id="authConfirmField" style="display:none;">
         <label for="authConfirm">Confirm password</label>
         <div class="password-wrap">
           <input type="password" id="authConfirm" autocomplete="new-password" placeholder="••••••••">
-          <button type="button" class="password-toggle" id="toggleAuthConfirm" aria-label="Show password" aria-pressed="false">👁</button>
+          <button type="button" class="pw-toggle" data-target="authConfirm" aria-label="Show password">Show</button>
         </div>
       </div>
       <p class="auth-error" id="authError" style="display:none;"></p>
@@ -814,6 +897,10 @@
 </header>
 
 <main>
+  <div class="trial-banner" id="trialBanner">
+    <span id="trialBannerText"></span>
+    <button type="button" class="link-btn" id="trialUnlockLink">Enter code</button>
+  </div>
   <div class="offline-banner" id="offlineBanner">Working without live sync — changes stay on this device until the connection is ready.</div>
 
   <!-- DASHBOARD -->
@@ -945,6 +1032,16 @@
   </section>
 </main>
 
+</div>
+
+<div class="confirm-overlay" id="confirmModal">
+  <div class="confirm-card">
+    <p id="confirmMessage"></p>
+    <div class="panel-actions">
+      <button class="btn" id="confirmYes" type="button">Remove</button>
+      <button class="btn secondary" id="confirmNo" type="button">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1122,7 +1219,7 @@
         <td>
           <div class="row-actions">
             <button data-act="edit" data-id="${b.id}">Edit</button>
-            <button type="button" data-act="delete" data-id="${b.id}" class="danger" onclick="deleteBook(this.dataset.id)">Remove</button>
+            <button data-act="delete" data-id="${b.id}" class="danger">Remove</button>
           </div>
         </td>`;
       tbody.appendChild(tr);
@@ -1206,26 +1303,39 @@
     persistBooks();
     renderAll();
   }
+  function askConfirm(message) {
+    return new Promise((resolve) => {
+      const overlay = $("#confirmModal");
+      $("#confirmMessage").textContent = message;
+      overlay.classList.add("open");
+      const yesBtn = $("#confirmYes");
+      const noBtn = $("#confirmNo");
+      function cleanup(result) {
+        overlay.classList.remove("open");
+        yesBtn.removeEventListener("click", onYes);
+        noBtn.removeEventListener("click", onNo);
+        overlay.removeEventListener("click", onOverlay);
+        resolve(result);
+      }
+      function onYes() { cleanup(true); }
+      function onNo() { cleanup(false); }
+      function onOverlay(e) { if (e.target === overlay) cleanup(false); }
+      yesBtn.addEventListener("click", onYes);
+      noBtn.addEventListener("click", onNo);
+      overlay.addEventListener("click", onOverlay);
+    });
+  }
+
   async function deleteBook(id) {
     const b = books.find((x) => x.id === id);
     if (!b) return;
-    if (!confirm(`Remove "${b.title}" from inventory? This won't affect past sales records.`)) return;
-
-    try {
-      if (db) {
-        await db.collection("books").doc(id).delete();
-      }
-      books = books.filter((x) => x.id !== id);
-      if (!db) saveLocal();
-      renderAll();
-      toast("Book removed.");
-    } catch (error) {
-      console.error("Failed to remove book:", error);
-      toast("Could not remove book.");
-    }
+    const ok = await askConfirm(`Remove "${b.title}" from inventory? This won't affect past sales records.`);
+    if (!ok) return;
+    books = books.filter((x) => x.id !== id);
+    removeBookPersist(id);
+    renderAll();
+    toast("Book removed.");
   }
-window.deleteBook = deleteBook;
-
 
   function persistBooks() {
     if (db) {
@@ -1233,6 +1343,13 @@ window.deleteBook = deleteBook;
       books.forEach((b) => {
         col.doc(b.id).set(stripId(b)).catch(() => {});
       });
+    } else {
+      saveLocal();
+    }
+  }
+  function removeBookPersist(id) {
+    if (db) {
+      db.collection("books").doc(id).delete().catch(() => {});
     } else {
       saveLocal();
     }
@@ -1379,7 +1496,7 @@ window.deleteBook = deleteBook;
     canvas.width = size; canvas.height = size;
     const ctx = canvas.getContext("2d");
     const pad = maskable ? size * 0.08 : 0;
-    const bg = getCssVar("--ink") || "#1C2B22";
+    const bg = getCssVar("--ink") || "#0F2439";
     ctx.fillStyle = bg;
     roundedRectPath(ctx, pad, pad, size - 2 * pad, size - 2 * pad, size * 0.22);
     ctx.fill();
@@ -1407,6 +1524,8 @@ window.deleteBook = deleteBook;
     document.title = name;
     $("#authBrandName").textContent = name;
     $("#authBrandLogo").textContent = logo;
+    $("#trialBrandName").textContent = name;
+    $("#trialBrandLogo").textContent = logo;
     try {
       const appleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
       if (appleTitle) appleTitle.setAttribute("content", name);
@@ -1431,8 +1550,8 @@ window.deleteBook = deleteBook;
       scope: ".",
       display: "standalone",
       orientation: "portrait-primary",
-      background_color: getCssVar("--paper") || "#F3EEDD",
-      theme_color: getCssVar("--gold") || "#A97E2F",
+      background_color: getCssVar("--paper") || "#EAF2FB",
+      theme_color: getCssVar("--gold") || "#2F7DE1",
       icons: [
         { src: icon192, sizes: "192x192", type: "image/png" },
         { src: icon512, sizes: "512x512", type: "image/png" },
@@ -1575,6 +1694,17 @@ window.deleteBook = deleteBook;
     }
   }
 
+  $all(".pw-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = $("#" + btn.dataset.target);
+      if (!input) return;
+      const nowVisible = input.type === "password";
+      input.type = nowVisible ? "text" : "password";
+      btn.textContent = nowVisible ? "Hide" : "Show";
+      btn.setAttribute("aria-label", nowVisible ? "Hide password" : "Show password");
+    });
+  });
+
   $("#authForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = $("#authName").value.trim();
@@ -1614,22 +1744,6 @@ window.deleteBook = deleteBook;
     }
   });
 
-  function wirePasswordToggle(inputId, buttonId) {
-    const input = $("#" + inputId);
-    const button = $("#" + buttonId);
-    if (!input || !button) return;
-    button.addEventListener("click", () => {
-      const showing = input.type === "text";
-      input.type = showing ? "password" : "text";
-      button.textContent = showing ? "👁" : "🙈";
-      button.setAttribute("aria-label", showing ? "Show password" : "Hide password");
-      button.setAttribute("aria-pressed", String(!showing));
-      input.focus();
-    });
-  }
-  wirePasswordToggle("authPass", "toggleAuthPass");
-  wirePasswordToggle("authConfirm", "toggleAuthConfirm");
-
   $("#authToggleBtn").addEventListener("click", () => {
     authMode = authMode === "login" ? "signup" : "login";
     $("#authError").style.display = "none";
@@ -1645,6 +1759,98 @@ window.deleteBook = deleteBook;
     updateAuthHeading();
     showAuth();
     $("#authName").focus();
+  });
+
+  // ---------- Trial / license gate ----------
+  // This copy is unlocked by whoever holds the unlock code below (only its SHA-256
+  // hash is stored here, not the code itself). Change TRIAL_DAYS and LICENSE_HASH
+  // per client before handing over a build, and keep that client's own code private.
+  const TRIAL_DAYS = 14;
+  const LICENSE_HASH = "b8a3bb9625f6a5198b60565c877ee35dc1c0ac181471cfc5bf26d82167b268ed";
+  const TRIAL_START_KEY = "bookshop-ledger-trial-start";
+  const LICENSED_KEY = "bookshop-ledger-licensed";
+
+  const normalizeCode = (s) => (s || "").trim().toUpperCase().replace(/\s+/g, "");
+
+  function isLicensed() {
+    try { return localStorage.getItem(LICENSED_KEY) === "1"; } catch (e) { return false; }
+  }
+  function hideTrialScreen() { $("#trialScreen").classList.remove("show"); }
+  function updateTrialBanner(remainingDays) {
+    const banner = $("#trialBanner");
+    if (remainingDays == null) { banner.classList.remove("show"); return; }
+    $("#trialBannerText").textContent = remainingDays <= 0 ? "Trial ending today" : `Trial — ${remainingDays} day${remainingDays === 1 ? "" : "s"} left`;
+    banner.classList.add("show");
+  }
+
+  function isTrialExpired() {
+    if (isLicensed()) return false;
+    let start;
+    try { start = localStorage.getItem(TRIAL_START_KEY); } catch (e) { start = null; }
+    if (!start) return false;
+    const elapsedDays = (Date.now() - parseInt(start, 10)) / (1000 * 60 * 60 * 24);
+    return elapsedDays >= TRIAL_DAYS;
+  }
+
+  // Opens the lock screen. When the trial has genuinely run out this is a hard
+  // block (no way back except a valid code). When opened early/voluntarily —
+  // via the banner's "Enter code" link — it offers a way to back out instead.
+  function openTrialScreen() {
+    const expired = isTrialExpired();
+    if (expired) {
+      $("#trialHeading").textContent = "Your trial has ended";
+      $("#trialSub").textContent = "This copy was a free trial. Enter your unlock code to keep using it.";
+      $("#trialCancelRow").style.display = "none";
+    } else {
+      $("#trialHeading").textContent = "Enter your unlock code";
+      $("#trialSub").textContent = "Already paid? Enter your code below to unlock the app now.";
+      $("#trialCancelRow").style.display = "block";
+    }
+    $("#trialScreen").classList.add("show");
+  }
+
+  $("#trialUnlockLink").addEventListener("click", () => openTrialScreen());
+  $("#trialCancel").addEventListener("click", () => hideTrialScreen());
+
+  function checkLicense() {
+    if (isLicensed()) { hideTrialScreen(); updateTrialBanner(null); return; }
+    let start;
+    try {
+      start = localStorage.getItem(TRIAL_START_KEY);
+      if (!start) {
+        start = String(Date.now());
+        localStorage.setItem(TRIAL_START_KEY, start);
+      }
+    } catch (e) {
+      start = String(Date.now());
+    }
+    const elapsedDays = (Date.now() - parseInt(start, 10)) / (1000 * 60 * 60 * 24);
+    const remaining = Math.max(0, Math.ceil(TRIAL_DAYS - elapsedDays));
+    if (elapsedDays >= TRIAL_DAYS) {
+      openTrialScreen();
+    } else {
+      hideTrialScreen();
+      updateTrialBanner(remaining);
+    }
+  }
+
+  $("#trialForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const code = normalizeCode($("#trialCode").value);
+    const errEl = $("#trialError");
+    errEl.style.display = "none";
+    if (!code) { errEl.textContent = "Enter your unlock code."; errEl.style.display = "block"; return; }
+    const hash = await hashPassword(code);
+    if (hash === LICENSE_HASH) {
+      try { localStorage.setItem(LICENSED_KEY, "1"); } catch (e2) {}
+      hideTrialScreen();
+      updateTrialBanner(null);
+      $("#trialForm").reset();
+      toast("Unlocked — thanks!");
+    } else {
+      errEl.textContent = "That code doesn't match. Check with the seller.";
+      errEl.style.display = "block";
+    }
   });
 
   // ---------- DB wiring ----------
@@ -1688,6 +1894,7 @@ window.deleteBook = deleteBook;
     );
   }
 
+  checkLicense();
   renderAll();
   initDb();
 })();
