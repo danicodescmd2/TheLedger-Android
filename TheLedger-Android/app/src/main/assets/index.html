@@ -15,8 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-app-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-firestore-compat.js"></script>
 <style>
   :root {
     box-sizing: border-box;
@@ -115,6 +113,7 @@
   .sync-pill.ok { color: var(--sage); border-color: var(--sage); }
   .sync-pill.wait { color: var(--ink-soft); }
   .sync-pill.error { color: var(--rust); border-color: var(--rust); }
+  .sync-pill.offline { color: var(--ink-soft); border-style: dashed; }
   .sync-detail { background: var(--glass-bg-strong); border: 1px solid var(--rust); color: var(--rust); border-radius: 14px; padding: 10px 14px; font-size: 12.5px; font-weight: 600; margin-bottom: 16px; word-break: break-word; }
   a { color: inherit; }
 
@@ -1097,7 +1096,7 @@
     <button type="button" class="link-btn" id="trialUnlockLink">Enter code</button>
   </div>
   <div class="sync-detail" id="syncDetail" style="display:none;"></div>
-  <div class="offline-banner" id="offlineBanner">Working without live sync — changes stay on this device until the connection is ready.</div>
+  <div class="offline-banner" id="offlineBanner">Working offline — changes are saved on this device and upload automatically once the connection is back.</div>
 
   <!-- DASHBOARD -->
   <section class="pane active" id="pane-dashboard">
@@ -2334,7 +2333,7 @@
     const pill = document.getElementById("syncPill");
     if (!pill) return;
     pill.className = "sync-pill " + state;
-    pill.innerHTML = '<span class="dot">●</span> <span class="lbl">' + (state === "ok" ? "Synced" : state === "wait" ? "Connecting…" : "Not syncing") + '</span>';
+    pill.innerHTML = '<span class="dot">●</span> <span class="lbl">' + (state === "ok" ? "Synced" : state === "wait" ? "Connecting…" : state === "offline" ? "Offline" : "Not syncing") + '</span>';
     pill.title = detail || "";
     pill.dataset.detail = detail || "";
     const line = document.getElementById("syncDetail");
@@ -2351,27 +2350,105 @@
   }
 
   // ---------- DB wiring ----------
-  async function initDb() {
-    // Firebase (shared across every device signed into the same project) takes
-    // priority, so every staff login on any device sees the same live data.
-    let firebaseDb = null;
-    try {
-      if (typeof firebase !== "undefined") {
-        firebase.initializeApp({
-          apiKey: "AIzaSyAJnuCOizblOFrcIvygAlV0D7_M98ZyT6c",
-          authDomain: "rubyrush-609b6.firebaseapp.com",
-          projectId: "rubyrush-609b6",
-          storageBucket: "rubyrush-609b6.firebasestorage.app",
-          messagingSenderId: "490646836441",
-          appId: "1:490646836441:web:09f2f6915e66d2f8a49ac8",
-        });
-        firebaseDb = firebase.firestore();
-      } else {
-        setSync("error", "Firebase scripts did not load (check internet / blocked CDN)");
+  // The Firebase code is fetched at runtime. If one source is blocked or offline we try
+  // the next, and keep retrying in the background so the app connects on its own later.
+  const FB_VER = "10.12.2";
+  const FB_SOURCES = [
+    "https://www.gstatic.com/firebasejs/" + FB_VER + "/",
+    "https://cdn.jsdelivr.net/npm/firebase@" + FB_VER + "/",
+    "https://unpkg.com/firebase@" + FB_VER + "/",
+  ];
+  const FB_CONFIG = {
+    apiKey: "AIzaSyAJnuCOizblOFrcIvygAlV0D7_M98ZyT6c",
+    authDomain: "rubyrush-609b6.firebaseapp.com",
+    projectId: "rubyrush-609b6",
+    storageBucket: "rubyrush-609b6.firebasestorage.app",
+    messagingSenderId: "490646836441",
+    appId: "1:490646836441:web:09f2f6915e66d2f8a49ac8",
+  };
+
+  function loadScript(src, ms) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      let done = false;
+      const t = setTimeout(() => finish(false), ms);
+      function finish(ok) {
+        if (done) return;
+        done = true;
+        clearTimeout(t);
+        if (ok) resolve(); else { el.remove(); reject(new Error("could not load " + src)); }
       }
-    } catch (e) {
-      firebaseDb = null;
-      setSync("error", "Firebase init failed: " + (e && e.message ? e.message : e));
+      el.src = src;
+      el.onload = () => finish(true);
+      el.onerror = () => finish(false);
+      document.head.appendChild(el);
+    });
+  }
+
+  async function loadFirebase() {
+    const ready = () => typeof firebase !== "undefined" && firebase.firestore;
+    if (ready()) return true;
+    for (const base of FB_SOURCES) {
+      try {
+        if (typeof firebase === "undefined") await loadScript(base + "firebase-app-compat.js", 12000);
+        await loadScript(base + "firebase-firestore-compat.js", 20000);
+        if (ready()) return true;
+      } catch (e) { /* try the next source */ }
+    }
+    return false;
+  }
+
+  let initBusy = false;
+  let retryTimer = null;
+  let onlineHooked = false;
+  let cloudGaveUp = false;      // set when the cloud refused us (e.g. rules) — no point retrying
+  let localAtConnect = null;    // data made offline, uploaded once the cloud first answers
+
+  function scheduleRetry() {
+    const attempt = () => {
+      if (db || cloudGaveUp) { clearInterval(retryTimer); retryTimer = null; return; }
+      initDb(true);
+    };
+    if (!retryTimer) retryTimer = setInterval(attempt, 20000);
+    if (!onlineHooked) {
+      onlineHooked = true;
+      window.addEventListener("online", () => { if (!db && !cloudGaveUp) initDb(true); });
+    }
+  }
+
+  function mergeLocalInto(colName, snap, localArr) {
+    // Only trust a real server answer, never a cached one, so nothing newer gets overwritten.
+    if (!localAtConnect || !db || snap.metadata.fromCache) return;
+    const key = "merged_" + colName;
+    if (localAtConnect[key]) return;
+    localAtConnect[key] = true;
+    const ids = new Set(snap.docs.map((d) => d.id));
+    localArr.forEach((x) => {
+      if (!ids.has(x.id)) db.collection(colName).doc(x.id).set(stripId(x)).then(syncSaved, syncFail);
+    });
+  }
+
+  async function initDb(isRetry) {
+    if (initBusy) return;
+    initBusy = true;
+    try { await connectCloud(isRetry); } finally { initBusy = false; }
+  }
+
+  async function connectCloud(isRetry) {
+    let firebaseDb = null;
+    const loaded = await loadFirebase();
+    if (!loaded) {
+      setSync("offline", "Can't reach the Firebase scripts — working offline, retrying automatically.");
+    } else {
+      try {
+        if (!(firebase.apps && firebase.apps.length)) firebase.initializeApp(FB_CONFIG);
+        firebaseDb = firebase.firestore();
+        // Keep a local copy and queue writes made offline.
+        try { firebaseDb.enablePersistence({ synchronizeTabs: true }).catch(() => {}); } catch (e) {}
+      } catch (e) {
+        firebaseDb = null;
+        setSync("error", "Firebase init failed: " + (e && e.message ? e.message : e));
+      }
     }
 
     if (firebaseDb) {
@@ -2385,16 +2462,28 @@
     }
 
     if (!db) {
-      loadLocal();
-      renderAll();
-      onUsersReady();
-      $("#offlineBanner").classList.add("show");
+      if (!isRetry) {
+        loadLocal();
+        renderAll();
+        onUsersReady();
+        $("#offlineBanner").classList.add("show");
+      }
+      scheduleRetry();
       return;
     }
+
+    if (isRetry) {
+      // We were running on this device only; keep that data so it can be uploaded.
+      localAtConnect = { books: books.slice(), sales: sales.slice(), users: users.slice() };
+      $("#offlineBanner").classList.remove("show");
+      setSync("wait", "Connecting…");
+    }
+
     let fellBack = false;
     function fallBackToLocal(err) {
       if (fellBack) return;
       fellBack = true;
+      cloudGaveUp = true;
       setSync("error", "Cloud read failed: " + (err && (err.code || err.message) ? (err.code || err.message) : "unknown error"));
       db = null;
       loadLocal();
@@ -2402,13 +2491,12 @@
       onUsersReady();
       $("#offlineBanner").classList.add("show");
     }
-    let booksLoaded = false, salesLoaded = false;
     db.collection("books").onSnapshot(
       (snap) => {
         if (fellBack) return;
         books = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-        booksLoaded = true;
         setSync(snap.metadata.fromCache ? "wait" : "ok", snap.metadata.fromCache ? "Waiting for the server…" : "Live — connected to cloud");
+        if (localAtConnect) mergeLocalInto("books", snap, localAtConnect.books);
         renderAll();
       },
       fallBackToLocal
@@ -2417,7 +2505,7 @@
       (snap) => {
         if (fellBack) return;
         sales = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-        salesLoaded = true;
+        if (localAtConnect) mergeLocalInto("sales", snap, localAtConnect.sales);
         renderAll();
       },
       fallBackToLocal
@@ -2426,6 +2514,7 @@
       (snap) => {
         if (fellBack) return;
         users = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        if (localAtConnect) mergeLocalInto("users", snap, localAtConnect.users);
         onUsersReady();
         renderAll();
       },
@@ -2435,7 +2524,7 @@
 
   checkLicense();
   renderAll();
-  initDb();
+  initDb(false);
 })();
 </script>
 </body>
