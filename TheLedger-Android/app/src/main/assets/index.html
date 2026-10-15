@@ -107,6 +107,15 @@
     --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   }
 
+
+  .sync-pill { flex-shrink: 0; white-space: nowrap; font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass-bg); }
+  @media (max-width: 360px) { .sync-pill .lbl { display: none; } .sync-pill { padding: 6px 9px; } }
+  .brand .logo-btn { width: 40px; height: 40px; }
+  .brand .tagline { line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sync-pill.ok { color: var(--sage); border-color: var(--sage); }
+  .sync-pill.wait { color: var(--ink-soft); }
+  .sync-pill.error { color: var(--rust); border-color: var(--rust); }
+  .sync-detail { background: var(--glass-bg-strong); border: 1px solid var(--rust); color: var(--rust); border-radius: 14px; padding: 10px 14px; font-size: 12.5px; font-weight: 600; margin-bottom: 16px; word-break: break-word; }
   a { color: inherit; }
 
   /* ---------- Header ---------- */
@@ -126,13 +135,22 @@
   .top-inner {
     max-width: 980px;
     margin: 0 auto;
-    padding: 22px 20px 0 20px;
+    padding: 14px 16px 14px 16px;
   }
   .brand {
     display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .brand > .nav-toggle, .brand > .logo-wrap { flex-shrink: 0; }
+  .brand-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
   .brand h1 {
     font-family: var(--font-display);
@@ -154,11 +172,14 @@
     font: inherit;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(24px, 4vw, 32px);
+    font-size: clamp(20px, 5.5vw, 28px);
+    line-height: 1.15;
     color: var(--ink);
     padding: 0;
     border-bottom: 1px dashed transparent;
-    max-width: 60vw;
+    width: 100%;
+    max-width: none;
+    text-overflow: ellipsis;
   }
   .shop-name-edit:focus { outline: none; border-bottom-color: var(--gold); }
 
@@ -392,7 +413,7 @@
     margin-bottom: 16px;
     align-items: center;
   }
-  input[type="text"], input[type="number"], input[type="search"], select {
+  input[type="text"], input[type="number"], input[type="search"], input[type="password"], select {
     font-family: var(--font-body);
     font-size: 14px;
     background: var(--paper-raised);
@@ -677,6 +698,16 @@
     font-size: 24px;
     margin: 0 0 4px 0;
   }
+  .role-switch { display: flex; padding: 4px; gap: 4px; margin: 0 0 16px 0; border-radius: 999px; border: 1px solid var(--glass-border); background: var(--glass-bg); position: relative; z-index: 1; }
+  .role-switch button { flex: 1; appearance: none; border: none; background: none; border-radius: 999px; padding: 9px 12px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+  .role-switch button.active { background: var(--ink); color: var(--paper); box-shadow: 0 4px 12px rgba(15, 36, 57, 0.22); }
+  .role-switch button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .staff-picks { position: relative; z-index: 1; margin: 0 0 14px 0; }
+  .staff-picks .picks-label { font-size: 11px; font-weight: 600; color: var(--ink-soft); margin-bottom: 7px; }
+  .staff-picks .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .staff-picks .chip { appearance: none; border: 1px solid var(--line); background: var(--paper-raised); color: var(--ink); border-radius: 999px; padding: 6px 12px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+  .staff-picks .chip.selected { border-color: var(--gold); color: var(--gold); }
+  .staff-picks .none { font-size: 12.5px; font-style: italic; font-family: var(--font-display); color: var(--ink-soft); }
   .auth-sub {
     font-size: 13px;
     color: var(--ink-soft);
@@ -745,7 +776,7 @@
     border-top: 1px solid var(--glass-border);
     font-size: 12.5px;
   }
-  .top-inner { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .top-inner { display: block; }
   .tabs-list {
     display: flex;
     flex-direction: column;
@@ -974,6 +1005,11 @@
     <div class="auth-brand"><span id="authBrandLogo">📚</span> <span id="authBrandName">The Ledger</span></div>
     <h2 class="auth-heading" id="authHeading">Welcome back</h2>
     <p class="auth-sub" id="authSub">Log in to record sales and manage stock.</p>
+    <div class="role-switch" id="roleSwitch" role="tablist" aria-label="Login type">
+      <button type="button" role="tab" data-role="owner" class="active" aria-selected="true">Owner</button>
+      <button type="button" role="tab" data-role="staff" aria-selected="false">Staff</button>
+    </div>
+    <div class="staff-picks" id="staffPicks" style="display:none;"></div>
     <form id="authForm" autocomplete="on">
       <div class="field">
         <label for="authName">Name</label>
@@ -1029,8 +1065,11 @@
           </div>
         </div>
       </div>
-      <input class="shop-name-edit" id="shopName" value="The Ledger" spellcheck="false" aria-label="Shop name">
-      <span class="tagline">stock &amp; sales, book by book</span>
+      <div class="brand-text">
+        <input class="shop-name-edit" id="shopName" value="The Ledger" spellcheck="false" aria-label="Shop name">
+        <span class="tagline">stock &amp; sales, book by book</span>
+      </div>
+      <span class="sync-pill wait" id="syncPill" title=""><span class="dot">●</span> <span class="lbl">Connecting…</span></span>
     </div>
   </div>
 </header>
@@ -1057,6 +1096,7 @@
     <span id="trialBannerText"></span>
     <button type="button" class="link-btn" id="trialUnlockLink">Enter code</button>
   </div>
+  <div class="sync-detail" id="syncDetail" style="display:none;"></div>
   <div class="offline-banner" id="offlineBanner">Working without live sync — changes stay on this device until the connection is ready.</div>
 
   <!-- DASHBOARD -->
@@ -1363,7 +1403,7 @@
   function persistUsers() {
     if (db) {
       const col = db.collection("users");
-      users.forEach((u) => { col.doc(u.id).set(stripId(u)).catch(() => {}); });
+      users.forEach((u) => { col.doc(u.id).set(stripId(u)).then(syncSaved, syncFail); });
     } else {
       saveLocal();
     }
@@ -1394,7 +1434,7 @@
     const ok = await askConfirm(`Remove ${u.name}'s login? They won't be able to sign in anymore.`);
     if (!ok) return;
     users = users.filter((x) => x.id !== id);
-    if (db) { db.collection("users").doc(id).delete().catch(() => {}); } else { saveLocal(); }
+    if (db) { db.collection("users").doc(id).delete().then(syncSaved, syncFail); } else { saveLocal(); }
     renderAll();
     toast("Staff login removed.");
   }
@@ -1436,7 +1476,7 @@
   });
   $("#navBackdrop").addEventListener("click", closeNavDrawer);
 
-  $all("nav.tabs button").forEach((btn) => {
+  $all("nav.tabs .tabs-list button").forEach((btn) => {
     btn.addEventListener("click", () => {
       $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
       $all("section.pane").forEach((p) => p.classList.remove("active"));
@@ -1455,6 +1495,7 @@
     renderOrders();
     renderLog();
     renderStaff();
+    renderStaffPicks();
   }
 
   function lowStockBooks() {
@@ -1663,7 +1704,7 @@
     if (db) {
       const col = db.collection("books");
       books.forEach((b) => {
-        col.doc(b.id).set(stripId(b)).catch(() => {});
+        col.doc(b.id).set(stripId(b)).then(syncSaved, syncFail);
       });
     } else {
       saveLocal();
@@ -1671,7 +1712,7 @@
   }
   function removeBookPersist(id) {
     if (db) {
-      db.collection("books").doc(id).delete().catch(() => {});
+      db.collection("books").doc(id).delete().then(syncSaved, syncFail);
     } else {
       saveLocal();
     }
@@ -1758,7 +1799,7 @@
 
   function persistSaleUpdate(sale) {
     if (db) {
-      db.collection("sales").doc(sale.id).set(stripId(sale)).catch(() => {});
+      db.collection("sales").doc(sale.id).set(stripId(sale)).then(syncSaved, syncFail);
     } else {
       saveLocal();
     }
@@ -1803,7 +1844,7 @@
 
   function persistSaleAdd(sale) {
     if (db) {
-      db.collection("sales").doc(sale.id).set(stripId(sale)).catch(() => {});
+      db.collection("sales").doc(sale.id).set(stripId(sale)).then(syncSaved, syncFail);
     } else {
       saveLocal();
     }
@@ -2027,11 +2068,49 @@
     $("#sessionName").textContent = currentUser.name + tag;
   }
 
+  let loginRole = "owner"; // "owner" | "staff" — which tab of the login screen is showing
+
+  function renderStaffPicks() {
+    const box = $("#staffPicks");
+    if (authMode !== "login" || loginRole !== "staff") { box.style.display = "none"; return; }
+    const staffList = users.filter((u) => u.role !== "owner").sort((a, b) => a.name.localeCompare(b.name));
+    const typed = normalizeName($("#authName").value);
+    box.style.display = "block";
+    box.innerHTML = staffList.length
+      ? `<div class="picks-label">Tap your name</div><div class="chips">${staffList.map((u) => `<button type="button" class="chip${normalizeName(u.name) === typed ? " selected" : ""}" data-name="${escapeHtml(u.name)}">${escapeHtml(u.name)}</button>`).join("")}</div>`
+      : `<div class="none">No staff logins yet — ask the owner to add you.</div>`;
+  }
+
+  function setLoginRole(role) {
+    loginRole = role;
+    $("#authError").style.display = "none";
+    $("#authName").value = "";
+    $("#authPass").value = "";
+    updateAuthHeading();
+  }
+
+  $all("#roleSwitch button").forEach((b) => b.addEventListener("click", () => setLoginRole(b.dataset.role)));
+  $("#staffPicks").addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    $("#authName").value = chip.dataset.name;
+    renderStaffPicks();
+    $("#authPass").focus();
+  });
+  $("#authName").addEventListener("input", () => { if (loginRole === "staff") renderStaffPicks(); });
+
   function updateAuthHeading() {
     const confirmField = $("#authConfirmField");
     // Self-signup only exists to create the very first (Owner) account.
     // After that, staff logins come only from the Owner's Staff tab.
     $("#authToggleRow").style.display = users.length === 0 ? "block" : "none";
+    $("#roleSwitch").style.display = authMode === "login" ? "flex" : "none";
+    $all("#roleSwitch button").forEach((b) => {
+      const on = b.dataset.role === loginRole;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    renderStaffPicks();
     if (authMode === "signup") {
       $("#authHeading").textContent = users.length ? "Create your account" : "Welcome — set up the first account";
       $("#authSub").textContent = "Add your name and a password to get started.";
@@ -2040,9 +2119,10 @@
       $("#authToggleLead").textContent = "Already have an account?";
       $("#authToggleBtn").textContent = "Log in";
     } else {
-      $("#authHeading").textContent = "Welcome back";
-      $("#authSub").textContent = "Log in to record sales and manage stock.";
-      $("#authSubmit").textContent = "Log in";
+      const staffMode = loginRole === "staff";
+      $("#authHeading").textContent = staffMode ? "Staff login" : "Owner login";
+      $("#authSub").textContent = staffMode ? "Pick your name, then enter your password." : "Log in to manage stock, staff and reports.";
+      $("#authSubmit").textContent = staffMode ? "Log in as staff" : "Log in as owner";
       confirmField.style.display = "none";
       $("#authToggleLead").textContent = "New here?";
       $("#authToggleBtn").textContent = "Create an account";
@@ -2116,9 +2196,12 @@
       toast(`Welcome, ${name}.`);
     } else {
       const u = findUserByName(name);
-      if (!u) { errEl.textContent = "No account with that name yet — create one below."; errEl.style.display = "block"; return; }
+      if (!u) { errEl.textContent = loginRole === "staff" ? "No staff login with that name — ask the owner to add you." : "No owner account with that name."; errEl.style.display = "block"; return; }
       const passHash = await hashPassword(pass);
       if (passHash !== u.passHash) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
+      const isOwnerAcct = u.role === "owner";
+      if (loginRole === "owner" && !isOwnerAcct) { errEl.textContent = "That's a staff account — switch to the Staff tab."; errEl.style.display = "block"; return; }
+      if (loginRole === "staff" && isOwnerAcct) { errEl.textContent = "That's the owner account — switch to the Owner tab."; errEl.style.display = "block"; return; }
       currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
       try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
       setSessionName();
@@ -2138,6 +2221,7 @@
   });
 
   $("#btnLogout").addEventListener("click", () => {
+    closeNavDrawer();
     currentUser = null;
     updateRoleUI();
     try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
@@ -2243,6 +2327,29 @@
     }
   });
 
+  // ---------- Sync status (diagnostic) ----------
+  let writeError = null;
+  function setSync(state, detail) {
+    if (state === "ok" && writeError) return;
+    const pill = document.getElementById("syncPill");
+    if (!pill) return;
+    pill.className = "sync-pill " + state;
+    pill.innerHTML = '<span class="dot">●</span> <span class="lbl">' + (state === "ok" ? "Synced" : state === "wait" ? "Connecting…" : "Not syncing") + '</span>';
+    pill.title = detail || "";
+    pill.dataset.detail = detail || "";
+    const line = document.getElementById("syncDetail");
+    if (line) { line.textContent = detail || ""; line.style.display = state === "error" ? "block" : "none"; }
+  }
+  function syncFail(e) {
+    writeError = (e && (e.code || e.message)) || "unknown error";
+    setSync("error", "Save to cloud failed: " + writeError);
+    toast("Not saved to cloud: " + writeError);
+  }
+  function syncSaved() {
+    writeError = null;
+    setSync("ok", "Saved to cloud");
+  }
+
   // ---------- DB wiring ----------
   async function initDb() {
     // Firebase (shared across every device signed into the same project) takes
@@ -2259,9 +2366,12 @@
           appId: "1:490646836441:web:09f2f6915e66d2f8a49ac8",
         });
         firebaseDb = firebase.firestore();
+      } else {
+        setSync("error", "Firebase scripts did not load (check internet / blocked CDN)");
       }
     } catch (e) {
       firebaseDb = null;
+      setSync("error", "Firebase init failed: " + (e && e.message ? e.message : e));
     }
 
     if (firebaseDb) {
@@ -2282,9 +2392,10 @@
       return;
     }
     let fellBack = false;
-    function fallBackToLocal() {
+    function fallBackToLocal(err) {
       if (fellBack) return;
       fellBack = true;
+      setSync("error", "Cloud read failed: " + (err && (err.code || err.message) ? (err.code || err.message) : "unknown error"));
       db = null;
       loadLocal();
       renderAll();
@@ -2297,6 +2408,7 @@
         if (fellBack) return;
         books = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         booksLoaded = true;
+        setSync(snap.metadata.fromCache ? "wait" : "ok", snap.metadata.fromCache ? "Waiting for the server…" : "Live — connected to cloud");
         renderAll();
       },
       fallBackToLocal
