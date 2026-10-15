@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-app-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-firestore-compat.js"></script>
 <style>
   :root {
     box-sizing: border-box;
@@ -160,32 +162,78 @@
   }
   .shop-name-edit:focus { outline: none; border-bottom-color: var(--gold); }
 
+  /* ---------- Navigation drawer (glass) ---------- */
+  .nav-toggle {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    font-size: 17px;
+    line-height: 1;
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  .nav-toggle:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 8px 20px rgba(47, 125, 225, 0.32); }
+  .nav-toggle:active { transform: scale(0.92); }
+
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: none;
+    background: rgba(10, 21, 32, 0.35);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+  .nav-backdrop.show { display: block; }
+
   nav.tabs {
-    max-width: 980px;
-    margin: 18px auto 0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: min(78vw, 280px);
     display: flex;
-    gap: 4px;
-    padding: 0 20px;
-    overflow-x: auto;
+    flex-direction: column;
+    padding: calc(20px + env(safe-area-inset-top, 0px)) 14px calc(16px + env(safe-area-inset-bottom, 0px)) 14px;
+    margin: 0;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border-right: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  nav.tabs.open { transform: translateX(0); }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    nav.tabs { background: var(--paper-raised); }
   }
   nav.tabs button {
     appearance: none;
     background: none;
     border: none;
+    border-radius: 12px;
+    text-align: left;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 600;
     color: var(--ink-soft);
-    padding: 10px 14px 12px 14px;
+    padding: 12px 14px;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
     white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
   }
   nav.tabs button.active {
     color: var(--ink);
-    border-bottom-color: var(--gold);
+    background: var(--glass-bg);
+    box-shadow: inset 2px 0 0 var(--gold);
   }
-  nav.tabs button:hover:not(.active) { color: var(--ink); }
+  nav.tabs button:hover:not(.active) { color: var(--ink); background: var(--glass-bg); }
 
   main {
     max-width: 980px;
@@ -499,6 +547,28 @@
     .qty-row button { transition: none; transform: none; }
   }
   .qty-row input { width: 70px; text-align: center; }
+  .delivery-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 2px 0 16px 0;
+    cursor: pointer;
+  }
+  .delivery-check input { margin-top: 2px; }
+  .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .status-badge.delivered { color: var(--sage); border-color: var(--sage); }
+  .status-badge.pending { color: var(--rust); border-color: var(--rust); }
+
   .sale-total {
     font-family: var(--font-display);
     font-size: 26px;
@@ -667,11 +737,23 @@
   .session-bar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    margin-left: auto;
+    flex-shrink: 0;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--glass-border);
     font-size: 12.5px;
   }
   .top-inner { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .tabs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
   .session-name {
     color: var(--ink-soft);
     font-weight: 600;
@@ -810,7 +892,8 @@
   .panel::before,
   .sale-picker::before,
   .auth-card::before,
-  .confirm-card::before {
+  .confirm-card::before,
+  nav.tabs::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -824,7 +907,8 @@
     :root:not([data-theme="light"]) .panel::before,
     :root:not([data-theme="light"]) .sale-picker::before,
     :root:not([data-theme="light"]) .auth-card::before,
-    :root:not([data-theme="light"]) .confirm-card::before {
+    :root:not([data-theme="light"]) .confirm-card::before,
+    :root:not([data-theme="light"]) nav.tabs::before {
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 100%);
     }
   }
@@ -832,11 +916,35 @@
   :root[data-theme="dark"] .panel::before,
   :root[data-theme="dark"] .sale-picker::before,
   :root[data-theme="dark"] .auth-card::before,
-  :root[data-theme="dark"] .confirm-card::before {
+  :root[data-theme="dark"] .confirm-card::before,
+  :root[data-theme="dark"] nav.tabs::before {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 100%);
   }
 
   ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  @media print {
+    body::before { display: none; }
+    header.top, .controls-row, .ledger-row, .panel, .confirm-overlay,
+    .trial-screen, .auth-screen, .toast, .offline-banner, .trial-banner,
+    #authScreen, #trialScreen { display: none !important; }
+    nav.tabs, #navBackdrop { display: none !important; }
+    section.pane { display: none !important; }
+    #pane-log.active-print { display: block !important; }
+    main { padding: 0; max-width: 100%; }
+    .tbl-wrap {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      overflow: visible;
+    }
+    .tbl-wrap::before { display: none; }
+    table.ledger th, table.ledger td { color: #000; border-color: #999; }
+    .status-badge { border: 1px solid #999; color: #000 !important; }
+  }
 </style>
 </head>
 <body>
@@ -888,7 +996,7 @@
       <p class="auth-error" id="authError" style="display:none;"></p>
       <button type="submit" class="btn auth-submit" id="authSubmit">Log in</button>
     </form>
-    <p class="auth-toggle">
+    <p class="auth-toggle" id="authToggleRow">
       <span id="authToggleLead">New here?</span>
       <button type="button" class="link-btn" id="authToggleBtn">Create an account</button>
     </p>
@@ -901,6 +1009,7 @@
 <header class="top">
   <div class="top-inner">
     <div class="brand">
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Open navigation">☰</button>
       <div class="logo-wrap">
         <button type="button" class="logo-btn" id="logoBtn" title="Change logo" aria-label="Change store logo">📚</button>
         <div class="logo-panel" id="logoPanel">
@@ -923,19 +1032,25 @@
       <input class="shop-name-edit" id="shopName" value="The Ledger" spellcheck="false" aria-label="Shop name">
       <span class="tagline">stock &amp; sales, book by book</span>
     </div>
-    <div class="session-bar">
-      <span class="session-name" id="sessionName"></span>
-      <button type="button" class="link-btn" id="btnLogout">Log out</button>
-    </div>
   </div>
-  <nav class="tabs" id="tabs">
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tabs-list">
     <button data-pane="dashboard" class="active">Dashboard</button>
     <button data-pane="inventory">Inventory</button>
     <button data-pane="sale">Record Sale</button>
+    <button data-pane="orders">Orders</button>
     <button data-pane="log">Sales Log</button>
+    <button data-pane="staff" id="navStaffBtn" style="display:none;">Staff</button>
     <button data-pane="about">About</button>
-  </nav>
-</header>
+  </div>
+  <div class="session-bar">
+    <span class="session-name" id="sessionName"></span>
+    <button type="button" class="link-btn" id="btnLogout">Log out</button>
+  </div>
+</nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <main>
   <div class="trial-banner" id="trialBanner">
@@ -1032,6 +1147,10 @@
           <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
         </div>
       </div>
+      <label class="delivery-check">
+        <input type="checkbox" id="saleDelivery">
+        <span>This is a delivery — mark as pending until it's handed over</span>
+      </label>
       <div class="sale-total"><span class="cur">Total </span><span id="saleTotal">$0.00</span></div>
       <button class="btn" id="btnRecordSale">Record sale</button>
     </div>
@@ -1040,11 +1159,39 @@
       <div class="block-head"><h3>Sold today</h3><span class="count" id="todayCount">0</span></div>
       <div class="tbl-wrap">
         <table class="ledger" id="todayTable">
-          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Time</th><th>Sold by</th></tr></thead>
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Time</th><th>Sold by</th><th>Status</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
       <p class="empty-note" id="todayEmpty" style="display:none;">Nothing sold today yet.</p>
+    </div>
+  </section>
+
+  <!-- ORDERS -->
+  <section class="pane" id="pane-orders">
+    <h2 class="section-title">Orders</h2>
+    <p class="section-sub">Deliveries, separated from everyday counter sales.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>Pending</h3><span class="count" id="ordersPendingCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="ordersPendingTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Sold by</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="ordersPendingEmpty" style="display:none;">No pending deliveries right now.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Delivered</h3><span class="count" id="ordersDeliveredCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="ordersDeliveredTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Sold by</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="ordersDeliveredEmpty" style="display:none;">No completed deliveries yet.</p>
     </div>
   </section>
 
@@ -1055,6 +1202,7 @@
 
     <div class="controls-row">
       <input type="search" class="search-input" id="logSearch" placeholder="Search by book title…">
+      <button class="btn secondary" id="btnPrintLog" type="button">Print</button>
     </div>
 
     <div class="ledger-row" id="logStatRow">
@@ -1065,11 +1213,46 @@
 
     <div class="tbl-wrap">
       <table class="ledger" id="logTable">
-        <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th></tr></thead>
+        <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th><th>Status</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
     <p class="empty-note" id="logEmpty" style="display:none;">No sales in the log yet.</p>
+  </section>
+
+  <!-- STAFF (Owner only) -->
+  <section class="pane" id="pane-staff">
+    <h2 class="section-title">Staff</h2>
+    <p class="section-sub">Add logins for the people who work here.</p>
+
+    <div class="panel open" style="display:block;">
+      <h4>Add a staff login</h4>
+      <form id="staffForm">
+        <div class="form-grid">
+          <div class="field"><label for="staffName">Name</label><input type="text" id="staffName" placeholder="Staff member's name"></div>
+          <div class="field">
+            <label for="staffPass">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="staffPass" autocomplete="new-password" placeholder="At least 4 characters">
+              <button type="button" class="pw-toggle" data-target="staffPass" aria-label="Show password">Show</button>
+            </div>
+          </div>
+        </div>
+        <p class="auth-error" id="staffError" style="display:none;"></p>
+        <div class="panel-actions"><button class="btn" type="submit">Add staff login</button></div>
+      </form>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Current staff</h3><span class="count" id="staffCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="staffTable">
+          <thead><tr><th>Name</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="staffEmpty" style="display:none;">No staff logins yet — add one above.</p>
+    </div>
   </section>
 
   <!-- ABOUT -->
@@ -1186,7 +1369,73 @@
     }
   }
 
+  // ---------- Staff management (Owner only) ----------
+  function updateRoleUI() {
+    const isOwner = !!(currentUser && currentUser.role === "owner");
+    $("#navStaffBtn").style.display = isOwner ? "" : "none";
+  }
+
+  function renderStaff() {
+    const staffList = users.filter((u) => u.role !== "owner");
+    const tbody = $("#staffTable tbody");
+    tbody.innerHTML = "";
+    staffList.forEach((u) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${escapeHtml(u.name)}</td><td><div class="row-actions"><button type="button" data-act="remove-staff" data-id="${u.id}" class="danger">Remove</button></div></td>`;
+      tbody.appendChild(tr);
+    });
+    $("#staffCount").textContent = fmtInt(staffList.length);
+    $("#staffEmpty").style.display = staffList.length ? "none" : "block";
+  }
+
+  async function removeStaff(id) {
+    const u = users.find((x) => x.id === id);
+    if (!u) return;
+    const ok = await askConfirm(`Remove ${u.name}'s login? They won't be able to sign in anymore.`);
+    if (!ok) return;
+    users = users.filter((x) => x.id !== id);
+    if (db) { db.collection("users").doc(id).delete().catch(() => {}); } else { saveLocal(); }
+    renderAll();
+    toast("Staff login removed.");
+  }
+
+  $("#staffTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="remove-staff"]');
+    if (btn) removeStaff(btn.dataset.id);
+  });
+
+  $("#staffForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("#staffName").value.trim();
+    const pass = $("#staffPass").value;
+    const errEl = $("#staffError");
+    errEl.style.display = "none";
+    if (!name) { errEl.textContent = "Enter a name."; errEl.style.display = "block"; return; }
+    if (findUserByName(name)) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+    if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+    const passHash = await hashPassword(pass);
+    const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role: "staff" };
+    users.push(u);
+    persistUsers();
+    renderAll();
+    $("#staffForm").reset();
+    toast(`Added ${name}.`);
+  });
+
   // ---------- Tabs ----------
+  function closeNavDrawer() {
+    $("#tabs").classList.remove("open");
+    $("#navBackdrop").classList.remove("show");
+  }
+  function openNavDrawer() {
+    $("#tabs").classList.add("open");
+    $("#navBackdrop").classList.add("show");
+  }
+  $("#navToggle").addEventListener("click", () => {
+    if ($("#tabs").classList.contains("open")) closeNavDrawer(); else openNavDrawer();
+  });
+  $("#navBackdrop").addEventListener("click", closeNavDrawer);
+
   $all("nav.tabs button").forEach((btn) => {
     btn.addEventListener("click", () => {
       $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
@@ -1194,6 +1443,7 @@
       btn.classList.add("active");
       $("#pane-" + btn.dataset.pane).classList.add("active");
       if (btn.dataset.pane === "sale") renderSalePane();
+      closeNavDrawer();
     });
   });
 
@@ -1202,7 +1452,9 @@
     renderDashboard();
     renderInventory();
     renderSalePane();
+    renderOrders();
     renderLog();
+    renderStaff();
   }
 
   function lowStockBooks() {
@@ -1290,6 +1542,15 @@
     const cats = Array.from(new Set(books.map((b) => b.category).filter(Boolean))).sort();
     $("#catList").innerHTML = cats.map((c) => `<option value="${escapeHtml(c)}">`).join("");
   }
+
+  $("#todayTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+  $("#logTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
 
   $("#invTable").addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-act]");
@@ -1483,13 +1744,61 @@
       total: qty * (b.price || 0),
       ts: Date.now(),
       soldBy: currentUser ? currentUser.name : "",
+      isDelivery: $("#saleDelivery").checked,
+      deliveryStatus: $("#saleDelivery").checked ? "pending" : "delivered",
     };
     sales.push(sale);
     updateBook(b.id, { stock: (b.stock || 0) - qty });
     persistSaleAdd(sale);
     $("#saleQty").value = 1;
+    $("#saleDelivery").checked = false;
     renderAll();
     toast(`Sold ${qty} × "${b.title}".`);
+  });
+
+  function persistSaleUpdate(sale) {
+    if (db) {
+      db.collection("sales").doc(sale.id).set(stripId(sale)).catch(() => {});
+    } else {
+      saveLocal();
+    }
+  }
+  function toggleDeliveryStatus(id) {
+    const s = sales.find((x) => x.id === id);
+    if (!s) return;
+    s.deliveryStatus = s.deliveryStatus === "pending" ? "delivered" : "pending";
+    persistSaleUpdate(s);
+    renderAll();
+  }
+
+  function orderRowHtml(s) {
+    const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+    const d = new Date(s.ts);
+    const dateStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    return `<tr><td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${escapeHtml(s.soldBy || "—")}</td><td>${dateStr}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td></tr>`;
+  }
+
+  function renderOrders() {
+    const orders = sales.filter((s) => s.isDelivery);
+    const pending = orders.filter((s) => s.deliveryStatus === "pending").sort((a, b) => b.ts - a.ts);
+    const delivered = orders.filter((s) => s.deliveryStatus !== "pending").sort((a, b) => b.ts - a.ts);
+
+    $("#ordersPendingTable tbody").innerHTML = pending.map(orderRowHtml).join("");
+    $("#ordersPendingCount").textContent = fmtInt(pending.length);
+    $("#ordersPendingEmpty").style.display = pending.length ? "none" : "block";
+
+    $("#ordersDeliveredTable tbody").innerHTML = delivered.map(orderRowHtml).join("");
+    $("#ordersDeliveredCount").textContent = fmtInt(delivered.length);
+    $("#ordersDeliveredEmpty").style.display = delivered.length ? "none" : "block";
+  }
+
+  $("#ordersPendingTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+  $("#ordersDeliveredTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
   });
 
   function persistSaleAdd(sale) {
@@ -1509,7 +1818,8 @@
     $("#todayEmpty").style.display = todays.length ? "none" : "block";
     todays.forEach((s) => {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td><td>${escapeHtml(s.soldBy || "—")}</td>`;
+      const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td><td>${escapeHtml(s.soldBy || "—")}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td>`;
       tbody.appendChild(tr);
     });
   }
@@ -1524,7 +1834,8 @@
     filtered.forEach((s) => {
       const d = new Date(s.ts);
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.unitPrice)}</td><td class="num">${fmtMoney(s.total)}</td><td>${d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })} ${d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}</td><td>${escapeHtml(s.soldBy || "—")}</td>`;
+      const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.unitPrice)}</td><td class="num">${fmtMoney(s.total)}</td><td>${d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })} ${d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}</td><td>${escapeHtml(s.soldBy || "—")}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td>`;
       tbody.appendChild(tr);
     });
     $("#logCountStat").textContent = fmtInt(sales.length);
@@ -1532,6 +1843,11 @@
     $("#logUnitsStat").textContent = fmtInt(sales.reduce((s, x) => s + (x.qty || 0), 0));
   }
   $("#logSearch").addEventListener("input", renderLog);
+  $("#btnPrintLog").addEventListener("click", () => {
+    $("#pane-log").classList.add("active-print");
+    window.print();
+  });
+  window.addEventListener("afterprint", () => { $("#pane-log").classList.remove("active-print"); });
 
   // ---------- Store name & logo (editable; also drives the app's title, favicon, and install manifest) ----------
   const NAME_KEY = "bookshop-ledger-name";
@@ -1706,11 +2022,16 @@
     $("#appRoot").classList.remove("show");
   }
   function setSessionName() {
-    $("#sessionName").textContent = currentUser ? currentUser.name : "";
+    if (!currentUser) { $("#sessionName").textContent = ""; return; }
+    const tag = currentUser.role === "owner" ? " (Owner)" : "";
+    $("#sessionName").textContent = currentUser.name + tag;
   }
 
   function updateAuthHeading() {
     const confirmField = $("#authConfirmField");
+    // Self-signup only exists to create the very first (Owner) account.
+    // After that, staff logins come only from the Owner's Staff tab.
+    $("#authToggleRow").style.display = users.length === 0 ? "block" : "none";
     if (authMode === "signup") {
       $("#authHeading").textContent = users.length ? "Create your account" : "Welcome — set up the first account";
       $("#authSub").textContent = "Add your name and a password to get started.";
@@ -1735,8 +2056,9 @@
         const sess = JSON.parse(raw);
         const u = users.find((x) => x.id === sess.id);
         if (u) {
-          currentUser = { id: u.id, name: u.name };
+          currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
           setSessionName();
+          updateRoleUI();
           showApp();
           return true;
         }
@@ -1782,12 +2104,13 @@
       if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
       if (pass !== confirmPass) { errEl.textContent = "Passwords don't match."; errEl.style.display = "block"; return; }
       const passHash = await hashPassword(pass);
-      const u = { id: uid(), name, nameLower: normalizeName(name), passHash };
+      const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role: users.length === 0 ? "owner" : "staff" };
       users.push(u);
       persistUsers();
-      currentUser = { id: u.id, name: u.name };
+      currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
       try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
       setSessionName();
+      updateRoleUI();
       showApp();
       $("#authForm").reset();
       toast(`Welcome, ${name}.`);
@@ -1796,9 +2119,10 @@
       if (!u) { errEl.textContent = "No account with that name yet — create one below."; errEl.style.display = "block"; return; }
       const passHash = await hashPassword(pass);
       if (passHash !== u.passHash) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
-      currentUser = { id: u.id, name: u.name };
+      currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
       try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
       setSessionName();
+      updateRoleUI();
       showApp();
       $("#authForm").reset();
       toast(`Welcome back, ${u.name}.`);
@@ -1815,11 +2139,16 @@
 
   $("#btnLogout").addEventListener("click", () => {
     currentUser = null;
+    updateRoleUI();
     try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
     authMode = users.length ? "login" : "signup";
     updateAuthHeading();
     showAuth();
     $("#authName").focus();
+    $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
+    $all("section.pane").forEach((p) => p.classList.remove("active"));
+    $("nav.tabs button[data-pane='dashboard']").classList.add("active");
+    $("#pane-dashboard").classList.add("active");
   });
 
   // ---------- Trial / license gate ----------
@@ -1916,11 +2245,35 @@
 
   // ---------- DB wiring ----------
   async function initDb() {
+    // Firebase (shared across every device signed into the same project) takes
+    // priority, so every staff login on any device sees the same live data.
+    let firebaseDb = null;
     try {
-      db = await claude.use("db");
+      if (typeof firebase !== "undefined") {
+        firebase.initializeApp({
+          apiKey: "AIzaSyAJnuCOizblOFrcIvygAlV0D7_M98ZyT6c",
+          authDomain: "rubyrush-609b6.firebaseapp.com",
+          projectId: "rubyrush-609b6",
+          storageBucket: "rubyrush-609b6.firebasestorage.app",
+          messagingSenderId: "490646836441",
+          appId: "1:490646836441:web:09f2f6915e66d2f8a49ac8",
+        });
+        firebaseDb = firebase.firestore();
+      }
     } catch (e) {
-      db = null;
+      firebaseDb = null;
     }
+
+    if (firebaseDb) {
+      db = firebaseDb;
+    } else {
+      try {
+        db = await claude.use("db");
+      } catch (e) {
+        db = null;
+      }
+    }
+
     if (!db) {
       loadLocal();
       renderAll();
@@ -1928,30 +2281,43 @@
       $("#offlineBanner").classList.add("show");
       return;
     }
+    let fellBack = false;
+    function fallBackToLocal() {
+      if (fellBack) return;
+      fellBack = true;
+      db = null;
+      loadLocal();
+      renderAll();
+      onUsersReady();
+      $("#offlineBanner").classList.add("show");
+    }
     let booksLoaded = false, salesLoaded = false;
     db.collection("books").onSnapshot(
       (snap) => {
+        if (fellBack) return;
         books = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         booksLoaded = true;
         renderAll();
       },
-      () => { $("#offlineBanner").classList.add("show"); }
+      fallBackToLocal
     );
     db.collection("sales").onSnapshot(
       (snap) => {
+        if (fellBack) return;
         sales = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         salesLoaded = true;
         renderAll();
       },
-      () => { $("#offlineBanner").classList.add("show"); }
+      fallBackToLocal
     );
     db.collection("users").onSnapshot(
       (snap) => {
+        if (fellBack) return;
         users = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         onUsersReady();
         renderAll();
       },
-      () => { $("#offlineBanner").classList.add("show"); }
+      fallBackToLocal
     );
   }
 
