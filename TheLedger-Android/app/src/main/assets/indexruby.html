@@ -3044,5 +3044,60 @@
   initDb(false);
 })();
 </script>
+<script>
+/* ---------- Update checker ----------
+   On each release: bump APP_VERSION below AND "latest" in version.json in your repo.
+   Set VERSION_URL to your repo's raw version.json link. */
+(function () {
+  "use strict";
+  const APP_VERSION = "1.0.0";
+  const VERSION_URL = "https://raw.githubusercontent.com/danicodescmd2/TheLedger-Android/main/version.json";
+
+  const newer = (a, b) => {
+    const x = String(a).split(".").map(Number), y = String(b).split(".").map(Number);
+    for (let i = 0; i < 3; i++) {
+      if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
+    }
+    return false;
+  };
+
+  async function checkForUpdate() {
+    if (VERSION_URL.indexOf("YOU/REPO") !== -1) return; // not configured yet
+    try {
+      const r = await fetch(VERSION_URL + "?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) return;
+      const v = await r.json();
+      if (!v || !v.latest || !newer(v.latest, APP_VERSION)) return;
+      if (document.getElementById("updateBar")) return;
+
+      const bar = document.createElement("div");
+      bar.id = "updateBar";
+      bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));background:#A97E2F;color:#fff;z-index:99999;display:flex;gap:12px;justify-content:space-between;align-items:center;font:15px system-ui,sans-serif;box-shadow:0 -2px 8px rgba(0,0,0,.2)";
+
+      const msg = document.createElement("span");
+      msg.textContent = "Update " + v.latest + " available" + (v.notes ? ": " + v.notes : "");
+      msg.style.flex = "1";
+
+      const link = document.createElement("a");
+      link.href = v.url || "#";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Update";
+      link.style.cssText = "color:#fff;font-weight:bold;text-decoration:underline";
+
+      const close = document.createElement("button");
+      close.textContent = "\u2715";
+      close.setAttribute("aria-label", "Dismiss");
+      close.style.cssText = "background:none;border:0;color:#fff;font-size:18px";
+      close.onclick = () => bar.remove();
+
+      bar.append(msg, link, close);
+      document.body.appendChild(bar);
+    } catch (e) { /* offline or blocked: ignore */ }
+  }
+
+  window.addEventListener("load", () => setTimeout(checkForUpdate, 2000));
+})();
+</script>
 </body>
 </html>
