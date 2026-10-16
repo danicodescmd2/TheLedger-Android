@@ -954,6 +954,15 @@
   ::selection { background: var(--gold-soft); color: var(--ink); }
 
   #printArea { display: none; }
+  #printArea.preview { display: block; position: fixed; inset: 0; z-index: 99998; background: #fff; color: #000; overflow: auto; padding: 14px; font-family: Arial, Helvetica, sans-serif; }
+  #printArea h1 { font-size: 18px; margin: 0 0 2px 0; }
+  #printArea .pa-sub, #printArea .pa-stats { font-size: 12px; margin: 0 0 8px 0; }
+  #printArea .pa-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+  #printArea .pa-bar button { padding: 10px 14px; font-size: 14px; }
+  #printArea table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  #printArea th, #printArea td { border: 1px solid #999; padding: 5px 7px; text-align: left; vertical-align: top; }
+  #printArea th { background: #eee; }
+  #printArea td.num, #printArea th.num { text-align: right; }
   @media print {
     html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; }
     body::before { display: none !important; }
@@ -967,6 +976,8 @@
     #printArea th { background: #eee; }
     #printArea td.num, #printArea th.num { text-align: right; }
     #printArea thead { display: table-header-group; }
+    #printArea .no-print { display: none !important; }
+    #printArea.preview { position: static !important; overflow: visible !important; padding: 0 !important; }
     #printArea tr { page-break-inside: avoid; }
   }
 </style>
@@ -1308,7 +1319,7 @@
         <button class="btn secondary" type="button" id="supEmail" style="display:none;">Send an email</button>
       </div>
       <p id="supNone" style="font-size:13px;color:var(--ink-soft);margin:0;display:none;">Contact details haven't been set up yet.</p>
-      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix </p>
+      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix problems.</p>
     </div>
   </section>
 
@@ -1910,6 +1921,21 @@
   });
 
   // ---------- Support tab ----------
+  function copyText(text) {
+    return new Promise((resolve) => {
+      const fallback = () => {
+        try {
+          const t = document.createElement("textarea");
+          t.value = text; t.style.cssText = "position:fixed;opacity:0;top:0;left:0;";
+          document.body.appendChild(t); t.focus(); t.select();
+          const ok = document.execCommand("copy");
+          t.remove(); resolve(!!ok);
+        } catch (e) { resolve(false); }
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(() => resolve(true), fallback);
+      else fallback();
+    });
+  }
   (function setupSupport() {
     const msg = () => {
       const store = ($("#authBrandName") && $("#authBrandName").textContent) || "The Ledger";
@@ -2393,9 +2419,23 @@
       <p class="pa-sub">Printed ${escapeHtml(new Date().toLocaleString())}${q ? " · filtered by “" + escapeHtml(q) + "”" : ""}</p>
       <p class="pa-stats"><strong>${fmtInt(rows.length)}</strong> sales · <strong>${fmtMoney(revenue)}</strong> revenue · <strong>${fmtInt(units)}</strong> copies sold</p>
       <table><thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th><th>Status</th></tr></thead><tbody>${body || '<tr><td colspan="7">No sales to print.</td></tr>'}</tbody></table>`;
+    const textReport = storeName + " — Sales log\n" + rows.map((x) => `${x.title} | qty ${x.qty} | ${fmtMoney(x.total)} | ${new Date(x.ts).toLocaleDateString()} | ${x.soldBy || "—"} | ${x.deliveryStatus === "pending" ? "Pending" : "Delivered"}`).join("\n") + `\nTotal: ${fmtMoney(revenue)}`;
+    if (window.AndroidBridge && typeof window.AndroidBridge.printPage === "function") {
+      setTimeout(() => { try { window.AndroidBridge.printPage(); } catch (err) { toast("Printing isn't available here."); } }, 50);
+      return;
+    }
+    const inWebView = /; wv\)/.test(navigator.userAgent) || (/Android/.test(navigator.userAgent) && location.protocol === "file:");
+    if (inWebView) {
+      // Phone app: the system print dialog isn't available, so show the report on screen with a copy button.
+      area.classList.add("preview");
+      area.insertAdjacentHTML("afterbegin", '<div class="pa-bar no-print"><button type="button" id="paClose">Close</button><button type="button" id="paCopy">Copy as text</button></div>');
+      $("#paClose").addEventListener("click", () => { area.classList.remove("preview"); area.innerHTML = ""; });
+      $("#paCopy").addEventListener("click", async () => { toast((await copyText(textReport)) ? "Report copied." : "Couldn't copy."); });
+      return;
+    }
     setTimeout(() => { try { window.print(); } catch (err) { toast("Printing isn't available here."); } }, 50);
   });
-  window.addEventListener("afterprint", () => { $("#printArea").innerHTML = ""; });
+  window.addEventListener("afterprint", () => { const pa = $("#printArea"); if (!pa.classList.contains("preview")) pa.innerHTML = ""; });
 
   // ---------- Store name & logo (editable; also drives the app's title, favicon, and install manifest) ----------
   const NAME_KEY = "bookshop-ledger-name";
