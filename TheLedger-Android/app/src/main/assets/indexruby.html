@@ -1069,11 +1069,11 @@
 
 <nav class="tabs" id="tabs">
   <div class="tabs-list">
-    <button data-pane="dashboard" class="active">Dashboard</button>
-    <button data-pane="inventory">Inventory</button>
-    <button data-pane="sale">Record Sale</button>
-    <button data-pane="orders">Orders</button>
-    <button data-pane="log">Sales Log</button>
+    <button data-biz="1" data-pane="dashboard" class="active">Dashboard</button>
+    <button data-biz="1" data-pane="inventory">Inventory</button>
+    <button data-biz="1" data-pane="sale">Record Sale</button>
+    <button data-biz="1" data-pane="orders">Orders</button>
+    <button data-biz="1" data-pane="log">Sales Log</button>
     <button data-pane="staff" id="navStaffBtn" style="display:none;">Staff</button>
     <button data-pane="support">Support</button>
     <button data-pane="dev" id="navDevBtn" style="display:none;">Developer</button>
@@ -1308,7 +1308,7 @@
         <button class="btn secondary" type="button" id="supEmail" style="display:none;">Send an email</button>
       </div>
       <p id="supNone" style="font-size:13px;color:var(--ink-soft);margin:0;display:none;">Contact details haven't been set up yet.</p>
-      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix </p>
+      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix problems.</p>
     </div>
   </section>
 
@@ -1559,6 +1559,13 @@
     const isOwner = isDev || !!(currentUser && currentUser.role === "owner");
     $("#navStaffBtn").style.display = isOwner ? "" : "none";
     $("#navDevBtn").style.display = isDev ? "" : "none";
+    // The developer login only sees Developer, Staff, Support and About — not the shop's own data tabs.
+    $all("nav.tabs button[data-biz]").forEach((b) => { b.style.display = isDev ? "none" : ""; });
+    const cur = $("nav.tabs .tabs-list button.active");
+    if (currentUser && cur) {
+      if (isDev && cur.hasAttribute("data-biz")) $("nav.tabs button[data-pane='dev']").click();
+      else if (!isDev && cur.dataset.pane === "dev") $("nav.tabs button[data-pane='dashboard']").click();
+    }
     if (typeof renderStaff === "function") renderStaff();
   }
 
