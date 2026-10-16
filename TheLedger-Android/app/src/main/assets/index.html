@@ -953,27 +953,21 @@
 
   ::selection { background: var(--gold-soft); color: var(--ink); }
 
+  #printArea { display: none; }
   @media print {
-    body::before { display: none; }
-    header.top, .controls-row, .ledger-row, .panel, .confirm-overlay,
-    .trial-screen, .auth-screen, .toast, .offline-banner, .trial-banner,
-    #authScreen, #trialScreen { display: none !important; }
-    nav.tabs, #navBackdrop { display: none !important; }
-    section.pane { display: none !important; }
-    #pane-log.active-print { display: block !important; }
-    main { padding: 0; max-width: 100%; }
-    .tbl-wrap {
-      background: none;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-      overflow: visible;
-    }
-    .tbl-wrap::before { display: none; }
-    table.ledger th, table.ledger td { color: #000; border-color: #999; }
-    .status-badge { border: 1px solid #999; color: #000 !important; }
+    html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; }
+    body::before { display: none !important; }
+    body > *:not(#printArea) { display: none !important; }
+    #printArea { display: block !important; font-family: Arial, Helvetica, sans-serif; color: #000; padding: 0; }
+    #printArea h1 { font-size: 20px; margin: 0 0 2px 0; }
+    #printArea .pa-sub { font-size: 12px; color: #444; margin: 0 0 12px 0; }
+    #printArea .pa-stats { font-size: 13px; margin: 0 0 14px 0; }
+    #printArea table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    #printArea th, #printArea td { border: 1px solid #999; padding: 5px 7px; text-align: left; vertical-align: top; }
+    #printArea th { background: #eee; }
+    #printArea td.num, #printArea th.num { text-align: right; }
+    #printArea thead { display: table-header-group; }
+    #printArea tr { page-break-inside: avoid; }
   }
 </style>
 </head>
@@ -1081,6 +1075,8 @@
     <button data-pane="orders">Orders</button>
     <button data-pane="log">Sales Log</button>
     <button data-pane="staff" id="navStaffBtn" style="display:none;">Staff</button>
+    <button data-pane="support">Support</button>
+    <button data-pane="dev" id="navDevBtn" style="display:none;">Developer</button>
     <button data-pane="about">About</button>
   </div>
   <div class="session-bar">
@@ -1262,10 +1258,10 @@
   <!-- STAFF (Owner only) -->
   <section class="pane" id="pane-staff">
     <h2 class="section-title">Staff</h2>
-    <p class="section-sub">Add logins for the people who work here.</p>
+    <p class="section-sub">Add logins for the people who work here — staff or additional owners.</p>
 
     <div class="panel open" style="display:block;">
-      <h4>Add a staff login</h4>
+      <h4>Add a login</h4>
       <form id="staffForm">
         <div class="form-grid">
           <div class="field"><label for="staffName">Name</label><input type="text" id="staffName" placeholder="Staff member's name"></div>
@@ -1277,20 +1273,151 @@
             </div>
           </div>
         </div>
+        <div class="field" style="margin-top:12px;">
+          <label for="staffRole">Account type</label>
+          <select id="staffRole">
+            <option value="staff">Staff</option>
+            <option value="owner">Owner (full access, can manage logins)</option>
+          </select>
+        </div>
         <p class="auth-error" id="staffError" style="display:none;"></p>
-        <div class="panel-actions"><button class="btn" type="submit">Add staff login</button></div>
+        <div class="panel-actions"><button class="btn" type="submit">Add login</button></div>
       </form>
     </div>
 
     <div class="block">
-      <div class="block-head"><h3>Current staff</h3><span class="count" id="staffCount">0</span></div>
+      <div class="block-head"><h3>All logins</h3><span class="count" id="staffCount">0</span></div>
       <div class="tbl-wrap">
         <table class="ledger" id="staffTable">
-          <thead><tr><th>Name</th><th></th></tr></thead>
+          <thead><tr><th>Name</th><th>Type</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
-      <p class="empty-note" id="staffEmpty" style="display:none;">No staff logins yet — add one above.</p>
+      <p class="empty-note" id="staffEmpty" style="display:none;">No logins yet — add one above.</p>
+    </div>
+  </section>
+
+  <!-- SUPPORT (for everyone) -->
+  <section class="pane" id="pane-support">
+    <h2 class="section-title">Support</h2>
+    <p class="section-sub">Having a technical problem? Get in touch with the developer.</p>
+    <div class="block">
+      <div class="block-head"><h3>Contact the developer</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="supWhatsapp" style="display:none;">Chat on WhatsApp</button>
+        <button class="btn secondary" type="button" id="supEmail" style="display:none;">Send an email</button>
+      </div>
+      <p id="supNone" style="font-size:13px;color:var(--ink-soft);margin:0;display:none;">Contact details haven't been set up yet.</p>
+      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix </p>
+    </div>
+  </section>
+
+  <!-- DEVELOPER (support account only) -->
+  <section class="pane" id="pane-dev">
+    <h2 class="section-title">Developer</h2>
+    <p class="section-sub">Diagnostics and support tools.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>System</h3></div>
+      <div class="tbl-wrap"><table class="ledger" id="devInfo"><tbody></tbody></table></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Recent errors</h3><span class="count" id="devErrCount">0</span></div>
+      <div class="panel-actions" style="margin:0 0 8px 0;flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devErrClear">Clear log</button>
+        <button class="btn secondary" type="button" id="devErrTest">Trigger test error</button>
+        <button class="btn secondary" type="button" id="devCopy">Copy report</button>
+      </div>
+      <pre id="devErrLog" style="white-space:pre-wrap;font-size:12px;margin:0;max-height:220px;overflow:auto;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Tools</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devExport">Download backup (JSON)</button>
+        <button class="btn secondary" type="button" id="devResync">Re-sync this device to cloud</button>
+        <button class="btn secondary" type="button" id="devClear">Clear local cache &amp; reload</button>
+      </div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Reset a login's password</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devResetUser">Login</label><select id="devResetUser"></select></div>
+        <div class="field"><label for="devResetPass">New password</label><input type="password" id="devResetPass" autocomplete="new-password" placeholder="At least 4 characters"></div>
+      </div>
+      <p class="auth-error" id="devResetError" style="display:none;"></p>
+      <div class="panel-actions"><button class="btn" type="button" id="devResetBtn">Reset password</button></div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Change a login's type</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devRoleUser">Login</label><select id="devRoleUser"></select></div>
+        <div class="field"><label for="devRoleSel">Type</label><select id="devRoleSel"><option value="staff">Staff</option><option value="owner">Owner</option></select></div>
+      </div>
+      <div class="panel-actions"><button class="btn" type="button" id="devRoleBtn">Change type</button></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Health check</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devCheck">Run health check</button>
+        <button class="btn secondary" type="button" id="devFixTotals">Fix sale totals</button>
+        <button class="btn secondary" type="button" id="devFixStock">Fix negative stock</button>
+        <button class="btn secondary" type="button" id="devFixNames">Fix login names</button>
+      </div>
+      <pre id="devCheckOut" style="white-space:pre-wrap;font-size:12px;margin:0;max-height:220px;overflow:auto;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Cloud</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devCloudTest">Test connection &amp; compare counts</button>
+        <button class="btn secondary" type="button" id="devRetry">Retry connection</button>
+        <button class="btn secondary" type="button" id="devReload">Reload app</button>
+      </div>
+      <pre id="devCloudOut" style="white-space:pre-wrap;font-size:12px;margin:0;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Import &amp; export</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devCsvSales">Sales CSV</button>
+        <button class="btn secondary" type="button" id="devCsvBooks">Books CSV</button>
+        <label class="btn secondary" for="devImportFile" style="cursor:pointer;">Import backup (JSON)</label>
+        <input type="file" id="devImportFile" accept="application/json,.json" style="display:none;">
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Licence &amp; trial (this device)</h3></div>
+      <p id="devLicInfo" style="font-size:13px;margin:0 0 8px 0;"></p>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devLicOn">Mark licensed</button>
+        <button class="btn secondary" type="button" id="devLicReset">Restart trial</button>
+        <button class="btn secondary" type="button" id="devLicOff">Remove licence</button>
+      </div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Edit a record directly</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devEdKind">Type</label><select id="devEdKind"><option value="books">Book</option><option value="sales">Sale</option><option value="users">Login</option></select></div>
+        <div class="field"><label for="devEdRec">Record</label><select id="devEdRec"></select></div>
+      </div>
+      <div class="field" style="margin-top:12px;"><label for="devEdText">Data (JSON)</label><textarea id="devEdText" rows="10" style="width:100%;font-family:monospace;font-size:12px;box-sizing:border-box;"></textarea></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devEdLoad">Load</button>
+        <button class="btn" type="button" id="devEdSave">Save</button>
+        <button class="btn secondary" type="button" id="devEdDelete">Delete record</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Stored on this device</h3></div>
+      <div class="tbl-wrap"><table class="ledger" id="devStorage"><tbody></tbody></table></div>
     </div>
   </section>
 
@@ -1321,13 +1448,15 @@
   <div class="confirm-card">
     <p id="confirmMessage"></p>
     <div class="panel-actions">
-      <button class="btn" id="confirmYes" type="button">Remove</button>
+      <button class="btn" id="confirmYes" type="button">Delete</button>
       <button class="btn secondary" id="confirmNo" type="button">Cancel</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div id="printArea" aria-hidden="true"></div>
 
 <script>
 (function () {
@@ -1343,6 +1472,22 @@
   let ready = false;
   let authMode = "login"; // "login" | "signup"
   let usersLoaded = false;
+
+  // ---------- Developer support account ----------
+  // Set by the app's creator: run dev-setup.html, then paste its two lines here.
+  // Leave both empty to switch the developer account off. Only the password's SHA-256
+  // hash is stored. The account is shown openly in the Staff tab and About page.
+  const DEV_NAME = "Daniel";
+  const DEV_HASH = "e937adea6647b118b1eb9e9331d87708083db237bddefcd24a25c8e2eca2ca22";
+  const devEnabled = !!(DEV_NAME && DEV_HASH);
+  // How the client reaches you from the Support tab. WhatsApp number in international format
+  // without + or spaces (e.g. "2348012345678"). Leave empty to hide that button.
+  const DEV_WHATSAPP = "2347073206415";
+  const DEV_EMAIL = "ashaoludaniel2@gmail.com";
+  const devErrors = []; // recent technical errors, shown in the Developer tab
+  function logDevError(msg) { devErrors.unshift(new Date().toLocaleString() + " — " + msg); if (devErrors.length > 50) devErrors.pop(); }
+  window.addEventListener("error", (e) => logDevError(e.message || "Script error"));
+  window.addEventListener("unhandledrejection", (e) => logDevError("Promise: " + ((e.reason && (e.reason.message || e.reason.code)) || e.reason)));
 
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $all = (sel, root) => Array.from((root || document).querySelectorAll(sel));
@@ -1410,32 +1555,41 @@
 
   // ---------- Staff management (Owner only) ----------
   function updateRoleUI() {
-    const isOwner = !!(currentUser && currentUser.role === "owner");
+    const isDev = !!(currentUser && currentUser.role === "developer");
+    const isOwner = isDev || !!(currentUser && currentUser.role === "owner");
     $("#navStaffBtn").style.display = isOwner ? "" : "none";
+    $("#navDevBtn").style.display = isDev ? "" : "none";
+    if (typeof renderStaff === "function") renderStaff();
   }
 
   function renderStaff() {
-    const staffList = users.filter((u) => u.role !== "owner");
+    const list = users.slice().sort((a, b) => (a.role === "owner" ? 0 : 1) - (b.role === "owner" ? 0 : 1) || a.name.localeCompare(b.name));
     const tbody = $("#staffTable tbody");
     tbody.innerHTML = "";
-    staffList.forEach((u) => {
+    list.forEach((u) => {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${escapeHtml(u.name)}</td><td><div class="row-actions"><button type="button" data-act="remove-staff" data-id="${u.id}" class="danger">Remove</button></div></td>`;
+      const isSelf = !!(currentUser && currentUser.id === u.id);
+      const roleLabel = u.role === "owner" ? "Owner" : "Staff";
+      const action = `<div class="row-actions"><button type="button" data-act="remove-staff" data-id="${u.id}" class="danger">${isSelf ? "Delete mine" : "Delete"}</button></div>`;
+      tr.innerHTML = `<td>${escapeHtml(u.name)}${isSelf ? ' <span style="color:var(--ink-soft);font-size:12px;">(you)</span>' : ""}</td><td>${roleLabel}</td><td>${action}</td>`;
       tbody.appendChild(tr);
     });
-    $("#staffCount").textContent = fmtInt(staffList.length);
-    $("#staffEmpty").style.display = staffList.length ? "none" : "block";
+    $("#staffCount").textContent = fmtInt(list.length);
+    $("#staffEmpty").style.display = list.length ? "none" : "block";
   }
 
   async function removeStaff(id) {
     const u = users.find((x) => x.id === id);
     if (!u) return;
-    const ok = await askConfirm(`Remove ${u.name}'s login? They won't be able to sign in anymore.`);
+    const isSelf = !!(currentUser && currentUser.id === id);
+    if (u.role === "owner" && users.filter((x) => x.role === "owner").length <= 1 && users.length > 1) { toast("Add another owner before deleting the last owner."); return; }
+    const ok = await askConfirm(isSelf ? "Delete your own login? You'll be signed out." : `Delete ${u.name}'s login? They won't be able to sign in anymore.`);
     if (!ok) return;
     users = users.filter((x) => x.id !== id);
     if (db) { db.collection("users").doc(id).delete().then(syncSaved, syncFail); } else { saveLocal(); }
+    if (isSelf) { $("#btnLogout").click(); }
     renderAll();
-    toast("Staff login removed.");
+    toast("Login deleted.");
   }
 
   $("#staffTable").addEventListener("click", (e) => {
@@ -1450,16 +1604,347 @@
     const errEl = $("#staffError");
     errEl.style.display = "none";
     if (!name) { errEl.textContent = "Enter a name."; errEl.style.display = "block"; return; }
-    if (findUserByName(name)) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+    if (findUserByName(name) || (devEnabled && normalizeName(name) === normalizeName(DEV_NAME))) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
     if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
     const passHash = await hashPassword(pass);
-    const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role: "staff" };
+    const role = $("#staffRole").value === "owner" ? "owner" : "staff";
+    const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role };
     users.push(u);
     persistUsers();
     renderAll();
     $("#staffForm").reset();
-    toast(`Added ${name}.`);
+    toast(`Added ${name} as ${role}.`);
   });
+
+  // ---------- Developer tools (developer account only) ----------
+  function renderDev() {
+    if (!(currentUser && currentUser.role === "developer")) return;
+    const pill = document.getElementById("syncPill");
+    let licence = "Licensed";
+    try { if (localStorage.getItem("bookshop-ledger-licensed") !== "1") licence = "Trial"; } catch (e) { licence = "Unknown"; }
+    const info = [
+      ["Storage", db ? "Cloud database" : "This device only (offline fallback)"],
+      ["Sync status", pill ? (pill.textContent.trim() + (pill.dataset.detail ? " — " + pill.dataset.detail : "")) : "—"],
+      ["Online", navigator.onLine ? "Yes" : "No"],
+      ["Books / Sales / Logins", `${books.length} / ${sales.length} / ${users.length}`],
+      ["Licence", licence],
+      ["Browser", navigator.userAgent],
+    ];
+    $("#devInfo tbody").innerHTML = info.map((r) => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td></tr>`).join("");
+    $("#devErrLog").textContent = devErrors.length ? devErrors.join("\n") : "No errors recorded this session.";
+    $("#devErrCount").textContent = fmtInt(devErrors.length);
+    renderDevExtra();
+    $("#devResetUser").innerHTML = users.map((u) => `<option value="${u.id}">${escapeHtml(u.name)} (${u.role === "owner" ? "Owner" : "Staff"})</option>`).join("");
+  }
+  $("#devExport").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), books, sales, users }, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "ledger-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
+  $("#devResync").addEventListener("click", async () => {
+    if (!db) { toast("No cloud connection to sync to."); return; }
+    if (!(await askConfirm("Push everything on this device to the cloud, overwriting matching records?"))) return;
+    persistBooks(); persistUsers();
+    sales.forEach((x) => persistSaleUpdate(x));
+    toast("Re-sync started.");
+  });
+  $("#devClear").addEventListener("click", async () => {
+    if (!(await askConfirm("Clear this device's local cache and reload? Cloud data is not affected."))) return;
+    try { localStorage.removeItem(LOCAL_KEY); localStorage.removeItem(SESSION_KEY); } catch (e) {}
+    location.reload();
+  });
+  $("#devResetBtn").addEventListener("click", async () => {
+    const errEl = $("#devResetError");
+    errEl.style.display = "none";
+    const u = users.find((x) => x.id === $("#devResetUser").value);
+    const pass = $("#devResetPass").value;
+    if (!u) { errEl.textContent = "Pick a login."; errEl.style.display = "block"; return; }
+    if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+    u.passHash = await hashPassword(pass);
+    persistUsers();
+    $("#devResetPass").value = "";
+    toast(`Password reset for ${u.name}.`);
+  });
+
+  // ---------- More developer tools ----------
+  const devArr = (kind) => (kind === "books" ? books : kind === "sales" ? sales : users);
+  function devDownload(name, text, type) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+  function devCsv(name, headers, rows) {
+    const esc = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    devDownload(name, [headers].concat(rows).map((r) => r.map(esc).join(",")).join("\n"), "text/csv");
+  }
+  function devSaveRec(kind, rec) {
+    if (db) db.collection(kind).doc(rec.id).set(stripId(rec)).then(syncSaved, syncFail); else saveLocal();
+  }
+  function devDelRec(kind, id) {
+    if (db) db.collection(kind).doc(id).delete().then(syncSaved, syncFail); else saveLocal();
+  }
+  const devErrText = (e) => (e && (e.code || e.message)) || String(e);
+
+  function renderDevExtra() {
+    $("#devRoleUser").innerHTML = users.map((u) => `<option value="${u.id}">${escapeHtml(u.name)} (${u.role === "owner" ? "Owner" : "Staff"})</option>`).join("");
+    devLicRender();
+    devFillRecs();
+    devStorageRender();
+  }
+
+  // Health check
+  function devHealth() {
+    const issues = [];
+    const seen = {};
+    books.forEach((b) => {
+      const t = (b.title || "").trim().toLowerCase();
+      if (!t) issues.push(`Book ${b.id} has no title`);
+      else { if (seen[t]) issues.push(`Duplicate book title: "${b.title}"`); seen[t] = 1; }
+      if ((b.stock || 0) < 0) issues.push(`Negative stock: "${b.title}" (${b.stock})`);
+      if (typeof b.price !== "number" || isNaN(b.price)) issues.push(`Bad price on "${b.title}"`);
+    });
+    sales.forEach((x) => {
+      if (Math.abs((x.total || 0) - (x.qty || 0) * (x.unitPrice || 0)) > 0.01) issues.push(`Sale total mismatch: "${x.title}" (${x.total} vs ${(x.qty || 0) * (x.unitPrice || 0)})`);
+      if (!x.ts) issues.push(`Sale "${x.title}" has no date`);
+    });
+    const names = {};
+    users.forEach((u) => {
+      if (!u.passHash) issues.push(`Login "${u.name}" has no password`);
+      const k = normalizeName(u.name);
+      if (names[k]) issues.push(`Duplicate login name: ${u.name}`);
+      names[k] = 1;
+      if (u.nameLower !== k) issues.push(`Login "${u.name}" has a stale lowercase name`);
+    });
+    if (users.length && !users.some((u) => u.role === "owner")) issues.push("No owner account exists");
+    return issues;
+  }
+  function devRunCheck() {
+    const issues = devHealth();
+    $("#devCheckOut").textContent = issues.length ? issues.length + " problem(s):\n" + issues.join("\n") : "No problems found.";
+  }
+  $("#devCheck").addEventListener("click", devRunCheck);
+  $("#devFixTotals").addEventListener("click", () => {
+    let n = 0;
+    sales.forEach((x) => {
+      const t = Math.round((x.qty || 0) * (x.unitPrice || 0) * 100) / 100;
+      if (Math.abs((x.total || 0) - t) > 0.01) { x.total = t; persistSaleUpdate(x); n++; }
+    });
+    renderAll(); devRunCheck(); toast(`Fixed ${n} sale total(s).`);
+  });
+  $("#devFixStock").addEventListener("click", () => {
+    let n = 0;
+    books.forEach((b) => { if ((b.stock || 0) < 0) { b.stock = 0; n++; } });
+    if (n) persistBooks();
+    renderAll(); devRunCheck(); toast(`Fixed ${n} book(s).`);
+  });
+  $("#devFixNames").addEventListener("click", () => {
+    let n = 0;
+    users.forEach((u) => { const k = normalizeName(u.name); if (u.nameLower !== k) { u.nameLower = k; n++; } });
+    if (n) persistUsers();
+    devRunCheck(); toast(`Fixed ${n} login(s).`);
+  });
+
+  // Cloud
+  $("#devCloudTest").addEventListener("click", async () => {
+    const out = $("#devCloudOut");
+    if (!db) { out.textContent = "No cloud database connected (working on this device only)."; return; }
+    out.textContent = "Testing…";
+    const lines = [];
+    for (const name of ["books", "sales", "users"]) {
+      const t0 = Date.now();
+      try {
+        const snap = await db.collection(name).get();
+        const n = snap.size != null ? snap.size : (snap.docs ? snap.docs.length : "?");
+        const local = devArr(name).length;
+        lines.push(`${name}: ${n} in cloud, ${local} on this device${n !== local ? "  ⚠ differs" : ""} (${Date.now() - t0} ms)`);
+      } catch (e) { lines.push(`${name}: read failed — ${devErrText(e)}`); }
+    }
+    try {
+      const t1 = Date.now();
+      await db.collection("diagnostics").doc("ping").set({ ts: Date.now() });
+      await db.collection("diagnostics").doc("ping").delete();
+      lines.push(`Write test OK (${Date.now() - t1} ms)`);
+    } catch (e) { lines.push("Write test failed — " + devErrText(e)); }
+    out.textContent = lines.join("\n");
+  });
+  $("#devRetry").addEventListener("click", () => { initDb(true); toast("Retrying connection…"); });
+  $("#devReload").addEventListener("click", () => location.reload());
+
+  // Import / export
+  $("#devCsvSales").addEventListener("click", () => {
+    devCsv("sales-" + new Date().toISOString().slice(0, 10) + ".csv", ["Book", "Qty", "Unit price", "Total", "Date", "Sold by", "Status"],
+      sales.slice().sort((a, b) => b.ts - a.ts).map((x) => [x.title, x.qty, x.unitPrice, x.total, x.ts ? new Date(x.ts).toISOString() : "", x.soldBy || "", x.deliveryStatus === "pending" ? "Pending" : "Delivered"]));
+  });
+  $("#devCsvBooks").addEventListener("click", () => {
+    devCsv("books-" + new Date().toISOString().slice(0, 10) + ".csv", ["Title", "Author", "Category", "Price", "Stock", "Reorder level"],
+      books.map((b) => [b.title, b.author, b.category, b.price, b.stock, b.reorder]));
+  });
+  $("#devImportFile").addEventListener("change", async (e) => {
+    const f = e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    let data;
+    try { data = JSON.parse(await f.text()); } catch (err) { toast("That isn't a valid backup file."); return; }
+    const nb = Array.isArray(data.books) ? data.books : [], ns = Array.isArray(data.sales) ? data.sales : [], nu = Array.isArray(data.users) ? data.users : [];
+    if (!(await askConfirm(`Merge ${nb.length} books, ${ns.length} sales and ${nu.length} logins from this backup into the current data? Records with the same id are overwritten.`, "Merge"))) return;
+    const merge = (arr, inc) => inc.forEach((r) => {
+      if (!r || !r.id) return;
+      const i = arr.findIndex((x) => x.id === r.id);
+      if (i >= 0) arr[i] = r; else arr.push(r);
+    });
+    merge(books, nb); merge(sales, ns); merge(users, nu);
+    persistBooks(); persistUsers(); sales.forEach((x) => persistSaleUpdate(x));
+    renderAll(); renderDev(); toast("Backup merged.");
+  });
+
+  // Errors & report
+  $("#devErrClear").addEventListener("click", () => { devErrors.length = 0; renderDev(); });
+  $("#devErrTest").addEventListener("click", () => {
+    setTimeout(() => { throw new Error("Test error from developer tools"); }, 0);
+    setTimeout(renderDev, 150);
+  });
+  $("#devCopy").addEventListener("click", async () => {
+    const text = $all("#devInfo tbody tr").map((tr) => tr.cells[0].textContent + ": " + tr.cells[1].textContent).join("\n") + "\n\nErrors:\n" + (devErrors.join("\n") || "none");
+    try { await navigator.clipboard.writeText(text); toast("Report copied."); } catch (e) { window.prompt("Copy this report:", text); }
+  });
+
+  // Login type
+  $("#devRoleBtn").addEventListener("click", () => {
+    const u = users.find((x) => x.id === $("#devRoleUser").value);
+    const role = $("#devRoleSel").value;
+    if (!u) return;
+    if (u.role === "owner" && role !== "owner" && users.filter((x) => x.role === "owner").length <= 1) { toast("Keep at least one owner."); return; }
+    u.role = role;
+    persistUsers(); renderAll(); renderDev();
+    toast(`${u.name} is now ${role === "owner" ? "an owner" : "staff"}.`);
+  });
+
+  // Licence & trial
+  function devLicRender() {
+    let lic = false, start = null;
+    try { lic = localStorage.getItem(LICENSED_KEY) === "1"; start = localStorage.getItem(TRIAL_START_KEY); } catch (e) {}
+    const left = start ? Math.max(0, TRIAL_DAYS - Math.floor((Date.now() - parseInt(start, 10)) / 86400000)) : null;
+    $("#devLicInfo").textContent = lic ? "Licensed on this device." : start ? `Trial — ${left} day(s) left on this device.` : "Trial not started on this device.";
+  }
+  async function devLicSet(msg, fn) {
+    if (!(await askConfirm(msg, "Continue"))) return;
+    try { fn(); } catch (e) {}
+    location.reload();
+  }
+  $("#devLicOn").addEventListener("click", () => devLicSet("Mark this device as licensed and reload?", () => localStorage.setItem(LICENSED_KEY, "1")));
+  $("#devLicReset").addEventListener("click", () => devLicSet("Restart the trial from now on this device and reload?", () => { localStorage.removeItem(LICENSED_KEY); localStorage.setItem(TRIAL_START_KEY, String(Date.now())); }));
+  $("#devLicOff").addEventListener("click", () => devLicSet("Remove the licence from this device and reload?", () => localStorage.removeItem(LICENSED_KEY)));
+
+  // Record editor
+  function devFillRecs() {
+    const kind = $("#devEdKind").value;
+    const prev = $("#devEdRec").value;
+    $("#devEdRec").innerHTML = devArr(kind).slice(0, 500).map((r) => {
+      const label = kind === "books" ? r.title : kind === "sales" ? `${r.title} · ${r.ts ? new Date(r.ts).toLocaleDateString() : "no date"}` : r.name;
+      return `<option value="${escapeHtml(r.id)}">${escapeHtml(label || r.id)}</option>`;
+    }).join("");
+    if (prev && devArr(kind).some((r) => r.id === prev)) $("#devEdRec").value = prev;
+  }
+  function devCurrentRec() {
+    const kind = $("#devEdKind").value;
+    return { kind, rec: devArr(kind).find((r) => r.id === $("#devEdRec").value) };
+  }
+  $("#devEdKind").addEventListener("change", () => { devFillRecs(); $("#devEdText").value = ""; });
+  $("#devEdLoad").addEventListener("click", () => {
+    const { rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    $("#devEdText").value = JSON.stringify(rec, null, 2);
+  });
+  $("#devEdSave").addEventListener("click", () => {
+    const { kind, rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    let obj;
+    try { obj = JSON.parse($("#devEdText").value); } catch (e) { toast("That isn't valid JSON."); return; }
+    if (!obj || obj.id !== rec.id) { toast("Keep the same id."); return; }
+    if (kind === "users") {
+      obj.nameLower = normalizeName(obj.name);
+      if (devEnabled && obj.nameLower === normalizeName(DEV_NAME)) { toast("That name is reserved."); return; }
+    }
+    const arr = devArr(kind);
+    arr[arr.findIndex((r) => r.id === rec.id)] = obj;
+    devSaveRec(kind, obj);
+    renderAll(); devFillRecs();
+    toast("Record saved.");
+  });
+  $("#devEdDelete").addEventListener("click", async () => {
+    const { kind, rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    if (!(await askConfirm("Permanently delete this record?", "Delete"))) return;
+    const arr = devArr(kind);
+    arr.splice(arr.findIndex((r) => r.id === rec.id), 1);
+    devDelRec(kind, rec.id);
+    $("#devEdText").value = "";
+    renderAll(); devFillRecs();
+    toast("Record deleted.");
+  });
+
+  // Local storage inspector
+  function devStorageRender() {
+    const rows = [];
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); rows.push([k, (localStorage.getItem(k) || "").length]); } } catch (e) {}
+    $("#devStorage tbody").innerHTML = rows.map((r) => `<tr><td>${escapeHtml(r[0])}</td><td class="num">${r[1]} chars</td><td><div class="row-actions"><button type="button" class="danger" data-key="${escapeHtml(r[0])}">Remove</button></div></td></tr>`).join("") || '<tr><td colspan="3">Nothing stored.</td></tr>';
+  }
+  $("#devStorage").addEventListener("click", async (e) => {
+    const b = e.target.closest("button[data-key]");
+    if (!b) return;
+    if (!(await askConfirm(`Remove stored item "${b.dataset.key}" from this device?`, "Remove"))) return;
+    try { localStorage.removeItem(b.dataset.key); } catch (x) {}
+    devStorageRender();
+  });
+
+  // ---------- Support tab ----------
+  (function setupSupport() {
+    const msg = () => {
+      const store = ($("#authBrandName") && $("#authBrandName").textContent) || "The Ledger";
+      return `Hello, I need help with ${store}.` + (currentUser ? ` (Logged in as ${currentUser.name})` : "");
+    };
+    if (DEV_WHATSAPP) {
+      $("#supWhatsapp").style.display = "";
+      $("#supWhatsapp").addEventListener("click", () => { window.open("https://wa.me/" + DEV_WHATSAPP + "?text=" + encodeURIComponent(msg()), "_blank", "noopener"); });
+    }
+    if (DEV_EMAIL) {
+      $("#supEmail").style.display = "";
+      $("#supEmail").addEventListener("click", () => { window.location.href = "mailto:" + DEV_EMAIL + "?subject=" + encodeURIComponent("App support") + "&body=" + encodeURIComponent(msg()); });
+    }
+    if (!DEV_WHATSAPP && !DEV_EMAIL) $("#supNone").style.display = "block";
+  })();
+
+  // ---------- Developer setup helper ----------
+  // Open this file with #devsetup on the end of the address to generate the DEV_NAME / DEV_HASH
+  // lines. It only prints text to paste into the code; it grants no access by itself.
+  function openDevSetup() {
+    if (document.getElementById("devSetupBox")) return;
+    const box = document.createElement("div");
+    box.id = "devSetupBox";
+    box.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;";
+    box.innerHTML = `<div style="background:#fff;color:#111;max-width:520px;width:100%;border-radius:12px;padding:20px;font-family:system-ui,sans-serif;max-height:90vh;overflow:auto;">
+      <h3 style="margin:0 0 6px 0;">Developer account setup</h3>
+      <p style="font-size:13px;margin:0 0 10px 0;">Enter your name and a password. Paste the two lines it makes over the empty DEV_NAME and DEV_HASH lines in this file.</p>
+      <input id="dsName" type="text" placeholder="Your name" autocomplete="off" style="width:100%;padding:10px;margin-bottom:8px;box-sizing:border-box;">
+      <input id="dsPass" type="password" placeholder="Password (6+ characters)" autocomplete="new-password" style="width:100%;padding:10px;margin-bottom:8px;box-sizing:border-box;">
+      <div style="display:flex;gap:8px;"><button type="button" id="dsGo" style="padding:10px 14px;">Generate</button><button type="button" id="dsClose" style="padding:10px 14px;">Close</button></div>
+      <pre id="dsOut" style="background:#f2f2f2;padding:10px;white-space:pre-wrap;word-break:break-all;font-size:12px;margin:10px 0 0 0;"></pre></div>`;
+    document.body.appendChild(box);
+    $("#dsClose").addEventListener("click", () => { box.remove(); });
+    $("#dsGo").addEventListener("click", async () => {
+      const n = $("#dsName").value.trim(), pw = $("#dsPass").value;
+      if (!n || pw.length < 6) { $("#dsOut").textContent = "Enter a name and a password of at least 6 characters."; return; }
+      const h = await hashPassword(pw);
+      $("#dsOut").textContent = "const DEV_NAME = " + JSON.stringify(n) + ";\nconst DEV_HASH = \"" + h + "\";";
+    });
+  }
+  if (location.hash === "#devsetup") openDevSetup();
+  window.addEventListener("hashchange", () => { if (location.hash === "#devsetup") openDevSetup(); });
 
   // ---------- Tabs ----------
   function closeNavDrawer() {
@@ -1482,6 +1967,7 @@
       btn.classList.add("active");
       $("#pane-" + btn.dataset.pane).classList.add("active");
       if (btn.dataset.pane === "sale") renderSalePane();
+      if (btn.dataset.pane === "dev") renderDev();
       closeNavDrawer();
     });
   });
@@ -1665,13 +2151,14 @@
     persistBooks();
     renderAll();
   }
-  function askConfirm(message) {
+  function askConfirm(message, label) {
     return new Promise((resolve) => {
       const overlay = $("#confirmModal");
       $("#confirmMessage").textContent = message;
       overlay.classList.add("open");
       const yesBtn = $("#confirmYes");
       const noBtn = $("#confirmNo");
+      yesBtn.textContent = label || "Delete";
       function cleanup(result) {
         overlay.classList.remove("open");
         yesBtn.removeEventListener("click", onYes);
@@ -1884,10 +2371,24 @@
   }
   $("#logSearch").addEventListener("input", renderLog);
   $("#btnPrintLog").addEventListener("click", () => {
-    $("#pane-log").classList.add("active-print");
-    window.print();
+    const q = ($("#logSearch").value || "").trim().toLowerCase();
+    const rows = sales.filter((x) => !q || (x.title || "").toLowerCase().includes(q)).sort((a, b) => b.ts - a.ts);
+    const storeName = ($("#authBrandName") && $("#authBrandName").textContent) || "The Ledger";
+    const body = rows.map((x) => {
+      const d = new Date(x.ts);
+      const when = d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+      return `<tr><td>${escapeHtml(x.title)}</td><td class="num">${fmtInt(x.qty)}</td><td class="num">${fmtMoney(x.unitPrice)}</td><td class="num">${fmtMoney(x.total)}</td><td>${when}</td><td>${escapeHtml(x.soldBy || "—")}</td><td>${x.deliveryStatus === "pending" ? "Pending" : "Delivered"}</td></tr>`;
+    }).join("");
+    const revenue = rows.reduce((t, x) => t + (x.total || 0), 0);
+    const units = rows.reduce((t, x) => t + (x.qty || 0), 0);
+    const area = $("#printArea");
+    area.innerHTML = `<h1>${escapeHtml(storeName)} — Sales log</h1>
+      <p class="pa-sub">Printed ${escapeHtml(new Date().toLocaleString())}${q ? " · filtered by “" + escapeHtml(q) + "”" : ""}</p>
+      <p class="pa-stats"><strong>${fmtInt(rows.length)}</strong> sales · <strong>${fmtMoney(revenue)}</strong> revenue · <strong>${fmtInt(units)}</strong> copies sold</p>
+      <table><thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th><th>Status</th></tr></thead><tbody>${body || '<tr><td colspan="7">No sales to print.</td></tr>'}</tbody></table>`;
+    setTimeout(() => { try { window.print(); } catch (err) { toast("Printing isn't available here."); } }, 50);
   });
-  window.addEventListener("afterprint", () => { $("#pane-log").classList.remove("active-print"); });
+  window.addEventListener("afterprint", () => { $("#printArea").innerHTML = ""; });
 
   // ---------- Store name & logo (editable; also drives the app's title, favicon, and install manifest) ----------
   const NAME_KEY = "bookshop-ledger-name";
@@ -2063,7 +2564,7 @@
   }
   function setSessionName() {
     if (!currentUser) { $("#sessionName").textContent = ""; return; }
-    const tag = currentUser.role === "owner" ? " (Owner)" : "";
+    const tag = currentUser.role === "owner" ? " (Owner)" : currentUser.role === "developer" ? " (Developer)" : "";
     $("#sessionName").textContent = currentUser.name + tag;
   }
 
@@ -2133,6 +2634,11 @@
       const raw = localStorage.getItem(SESSION_KEY);
       if (raw) {
         const sess = JSON.parse(raw);
+        if (sess.id === "developer" && devEnabled) {
+          currentUser = { id: "developer", name: DEV_NAME, role: "developer" };
+          setSessionName(); updateRoleUI(); showApp();
+          return true;
+        }
         const u = users.find((x) => x.id === sess.id);
         if (u) {
           currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
@@ -2179,7 +2685,7 @@
 
     if (authMode === "signup") {
       const confirmPass = $("#authConfirm").value;
-      if (findUserByName(name)) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+      if (findUserByName(name) || (devEnabled && normalizeName(name) === normalizeName(DEV_NAME))) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
       if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
       if (pass !== confirmPass) { errEl.textContent = "Passwords don't match."; errEl.style.display = "block"; return; }
       const passHash = await hashPassword(pass);
@@ -2194,6 +2700,16 @@
       $("#authForm").reset();
       toast(`Welcome, ${name}.`);
     } else {
+      if (devEnabled && normalizeName(name) === normalizeName(DEV_NAME)) {
+        const dh = await hashPassword(pass);
+        if (dh !== DEV_HASH) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
+        currentUser = { id: "developer", name: DEV_NAME, role: "developer" };
+        try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: "developer" })); } catch (e2) {}
+        setSessionName(); updateRoleUI(); showApp();
+        $("#authForm").reset();
+        toast("Welcome, " + DEV_NAME + ".");
+        return;
+      }
       const u = findUserByName(name);
       if (!u) { errEl.textContent = loginRole === "staff" ? "No staff login with that name — ask the owner to add you." : "No owner account with that name."; errEl.style.display = "block"; return; }
       const passHash = await hashPassword(pass);
@@ -2341,6 +2857,7 @@
   }
   function syncFail(e) {
     writeError = (e && (e.code || e.message)) || "unknown error";
+    logDevError("Cloud save failed: " + writeError);
     setSync("error", "Save to cloud failed: " + writeError);
     toast("Not saved to cloud: " + writeError);
   }
