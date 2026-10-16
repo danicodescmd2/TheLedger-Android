@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Ledger — Bookshop Inventory</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiVGhlIExlZGdlciBcdTIwMTQgQm9va3Nob3AgSW52ZW50b3J5Iiwic2hvcnRfbmFtZSI6IlRoZSBMZWRnZXIiLCJkZXNjcmlwdGlvbiI6IlRyYWNrIHN0b2NrIGFuZCBzYWxlcyBmb3IgYSBib29rc2hvcC4iLCJzdGFydF91cmwiOiIuIiwic2NvcGUiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0LXByaW1hcnkiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI0YzRUVERCIsInRoZW1lX2NvbG9yIjoiI0E5N0UyRiIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFFWDBsRVFWUjRuTzNhelZYYlFBQ0ZVWm1UYlRwZ3haWnlLQ1YxcEpTVXc1WVZIYVFBc2dqT2NSSkx0a2FqbjVsMzd6Ym4yQXE4VHlNRHArRmdIcCtmUHZhK0J0YjEvdnAyMnZzYXpuYTlFR1BuYks4b05uOVRvK2VXTFdQWTdJME1uN20yQ0dIMU56QjhsbG96aE5WZTJQQ3BiWTBRcXIrZzRiTzJtaUU4MUhxaFlUQit0bEZ6WjFWS01uejJzdlEwV0h3Q0dEOTdXcnEvUlFFWVAwZXdaSWZGQVJnL1IxSzZ4NklBako4akt0bmw3QUNNbnlPYnU4OVpBUmcvTFppejA3c0RNSDVhY3U5ZTd3ckErR25SUGJ1OUdZRHgwN0piKzYzNnB4RFFtc2tBM1AzcHdkU09Sd013Zm5veXRtZVBRRVM3R29DN1B6MjZ0bXNuQU5IK0M4RGRuNTc5dTI4bkFOSCtDc0RkbndTWE8zY0NFTzFQQU83K0pEbnYzUWxBTkFFUTdUUU1Ibi9JNVFRZ21nQ0lKZ0NpQ1lCb0R6NEFrOHdKUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFSzNaQUw2L2ZOMzdFdmpVOHZmaXk5NFhzTVRZRi83Ymo1OGJYMG1HbG9jK3B1a0F4Z2hqbVI2SFBxYUxBQzZIUGZYTm0vcTN4RGhLaG43djE3b1ZYUVJ3YVdySUpYSDBFTWJTb2Zlc3V3Q21qSDFUZXdpajlHNTh0UC9IMXFJQ0dOTlNHTzdtZFFsZ1FzMHdwbDV2N3V2VWVIMStFMENCMnA4emFyNC84d2lnc3BKVFkrNXJVWThBTm5KdHpKZFJHUHMrbXYxVENLaEJBRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRVFFCRUV3RFJCRUEwQVJCTkFFUVRBTkVFUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFRXdEUkJFQTBBUkJOQUVRVEFORUVRRFFCRUUwQVJCTUEwUVJBTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRN2N2ZUY1RGkrOHZYMmYvKzdjZlB0UzZIVHdLbzdOYlFhN3lXTU9vUlFJSFNrYzhaN3RSN0NLTWVBVXdvR1hxdEVZNjlqakRxRXNDdzc5QnJ2VzlKR0ZPdmx5SXFnSmFHUHRmVWRUbzF4blVYd0JiUDU2M3hPRFh1OVBqODlMSDNSWlRvK1c2K3Q2U3ZiWGNud0RDMCs4MDRpcElUbzFWTkIyRG8yK294akdZZmdhQUdmd3RFTkFFUVRRQkVFd0RSQkVBMEFSQk5BRVFUQU5FRVFEUUJFRTBBUkJNQTBRUkFOQUVRVFFCRUV3RFJCRUEwQVJCTkFFUVRBTkVFUURRQkVFMEFSQk1BMFFSQU5BRVFUUUJFZTNoL2ZUdnRmUkd3RnljQTBRUkFOQUVRVFFCRWV4aUdZZkJCbUVUdnIyOG5Kd0RSQkVDMFB3RjREQ0xKZWU5T0FLTDlGWUJUZ0FTWE8zY0NFTzIvQUp3QzlPemZmVHNCaUhZMUFLY0FQYnEyYXljQTBVWURjQXJRazdFOVQ1NEFJcUFIVXp2MkNFUzBtd0U0QldqWnJmM2VkUUtJZ0JiZHM5dTdINEZFUUV2dTNldXN6d0Fpb0FWemRqcjdRN0FJT0xLNSt5ejZLWkFJT0tLU1hSYi9HRlFFSEVucEhoZjlIa0FFSE1HU0hTNytSWmdJMk5QUy9WVWQ3K1B6MDBmTjE0TXh0VzY4VmY4VXdtbkFGbXJ1YkxYQk9nMm9iWTBiN09wM2JDR3cxSnBQRnBzOXNnaUJ1Ylo0cE43OG1WMEkzTExsWjhsZFA3U0tnYk85Zm9EeUMwQ29VY0dUc2RTdEFBQUFBRWxGVGtTdVFtQ0MiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0seyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFPWEVsRVFWUjRuTzNjdlpYYjFnS0ZVWXlXVTNlZ3lLbktjU211dzZXNEhLV0sxSUVMa0lOWnRFYWNBVW1BOS8vc25UOC9FcVI0UGw1UWV0a1kwdWN2Zi96by9SZ0FTdm4rOWR0TDc4ZkFyN3dnblJoNGdKOEVRbnN1ZUFQR0h1QTRVVkNYaTF1QndRY29UeENVNVdJV1lQQUIyaE1FejNIeFRqTDZBT01RQThlNVlBY1lmWUR4aVlISHVFaDNHSDJBZVltQmZTN01Ec01Qc0E0aDhKNEw4b2JSQjFpZkdIamxJbXlHSHlCUmVnaEVQM25ERDBCcUNFUSthY01Qd0xXMEVJaDZzb1lmZ0h0U1FpRGlTUnArQUk1YVBRUSs5WDRBdFJsL0FNNVlmVCtXclp2Vlh6Z0EybG54TkdDNUoyVDRBYWhscFJCWTZoYUE4UWVncHBWMlpvbVNXZWtGQVdBT3M1OEdUSDhDWVB3QjZHSDIvWms2QUdhLytBRE1iZVlkbXZMNFl1WUxEc0NhWnJzbE1OMEpnUEVIWUVTejdkTlVBVERieFFVZ3kwdzdOY1Z4eFV3WEZBQzJiZnhiQXNPZkFCaC9BR1kwK240TkhRQ2pYendBdUdYa0hSczJBRWErYUFEd3FGSDNiTWdBR1BWaUFjQVpJKzdhY0FFdzRrVUNnR2VOdG05REJjQm9Gd2NBU2hwcDU0WUpnSkV1Q2dEVU1zcmVEUkVBbzF3TUFHaGhoTjNySGdBalhBUUFhSzMzL25VTmdONVBIZ0I2NnJtRDNRTEErQU5Bdnozc0VnREdId0IrNnJHTHpRUEErQVBBZTYzM3NXa0FHSDhBMk5keUo1c0ZnUEVIZ1B0YTdXV1RBREQrQVBDNEZydlovZDhCQUFEYXF4NEF2djBEd0hHMTk3TnFBQmgvQURpdjVvNVdDd0RqRHdEUHE3V25mZ01BQUlHcUJJQnYvd0JRVG8xZExSNEF4aDhBeWl1OXIwVUR3UGdEUUQwbGQ5WnZBQUFnVUxFQThPMGZBT29ydGJkRkFzRDRBMEE3SlhiWExRQUFDUFIwQVBqMkR3RHRQYnUvVGdBQUlOQlRBZURiUHdEMDg4d09udzRBNHc4QS9aM2RZN2NBQUNEUXFRRHc3UjhBeG5GbWw1MEFBRUNnd3dIZzJ6OEFqT2ZvUGpzQkFJQkFod0xBdDM4QUdOZVJuWFlDQUFDQkhnNEEzLzRCWUh5UDdyVVRBQUFJOUZBQStQWVBBUE40WkxlZEFBQkFJQUVBQUlIdUJvRGpmd0NZejczOWRnSUFBSUZ1Qm9Cdi93QXdyMXM3N2dRQUFBSUpBQUFJdEJzQWp2OEJZSDU3ZSs0RUFBQUNDUUFBQ1BSaEFEaitCNEIxZkxUclRnQUFJSkFBQUlCQTd3TEE4VDhBck9kNjM1MEFBRUFnQVFBQWdRUUFBQVQ2SlFEYy93ZUFkYjNkZVNjQUFCQklBQUJBSUFFQUFJSCtEd0QzL3dGZ2ZaZTlkd0lBQUlFRUFBQUVFZ0FBRUVnQUFFQ2dsMjN6QTBBQVNPTUVBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJTkFuL3dZQUFPUnhBZ0FBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJFQ0l2Ly84dmZkREFDYmdzeUxIYjcwZkFPM3MvY0grNjU5L0d6OFNvRGREandEZzVnZUJPSUI1R1hsdUVRRGM1TlFBeG1mb09VTUFjSXBUQTJqUDBGT1NBS0E0cHdad25wR25GUUZBTThJQWZqTDA5Q1lBNk03dEJGWm02Qm1WQUdCb1RnMllnWkZuUmdLQUtRa0RlakQwckVRQXNCUzNFeWpCMEpOQUFQQ0x5MGl1K0FIbzFJQzNWbnlQNzFuNXp6WG5DUUErdERlS0szNkFPRFZZMjRydjJUM2VyeHdoQURqazFnZk1paCswVGczbXNlTDdiNC8zSHlVSUFJcHhhdUNEdWJZVjMwdDd2SmVvVFFCUW5UQjQ1UVA5Y1N1K04vWjRYOUNMQUtBYnR4TmVKUS9BaXEvem51VFhtVEVKQUliazFHQ2R3Vmp4TmR1enltdEdCZ0hBVklUQnF4R0hac1hYWU0rSTF4K09FZ0Fzd2UyRVZ5MkdhY1hydWNmUXN6SUJ3UEtjR3J3Nk1tWXJYcHM5UnA1VUFvQllUZzJ5R0hyNGxRQ0FEeVNkR3F6RzBNTmpCQUFjSUF6R1lPVGhlUUlBQ2tpN25kQ0tvWWQ2QkFCVTV0VGdQa01QN1FrQTZDUXRESXc4akVVQXdHQm12NTFnNkdFT0FnQW1NdEtwZ2FHSHVRa0FXRUN0VXdNakQrc1NBTEM0dHlQK2FBd1lmbGpmcDk0UEFBQm9Ud0FBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRis2LzBBZ0xyKy92UDMwLytidi83NXQvVERBUVloQUdBQlowYisyZit1T0lDNUNRQ1lTSzJoUDJQdnNRZ0RtSU1BZ01HTU5QSm5DQU9ZZ3dDQVRtWWYrcVBjVG9DeENBQ29MRzNvejNCcUFPMEpBQ2pBeU5jaERLQWVBUUFIR1BveHVKMEF6eE1BOEFGRFB5K25CdkFZQVVDc3RKRS9Nb0FyWGh0aEFMOFNBQ3h2eFRIYlUyck1idjEzVnJ1ZWJpZVFTZ0N3aE5WRzZaNmV3N1QzLzczaWErRFVnSlVKQUtheTRzanNtVzFraE1GOHJ4blpCQUJEV25FMDlxdytHbTRudkZyOWRXWStBb0J1VnZ2d3Y4Y0F2T2ZVd1B1Q2ZnUUExYTM0WWI3SGgza1p3c0I3aWZvRUFNV3MrT0c4eDRkekgyNG52UEwrb3dRQndDR3JmY2plNDROMkhrNE52Rjg1UmdEd29SVS9OUGY0MEZ5Yk1QQWU1Mk12bjcvODhhUDNnNkMrRlQvc2p2SWh5S1BTLzd6NHM1TEJDUUJMOGNGRkNVbW5CdVFTQUV6SjBOT0RNR0FsQW9DaEdYcG1rUFMzRTFpSEFLQTdJOC9LbkJvd0tnRkFNNFllZmhJRzlDWUFLTTdRdzNsdUo5Q0tBT0FVSXcvdE9UV2dKQUhBVFlZZXhpY01PRU1BWU9SaFVXNG5jSXNBQ0dMb2dRdW5CdmluZ0FFZzBLZmVEd0FBYUU4QUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRS0JQMzc5K2UrbjlJQUNBdHB3QUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJQcTBiZHZtM3dJQWdCemZ2MzU3Y1FJQUFJRUVBQUFFRWdBQUVFZ0FBRUNnL3dQQUR3RUJZSDJYdlhjQ0FBQ0JCQUFBQkJJQUFCRG9sd0R3T3dBQVdOZmJuWGNDQUFDQkJBQUFCQklBQUJEb1hRRDRIUUFBck9kNjM1MEFBRUFnQVFBQWdUNE1BTGNCQUdBZEgrMjZFd0FBQ0NRQUFDRFFiZ0M0RFFBQTg5dmJjeWNBQUJCSUFBQkFvSnNCNERZQUFNenIxbzQ3QVFDQVFIY0R3Q2tBQU16bjNuNDdBUUNBUUFJQUFBSTlGQUJ1QXdEQVBCN1piU2NBQUJEbzRRQndDZ0FBNDN0MHI1MEFBRUNnUXdIZ0ZBQUF4blZrcDUwQUFFQ2d3d0hnRkFBQXhuTjBuNTBBQUVDZ1V3SGdGQUFBeG5GbWw1MEFBRUNnMHdIZ0ZBQUEranU3eDArZEFJZ0FBT2pubVIxMkN3QUFBajBkQUU0QkFLQzlaL2ZYQ1FBQUJDb1NBRTRCQUtDZEVydGI3QVJBQkFCQWZhWDIxaTBBQUFoVU5BQ2NBZ0JBUFNWM3R2Z0pnQWdBZ1BKSzcydVZXd0FpQUFES3FiR3JmZ01BQUlHcUJZQlRBQUI0WHEwOXJYb0NJQUlBNEx5YU8xcjlGb0FJQUlEamF1K24zd0FBUUtBbUFlQVVBQUFlMTJJM201MEFpQUFBdUsvVlhqYTlCU0FDQUdCZnk1MXMvaHNBRVFBQTc3WGV4eTQvQWhRQkFQQlRqMTNzOXJjQVJBQUE5TnZEcm44TlVBUUFrS3puRG5iL2R3QkVBQUNKZXU5Zjl3RFl0djRYQVFCYUdtSDNoZ2lBYlJ2allnQkFiYVBzM1RBQnNHM2pYQlFBcUdHa25Sc3FBTFp0cklzREFLV010bS9EQmNDMmpYZVJBT0FaSSs3YWtBR3diV05lTEFBNGF0UTlHellBdG0zY2l3WUFqeGg1eDRZT2dHMGIrK0lCd0o3Ujkydm9CM2Z0ODVjL2Z2UitEQUJ3eStqRGZ6SDhDY0JiczF4VUFETE50Rk5UQmNDMnpYVnhBY2d4Mno1TjlXQ3Z1U1VBUUcrekRmL0ZkQ2NBYjgxNjBRRll3OHc3TkhVQWJOdmNGeCtBZWMyK1AxTS8rR3R1Q1FCUTIrekRmekg5Q2NCYnE3d29BSXhwcFoxWjVvbGNjeG9BUUNrckRmL0Zjay9vbWhBQTRLd1ZoLzlpcVZzQUgxbjV4UU9nbnRYM1kra25kODFwQUFEM3JENzhGeEZQOHBvUUFPQmF5dkJmUkQzWmEwSUFnTFRodjRoODB0ZUVBRUNlMU9HL2lIN3kxNFFBd1ByU2gvL0NSZGdoQmdEV1lmVGZjMEh1RUFJQTh6TDgrMXlZQThRQXdQaU0vbU5jcEpQRUFNQTRqUDV4TGxnQllnQ2dQYVAvSEJldkFrRUFVSjdCTDh2RmJFQVFBQnhuOE90eWNUc1JCUUEvR2Z2Mi9nUHU5MzJYQldzSlJRQUFBQUJKUlU1RXJrSmdnZz09Iiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FZQUFBRDBlTlQ2QUFBTi9FbEVRVlI0bk8zY3daSGsxQlpGVVRYQkZBOFlNY1VjVE1FT1RNRWNwb3p3QUFOZ1VMOS9kOUdWVlpsS1NlL2VlOWFhUTJmb0NaMGRFdEhiQmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUF6L3EwK2dkUXk0OC8vL1RQNnQ4QW5PZXZQLzcwM0dmYk5nRVF4OEFEN3hFSU9SejBZTVllT0lJb21NbWhEbUx3Z1NzSWdoa2NZbU1HSDZoQUVQVGswSm94K2tCbFlxQVBCOVdBMFFjNkVnTzFPWnlpakQ0d2lSaW94NEVVWS9pQnlZUkFIUTZpQUtNUEpCSURhN240Q3hsK0FDR3dpb3UrZ09FSCtKWVF1SmFMZlNIREQvQXhJWEFORi9rQ2hoL2djVUxnWEM3dWlRdy93UE9Fd0RtK1cvMERwakwrQU1md1BEMkhxanFZR3hYZ1BONEdITWVGUElqaEI3aU9FSGllVHdBSE1QNEExL0xjZlo2Q2VvSWJFR0E5YndQMjhRWmdKK01QVUlQbjhUNENZQWMzRzBBdG5zdVA4OXJrQVc0d2dQcDhFcmlQTndCM012NEFQWGhlMzBjQTNNSE5CTkNMNS9iSHZDWjVoeHNJb0QrZkJON21EY0FOeGg5Z0JzL3p0d21BTjdoWkFHYnhYUCtXQVBnUE53bkFUSjd2cndtQXI3ZzVBR2J6blA5Q0FQeVBtd0lnZytmOUN3R3d1UmtBMG5qdUN3QTNBVUNvOU9kL2RBQ2tIejVBdXVRZGlBMkE1RU1INEl2VVBZZ01nTlREQnVCdGlic1FGd0NKaHd6QXg5TDJJU29BMGc0WGdNY2s3VVJNQUNRZEtnRDdwZXhGUkFDa0hDWUF4MGpZamZFQmtIQ0lBQnh2K242TURvRHBod2ZBdVNidnlPZ0FBQURlTmpZQUpsY2JBTmVadWljakEyRHFZUUd3eHNSZEdSY0FFdzhKZ1BXbTdjdTRBQUFBUGpZcUFLYlZHUUMxVE5xWk1RRXc2VkFBcUd2SzNvd0lnQ21IQVVBUEUzWm5SQUFBQUk5cEh3QVRLZ3lBZnJydlQrc0E2SDd4QWVpdDh3NjFEZ0FBWUorMkFkQzV1Z0NZbytzZXRRMEFBR0MvbGdIUXRiWUFtS25qTHJVTGdJNFhHWUQ1dXUxVHV3QUFBSjdYS2dDNjFSVUFXVHJ0VktzQUFBQ08wU1lBT2xVVkFMbTY3RldiQUFBQWp0TWlBTHJVRkFCc1c0L2RhaEVBQU1DeHlnZEFoNG9DZ1ArcXZsL2xBd0FBT0Y3cEFLaGVUd0R3bnNvN1Zqb0FBSUJ6Q0FBQUNGUTJBQ3EvTmdHQWUxWGRzN0lCQUFDY3AyUUFWSzBsQU5pajRxNlZEQUFBNEZ3Q0FBQUNsUXVBaXE5SkFPQloxZmF0WEFBQUFPY1RBQUFRcUZRQVZIczlBZ0JIcXJSenBRSUFBTGlHQUFDQVFHVUNvTkpyRVFBNFM1VzlLeE1BQU1CMUJBQUFCQklBQUJDb1JBQlUrUjRDQUZlb3NIc2xBZ0FBdUpZQUFJQkFBZ0FBQWkwUGdBcmZRUURnYXF2M2Iza0FBQURYRXdBQUVFZ0FBRUFnQVFBQWdaWUd3T3IvQVFJQVZscTVnOTRBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkZvV0FQNE9BQUJZdDRmZUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBSVg3NzVZZlZQd0Zvd0xNaXgvZXJmd0RYdWZVZjlxKy8vMzN4THdGV00vUUlBTjU5RUlnRDZNdkk4eDRCd0x1OE5ZRDZERDE3Q0FCMjhkWUFybWZvT1pJQTRIRGVHc0IrUnA2ckNBQXVJd3pnQzBQUGFnS0E1WHhPWURKRFQxVUNnTks4TmFBREkwOUhBb0NXaEFFckdIb21FUUNNNG5NQ1J6RDBKQkFBdlBKNUpDYytBTDAxNEdzVDcvRmJKdjkzelg0Q2dEZmRHc1dKRHhCdkRXYWJlTS9lNG43bEVRS0FoN3ozZ0puNG9QWFdvSStKOTk4dDdqK09JQUE0akxjR0hzeG5tM2d2M2VKZTRtd0NnTk1KZ3hjZTZQZWJlRy9jNHI1Z0ZRSEFNajRudkVnZWdJbm5mRXZ5T1ZPVEFLQWtidzNtRE1iRU03dGx5cG1SUVFEUWlqQjRVWEZvSnA3QkxSV3ZQenhLQURDQ3p3a3ZyaGltaWRmekZrUFBaQUtBOGJ3MWVQSEltRTI4TnJjWWVWSUpBR0o1YTVERjBNTnJBZ0Rla1BUV1lCcEREL2NSQVBBQVlWQ0RrWWZuQ1FBNFFOcm5oS3NZZWppUEFJQ1RlV3Z3TVVNUDF4TUFzRWhhR0JoNXFFVUFRREhkUHljWWV1aEJBRUFqbGQ0YUdIcm9UUURBQUdlOU5URHlNSmNBZ09HK0h2RjdZOER3dzN6ZnJmNEJBTUQxQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFT2o3MVQ4QU9OZHZ2L3l3KzUvNTlmZS9qLzQ1UUJFQ0FBYllNL0xQL252RkFmUW1BS0NSczRaK2oxdS9SUmhBRHdJQWlxazA4bnNJQStoQkFNQWkzWWYrVVQ0blFDMENBRTZXTnZSN2VHc0ExeE1BY0FBamZ3NWhBT2NSQVBBQVExK0R6d253UEFFQWJ6RDBmWGxyQVBjUkFNUktHL2xIQm5EaXRSRUc4Sm9BWUx5SlkzYkxVV1AyM3I5bjJ2WDBPWUZVQW9BUnBvM1NSMVlPMDYwL2UrSVplR3ZBWkFLQVZpYU96QzNkUmtZWTlEc3pzZ2tBU3BvNEdyZE1IdzJmRTE1TVAyZjZFUUFzTSszaC94RUQ4QzF2RGR3WHJDTUFPTjNFaC9rdEh1YkhFQWJ1SmM0bkFEak14SWZ6TFI3T2EvaWM4TUw5eHhFRUFBK1o5cEQ5aUFkdEg5NGF1Rjk1akFEZ1RSTWZtcmQ0YU00bUROemp2RTBBOE1yRWgrSm5Ib0o4emVjRTBna0FSakh5SENIcHJRRzVCQUF0R1hwV0VBWk1JZ0FvemREVFFkTG5CT1lRQUN4bjVKbk1Xd09xRWdCY3h0RERGOEtBMVFRQWh6UDBzSi9QQ1Z4RkFMQ0xrWWZyZVd2QWtRUUE3ekwwVUo4d1lBOEJnSkdIb1h4TzREMENJSWloQno3ejFvQlBxLzdnSDMvKzZaOVZmellBVlBMWEgzOWV2c2ZmWGYwSEFnRHJDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VETEF1Q3ZQLzc4dE9yUEJvQXFWdTJoTndBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQmxnYUF2d3NBZ0dRcmQ5QWJBQUFJSkFBQUlKQUFBSUJBQWdBQUFpMFBBUDhqSUFDSlZ1L2Y4Z0FBQUs0bkFBQWdrQUFBZ0VBbEFtRDFkeEFBdUZLRjNTc1JBQURBdFFRQUFBUVNBQUFRcUV3QVZQZ2VBZ0JucTdKM1pRSUFBTGlPQUFDQVFLVUNvTXByRVFBNFE2V2RLeFVBQU1BMUJBQUFCQ29YQUpWZWp3REFVYXJ0VzdrQUFBRE9Kd0FBSUZESkFLajJtZ1FBbmxGeDEwb0dBQUJ3cnJJQlVMR1dBT0JSVmZlc2JBQUFBT2NSQUFBUXFIUUFWSDF0QWdEM3FMeGpwUU1BQURoSCtRQ29YRThBY0V2MS9Tb2ZBQURBOFZvRVFQV0tBb0N2ZGRpdEZnRUFBQnlyVFFCMHFDa0E2TEpYYlFJQUFEaE9xd0RvVWxVQVpPcTBVNjBDQUFBNFJyc0E2RlJYQU9Ub3RrL3RBbURiK2wxa0FHYnJ1RXN0QXdBQWVFN2JBT2hZV3dETTAzV1AyZ1lBQUxCZjZ3RG9XbDBBek5CNWgxb0h3TGIxdnZnQTlOVjlmOW9IQUFEd3VCRUIwTDNDQU9obHd1Nk1DSUJ0bTNFWUFOUTNaVy9HQk1DMnpUa1VBR3FhdERPakFnQUF1TSs0QUpoVVp3RFVNVzFmeGdYQXRzMDdKQURXbXJnckl3TmcyMlllRmdEWG03b25Zd01BQUxodGRBQk1yVFlBcmpGNVIwWUh3TGJOUGp3QXpqTjlQOFlId0xiTlAwUUFqcFd3R3hFQnNHMFpod25BODFMMklpWUF0aTNuVUFIWUoya25vZ0pnMjdJT0Y0RDdwZTFEWEFCc1c5NGhBL0MreEYySURJQnR5enhzQUw2VnVnZXhBYkJ0dVljT3dJdmtIWWdPZ0czTFBueUFaT25QLy9nQTJEWTNBVUFhejMwQjhIOXVCb0FNbnZjdkJNQlgzQlFBczNuT2Z5RUEvc1BOQVRDVDUvdHJBdUFOYmhLQVdUelh2eVVBYm5DekFNemdlZjQyRitVT1AvNzgweityZndNQWp6SDg3L01HNEE1dUlvQmVQTGMvSmdEdTVHWUM2TUh6K2o0dTBnNCtDUURVWS9nZjR3M0FEbTR5Z0ZvOGx4OG5BSFp5c3dIVTRIbThqNHQyQUo4RUFLNW4rSi9qRGNBQjNJUUExL0xjZlo0TGVEQnZBd0RPWS9pUDQwS2VSQWdBSE1md0g4OG5nSk80V1FHTzRYbDZEaGYxQXQ0R0FEek84Si9MeGIyUUVBRDRtT0cvaG91OGdCQUErSmJodjVhTHZaQVFBREQ4cTdqb0JRZ0JJSkhoWDh2RkwwWU1BSk1aL1RvY1JGRkNBSmpFOE5malFCb1FBMEJIUnI4Mmg5T01HQUFxTS9wOU9Lakd4QUJRZ2RIdnlhRU5JZ2lBS3hqOEdSemlZSUlBT0lMQm44bWhoaEVGd0h1TWZRNEh6U3NDQVdZejhBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBTUJwL2dWb1E0aXBPV3ErQkFBQUFBQkpSVTVFcmtKZ2dnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6Im1hc2thYmxlIn1dfQ==">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEX0lEQVR4nO3azVXbQACFUZmTbTpgxZZyKCV1pJSUw5YVHaQAsgjOcRJLtkajn5l37zbn2Aq8TyMDp+FgHp+fPva+Btb1/vp22vsazna9EGPnbK8oNn9To+eWLWPY7I0Mn7m2CGH1NzB8llozhNVe2PCpbY0Qqr+g4bO2miE81HqhYTB+tlFzZ1VKMnz2svQ0WHwCGD97Wrq/RQEYP0ewZIfFARg/R1K6x6IAjJ8jKtnl7ACMnyObu89ZARg/LZiz07sDMH5acu9e7wrA+GnRPbu9GYDx07Jb+636pxDQmskA3P3pwdSORwMwfnoytmePQES7GoC7Pz26tmsnANH+C8Ddn579u28nANH+CsDdnwSXO3cCEO1PAO7+JDnv3QlANAEQ7TQMHn/I5QQgmgCIJgCiCYBoDz4Ak8wJQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEK3ZAL6/fN37EvjU8vfiy94XsMTYF/7bj58bX0mGloc+pukAxghjmR6HPqaLAC6HPfXNm/q3xDhKhn7v17oVXQRwaWrIJXH0EMbSofesuwCmjH1Tewij9G58tP/H1qICGNNSGO7mdQlgQs0wpl5v7uvUeH1+E0CB2p8zar4/8wigspJTY+5rUY8ANnJtzJdRGPs+mv1TCKhBAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQ7cveF5Di+8vX2f/+7cfPtS6HTwKo7NbQa7yWMOoRQIHSkc8Z7tR7CKMeAUwoGXqtEY69jjDqEsCw79BrvW9JGFOvlyIqgJaGPtfUdTo1xnUXwBbP563xODXu9Pj89LH3RZTo+W6+t6SvbXcnwDC0+804ipITo1VNB2Do2+oxjGYfgaAGfwtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEe3h/fTvtfRGwFycA0QRANAEQTQBEexiGYfBBmETvr28nJwDRBEC0PwF4DCLJee9OAKL9FYBTgASXO3cCEO2/AJwC9OzffTsBiHY1AKcAPbq2aycA0UYDcArQk7E9T54AIqAHUzv2CES0mwE4BWjZrf3edQKIgBbds9u7H4FEQEvu3euszwAioAVzdjr7Q7AIOLK5+yz6KZAIOKKSXRb/GFQEHEnpHhf9HkAEHMGSHS7+RZgI2NPS/VUd7+Pz00fN14MxtW68Vf8UwmnAFmrubLXBOg2obY0b7Op3bCGw1JpPFps9sgiBubZ4pN78mV0I3LLlZ8ldP7SKgbO9foDyC0CoUcGTsdStAAAAAElFTkSuQmCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Ledger">
+<meta name="theme-color" content="#EAF2FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1520" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --ink: #0F2439;
+    --ink-soft: #46607A;
+    --paper: #EAF2FB;
+    --paper-alt: #DCE9F7;
+    --paper-raised: #F5F9FE;
+    --gold: #2F7DE1;
+    --gold-soft: #5B9EEF;
+    --rust: #E0473A;
+    --sage: #16A6A0;
+    --line: #B9CFE6;
+    --line-soft: #D3E2F2;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --glass-bg: rgba(255, 255, 255, 0.30);
+    --glass-bg-strong: rgba(255, 255, 255, 0.50);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-shadow: 0 10px 34px rgba(15, 36, 57, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    --glass-blur: 42px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); height: 100%; }
+  body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  /* Blurred colour blobs behind the glass surfaces */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(38vmax 38vmax at 8% 8%, rgba(47, 125, 225, 0.34), transparent 60%),
+      radial-gradient(42vmax 42vmax at 92% 18%, rgba(22, 166, 160, 0.32), transparent 60%),
+      radial-gradient(46vmax 46vmax at 28% 94%, rgba(123, 92, 255, 0.24), transparent 60%),
+      radial-gradient(36vmax 36vmax at 90% 92%, rgba(77, 163, 255, 0.30), transparent 60%);
+  }
+  header.top, main, .toast { position: relative; z-index: 1; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #DCEAFB;
+      --ink-soft: #9FB7D1;
+      --paper: #0A1520;
+      --paper-alt: #101E2C;
+      --paper-raised: #142535;
+      --gold: #4DA3FF;
+      --gold-soft: #7CC0FF;
+      --rust: #FF6B57;
+      --sage: #2FD1C9;
+      --line: #223246;
+      --line-soft: #1A2735;
+      --glass-bg: rgba(8, 18, 28, 0.46);
+      --glass-bg-strong: rgba(8, 18, 28, 0.68);
+      --glass-border: rgba(220, 234, 251, 0.16);
+      --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #DCEAFB;
+    --ink-soft: #9FB7D1;
+    --paper: #0A1520;
+    --paper-alt: #101E2C;
+    --paper-raised: #142535;
+    --gold: #4DA3FF;
+    --gold-soft: #7CC0FF;
+    --rust: #FF6B57;
+    --sage: #2FD1C9;
+    --line: #223246;
+    --line-soft: #1A2735;
+    --glass-bg: rgba(8, 18, 28, 0.46);
+    --glass-bg-strong: rgba(8, 18, 28, 0.68);
+    --glass-border: rgba(220, 234, 251, 0.16);
+    --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+
+  .sync-pill { flex-shrink: 0; white-space: nowrap; font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass-bg); }
+  @media (max-width: 360px) { .sync-pill .lbl { display: none; } .sync-pill { padding: 6px 9px; } }
+  .brand .logo-btn { width: 40px; height: 40px; }
+  .brand .tagline { line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sync-pill.ok { color: var(--sage); border-color: var(--sage); }
+  .sync-pill.wait { color: var(--ink-soft); }
+  .sync-pill.error { color: var(--rust); border-color: var(--rust); }
+  .sync-pill.offline { color: var(--ink-soft); border-style: dashed; }
+  .sync-detail { background: var(--glass-bg-strong); border: 1px solid var(--rust); color: var(--rust); border-radius: 14px; padding: 10px 14px; font-size: 12.5px; font-weight: 600; margin-bottom: 16px; word-break: break-word; }
+  a { color: inherit; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    position: sticky;
+    top: 0;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 10;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header.top { background: var(--paper); }
+  }
+  .top-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 14px 16px 14px 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .brand > .nav-toggle, .brand > .logo-wrap { flex-shrink: 0; }
+  .brand-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .brand h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 32px);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .brand .tagline {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+  .shop-name-edit {
+    background: none;
+    border: none;
+    font: inherit;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(20px, 5.5vw, 28px);
+    line-height: 1.15;
+    color: var(--ink);
+    padding: 0;
+    border-bottom: 1px dashed transparent;
+    width: 100%;
+    max-width: none;
+    text-overflow: ellipsis;
+  }
+  .shop-name-edit:focus { outline: none; border-bottom-color: var(--gold); }
+
+  /* ---------- Navigation drawer (glass) ---------- */
+  .nav-toggle {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    font-size: 17px;
+    line-height: 1;
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  .nav-toggle:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 8px 20px rgba(47, 125, 225, 0.32); }
+  .nav-toggle:active { transform: scale(0.92); }
+
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: none;
+    background: rgba(10, 21, 32, 0.35);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+  .nav-backdrop.show { display: block; }
+
+  nav.tabs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: min(78vw, 280px);
+    display: flex;
+    flex-direction: column;
+    padding: calc(20px + env(safe-area-inset-top, 0px)) 14px calc(16px + env(safe-area-inset-bottom, 0px)) 14px;
+    margin: 0;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border-right: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  nav.tabs.open { transform: translateX(0); }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    nav.tabs { background: var(--paper-raised); }
+  }
+  nav.tabs button {
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 12px;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 12px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  nav.tabs button.active {
+    color: var(--ink);
+    background: var(--glass-bg);
+    box-shadow: inset 2px 0 0 var(--gold);
+  }
+  nav.tabs button:hover:not(.active) { color: var(--ink); background: var(--glass-bg); }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 20px 64px 20px;
+  }
+  section.pane { display: none; }
+  section.pane.active { display: block; }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 4px 0;
+  }
+  p.section-sub {
+    margin: 0 0 22px 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  /* ---------- Ledger stat row ---------- */
+  .ledger-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .ledger-row { background: var(--paper-raised); }
+  }
+  .ledger-stat {
+    flex: 1 1 160px;
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+  }
+  .ledger-stat:last-child { border-right: none; }
+  .ledger-stat .num {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .ledger-stat .num.rust { color: var(--rust); }
+  .ledger-stat .label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ---------- Blocks ---------- */
+  .block { margin-bottom: 36px; }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .block-head h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0;
+  }
+  .block-head .count {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .empty-note {
+    padding: 18px 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap {
+    overflow-x: auto;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    box-shadow: var(--glass-shadow);
+    padding: 4px 14px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .tbl-wrap { background: var(--paper-raised); }
+  }
+  table.ledger {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  table.ledger th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.ledger td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+  }
+  table.ledger tbody tr:hover { background: var(--paper-alt); }
+  table.ledger td.num, table.ledger th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .title-cell { font-weight: 600; }
+  .author-cell { color: var(--ink-soft); font-size: 12.5px; }
+  .cat-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--sage);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .stock-badge {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .stock-badge.low { color: var(--rust); }
+  .row-actions { display: flex; gap: 10px; }
+  .row-actions button {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 2px 0;
+  }
+  .row-actions button.danger { color: var(--rust); }
+  .row-actions button:hover { text-decoration: underline; }
+
+  /* ---------- Controls ---------- */
+  .controls-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  input[type="text"], input[type="number"], input[type="search"], input[type="password"], select {
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 9px 11px;
+    color: var(--ink);
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .search-input { flex: 1 1 220px; }
+
+  button.btn {
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    transition: border-radius 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+                transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+  }
+  button.btn:hover {
+    border-radius: 62% 38% 55% 45% / 45% 55% 38% 62%;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(47, 125, 225, 0.34);
+    background: var(--ink-soft);
+  }
+  button.btn:active {
+    border-radius: 999px;
+    transform: translateY(0) scale(0.94);
+    box-shadow: 0 2px 8px rgba(47, 125, 225, 0.26);
+  }
+  button.btn.secondary {
+    background: none;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  button.btn.secondary:hover {
+    background: var(--paper-alt);
+    box-shadow: 0 10px 26px rgba(22, 166, 160, 0.26);
+  }
+  .btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    pointer-events: none;
+    animation: rippleAnim 0.6s ease-out;
+  }
+  @keyframes rippleAnim {
+    to { transform: scale(2.6); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    button.btn, button.btn:hover, button.btn:active { transition: none; transform: none; border-radius: 999px; }
+    .btn-ripple { animation: none; display: none; }
+  }
+  button.btn.secondary:hover { background: var(--paper-alt); }
+  button.btn:focus-visible, input:focus-visible, select:focus-visible, nav.tabs button:focus-visible, .row-actions button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Form panel ---------- */
+  .panel {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    box-shadow: var(--glass-shadow);
+    padding: 18px;
+    margin-bottom: 24px;
+    display: none;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .panel { background: var(--paper-raised); }
+  }
+  .panel.open { display: block; }
+  .panel h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 14px 0;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .field input, .field select { width: 100%; }
+  .panel-actions { display: flex; gap: 10px; }
+
+  /* ---------- Sale panel ---------- */
+  .sale-picker {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    box-shadow: var(--glass-shadow);
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .sale-picker { background: var(--paper-raised); }
+  }
+  .sale-picker .field { margin-bottom: 14px; }
+  .qty-row { display: flex; align-items: center; gap: 10px; }
+  .qty-row button {
+    position: relative;
+    overflow: hidden;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .qty-row button:hover {
+    background: var(--paper-alt);
+    box-shadow: 0 6px 16px rgba(47, 125, 225, 0.30);
+    transform: translateY(-1px);
+  }
+  .qty-row button:active {
+    transform: scale(0.88);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .qty-row button { transition: none; transform: none; }
+  }
+  .qty-row input { width: 70px; text-align: center; }
+  .delivery-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 2px 0 16px 0;
+    cursor: pointer;
+  }
+  .delivery-check input { margin-top: 2px; }
+  .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .status-badge.delivered { color: var(--sage); border-color: var(--sage); }
+  .status-badge.pending { color: var(--rust); border-color: var(--rust); }
+
+  .sale-total {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    margin: 4px 0 16px 0;
+  }
+  .sale-total .cur { color: var(--ink-soft); font-size: 15px; font-family: var(--font-body); }
+  .stock-hint { font-size: 12px; color: var(--ink-soft); margin-top: -6px; margin-bottom: 14px; }
+  .stock-hint.low { color: var(--rust); }
+
+  .toast {
+    position: fixed;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 14px;
+    box-shadow: var(--glass-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 50;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .low-list { list-style: none; margin: 0; padding: 0; }
+  .low-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13.5px;
+  }
+  .low-list li:last-child { border-bottom: none; }
+  .low-list .amt { color: var(--rust); font-weight: 600; }
+
+  .offline-banner {
+    display: none;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .offline-banner.show { display: block; }
+
+  /* ---------- Auth screen ---------- */
+  .app-root { display: none; }
+  .app-root.show { display: block; }
+
+  .auth-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px));
+    padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  }
+  .auth-screen.hidden { display: none; }
+
+  .auth-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+    max-width: 360px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 30px 26px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .auth-card { background: var(--paper-raised); }
+  }
+  .auth-brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .auth-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0 0 4px 0;
+  }
+  .role-switch { display: flex; padding: 4px; gap: 4px; margin: 0 0 16px 0; border-radius: 999px; border: 1px solid var(--glass-border); background: var(--glass-bg); position: relative; z-index: 1; }
+  .role-switch button { flex: 1; appearance: none; border: none; background: none; border-radius: 999px; padding: 9px 12px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+  .role-switch button.active { background: var(--ink); color: var(--paper); box-shadow: 0 4px 12px rgba(15, 36, 57, 0.22); }
+  .role-switch button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .staff-picks { position: relative; z-index: 1; margin: 0 0 14px 0; }
+  .staff-picks .picks-label { font-size: 11px; font-weight: 600; color: var(--ink-soft); margin-bottom: 7px; }
+  .staff-picks .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .staff-picks .chip { appearance: none; border: 1px solid var(--line); background: var(--paper-raised); color: var(--ink); border-radius: 999px; padding: 6px 12px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+  .staff-picks .chip.selected { border-color: var(--gold); color: var(--gold); }
+  .staff-picks .none { font-size: 12.5px; font-style: italic; font-family: var(--font-display); color: var(--ink-soft); }
+  .auth-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 20px 0;
+  }
+  .auth-card .field { margin-bottom: 14px; }
+  .auth-card .field input { width: 100%; }
+  .password-wrap { position: relative; }
+  .password-wrap input { padding-right: 56px; }
+  .pw-toggle {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 6px 8px;
+  }
+  .pw-toggle:hover { color: var(--gold); }
+  .auth-submit { width: 100%; margin-top: 4px; }
+  .auth-error {
+    color: var(--rust);
+    font-size: 12.5px;
+    margin: -6px 0 12px 0;
+  }
+  .auth-toggle {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 18px 0 0 0;
+  }
+  .auth-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin: 14px 0 0 0;
+    line-height: 1.4;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: inherit;
+    color: var(--sage);
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+  .link-btn:hover { color: var(--gold); }
+
+  .session-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--glass-border);
+    font-size: 12.5px;
+  }
+  .top-inner { display: block; }
+  .tabs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+  .session-name {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ---------- Logo control ---------- */
+  .logo-wrap { position: relative; display: inline-flex; }
+  .logo-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  .logo-btn:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(47, 125, 225, 0.32);
+  }
+  .logo-btn:active { transform: scale(0.92); }
+  .logo-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 20;
+    width: 220px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    box-shadow: var(--glass-shadow);
+    padding: 14px;
+  }
+  .logo-panel.open { display: block; }
+  .logo-panel label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .logo-panel input[type="text"] { width: 100%; margin-bottom: 10px; font-size: 18px; text-align: center; }
+  .logo-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .logo-suggestions button {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .logo-suggestions button:hover { background: var(--paper-alt); }
+  .logo-panel .panel-actions { display: flex; gap: 8px; margin-bottom: 0; }
+  .logo-panel .btn { padding: 8px 14px; font-size: 12.5px; }
+
+  /* ---------- Trial lock ---------- */
+  .trial-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px));
+    padding-top: calc(24px + env(safe-area-inset-top, 0px));
+    background: var(--paper);
+  }
+  .trial-screen.show { display: flex; }
+
+  .trial-banner {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 9px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .trial-banner.show { display: flex; }
+  .trial-banner .link-btn { font-size: 12px; white-space: nowrap; }
+
+  /* ---------- Confirm modal (replaces native confirm(), which packaged Android apps often block) ---------- */
+  .confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 21, 32, 0.45);
+  }
+  .confirm-overlay.open { display: flex; }
+  .confirm-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 340px;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(210%);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow: var(--glass-shadow);
+    padding: 22px;
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .confirm-card { background: var(--paper-raised); }
+  }
+  .confirm-card p {
+    margin: 0 0 18px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .confirm-card .panel-actions { margin-bottom: 0; }
+
+
+  /* ---------- Liquid-glass specular sheen (iOS-style top highlight) ---------- */
+  .ledger-row::before,
+  .panel::before,
+  .sale-picker::before,
+  .auth-card::before,
+  .confirm-card::before,
+  nav.tabs::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.40), rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .ledger-row::before,
+    :root:not([data-theme="light"]) .panel::before,
+    :root:not([data-theme="light"]) .sale-picker::before,
+    :root:not([data-theme="light"]) .auth-card::before,
+    :root:not([data-theme="light"]) .confirm-card::before,
+    :root:not([data-theme="light"]) nav.tabs::before {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 100%);
+    }
+  }
+  :root[data-theme="dark"] .ledger-row::before,
+  :root[data-theme="dark"] .panel::before,
+  :root[data-theme="dark"] .sale-picker::before,
+  :root[data-theme="dark"] .auth-card::before,
+  :root[data-theme="dark"] .confirm-card::before,
+  :root[data-theme="dark"] nav.tabs::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 100%);
+  }
+
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  #printArea { display: none; }
+  @media print {
+    html, body { height: auto !important; min-height: 0 !important; overflow: visible !important; background: #fff !important; color: #000 !important; }
+    body::before { display: none !important; }
+    body > *:not(#printArea) { display: none !important; }
+    #printArea { display: block !important; font-family: Arial, Helvetica, sans-serif; color: #000; padding: 0; }
+    #printArea h1 { font-size: 20px; margin: 0 0 2px 0; }
+    #printArea .pa-sub { font-size: 12px; color: #444; margin: 0 0 12px 0; }
+    #printArea .pa-stats { font-size: 13px; margin: 0 0 14px 0; }
+    #printArea table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    #printArea th, #printArea td { border: 1px solid #999; padding: 5px 7px; text-align: left; vertical-align: top; }
+    #printArea th { background: #eee; }
+    #printArea td.num, #printArea th.num { text-align: right; }
+    #printArea thead { display: table-header-group; }
+    #printArea tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div id="trialScreen" class="trial-screen">
+  <div class="auth-card">
+    <div class="auth-brand"><span id="trialBrandLogo">📚</span> <span id="trialBrandName">The Ledger</span></div>
+    <h2 class="auth-heading" id="trialHeading">Your trial has ended</h2>
+    <p class="auth-sub" id="trialSub">This copy was a free trial. Enter your unlock code to keep using it.</p>
+    <form id="trialForm" autocomplete="off">
+      <div class="field">
+        <label for="trialCode">Unlock code</label>
+        <input type="text" id="trialCode" autocomplete="off" placeholder="XXXX-XXXX-XXXX-XXXX">
+      </div>
+      <p class="auth-error" id="trialError" style="display:none;"></p>
+      <button type="submit" class="btn auth-submit">Unlock</button>
+    </form>
+    <p class="auth-note">Don't have a code yet? Contact the person you got this app from.</p>
+    <p class="auth-toggle" id="trialCancelRow" style="display:none;">
+      <button type="button" class="link-btn" id="trialCancel">Not now, keep using the trial</button>
+    </p>
+  </div>
+</div>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-brand"><span id="authBrandLogo">📚</span> <span id="authBrandName">The Ledger</span></div>
+    <h2 class="auth-heading" id="authHeading">Welcome back</h2>
+    <p class="auth-sub" id="authSub">Log in to record sales and manage stock.</p>
+    <div class="role-switch" id="roleSwitch" role="tablist" aria-label="Login type">
+      <button type="button" role="tab" data-role="owner" class="active" aria-selected="true">Owner</button>
+      <button type="button" role="tab" data-role="staff" aria-selected="false">Staff</button>
+    </div>
+    <div class="staff-picks" id="staffPicks" style="display:none;"></div>
+    <form id="authForm" autocomplete="on">
+      <div class="field">
+        <label for="authName">Name</label>
+        <input type="text" id="authName" autocomplete="username" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="authPass">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="authPass" autocomplete="current-password" placeholder="••••••••">
+          <button type="button" class="pw-toggle" data-target="authPass" aria-label="Show password">Show</button>
+        </div>
+      </div>
+      <div class="field" id="authConfirmField" style="display:none;">
+        <label for="authConfirm">Confirm password</label>
+        <div class="password-wrap">
+          <input type="password" id="authConfirm" autocomplete="new-password" placeholder="••••••••">
+          <button type="button" class="pw-toggle" data-target="authConfirm" aria-label="Show password">Show</button>
+        </div>
+      </div>
+      <p class="auth-error" id="authError" style="display:none;"></p>
+      <button type="submit" class="btn auth-submit" id="authSubmit">Log in</button>
+    </form>
+    <p class="auth-toggle" id="authToggleRow">
+      <span id="authToggleLead">New here?</span>
+      <button type="button" class="link-btn" id="authToggleBtn">Create an account</button>
+    </p>
+    <p class="auth-note">A private login for the people who work here — kept on this device, not a secure enterprise login.</p>
+  </div>
+</div>
+
+<div id="appRoot" class="app-root">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Open navigation">☰</button>
+      <div class="logo-wrap">
+        <button type="button" class="logo-btn" id="logoBtn" title="Change logo" aria-label="Change store logo">📚</button>
+        <div class="logo-panel" id="logoPanel">
+          <label for="logoInput">Logo</label>
+          <input type="text" id="logoInput" maxlength="4" placeholder="📚" inputmode="text">
+          <div class="logo-suggestions">
+            <button type="button" data-emoji="📚">📚</button>
+            <button type="button" data-emoji="📖">📖</button>
+            <button type="button" data-emoji="📕">📕</button>
+            <button type="button" data-emoji="🏬">🏬</button>
+            <button type="button" data-emoji="🛍️">🛍️</button>
+            <button type="button" data-emoji="✒️">✒️</button>
+          </div>
+          <div class="panel-actions">
+            <button class="btn" id="logoSave" type="button">Save</button>
+            <button class="btn secondary" id="logoCancel" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="brand-text">
+        <input class="shop-name-edit" id="shopName" value="The Ledger" spellcheck="false" aria-label="Shop name">
+        <span class="tagline">stock &amp; sales, book by book</span>
+      </div>
+      <span class="sync-pill wait" id="syncPill" title=""><span class="dot">●</span> <span class="lbl">Connecting…</span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tabs-list">
+    <button data-pane="dashboard" class="active">Dashboard</button>
+    <button data-pane="inventory">Inventory</button>
+    <button data-pane="sale">Record Sale</button>
+    <button data-pane="orders">Orders</button>
+    <button data-pane="log">Sales Log</button>
+    <button data-pane="staff" id="navStaffBtn" style="display:none;">Staff</button>
+    <button data-pane="support">Support</button>
+    <button data-pane="dev" id="navDevBtn" style="display:none;">Developer</button>
+    <button data-pane="about">About</button>
+  </div>
+  <div class="session-bar">
+    <span class="session-name" id="sessionName"></span>
+    <button type="button" class="link-btn" id="btnLogout">Log out</button>
+  </div>
+</nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<main>
+  <div class="trial-banner" id="trialBanner">
+    <span id="trialBannerText"></span>
+    <button type="button" class="link-btn" id="trialUnlockLink">Enter code</button>
+  </div>
+  <div class="sync-detail" id="syncDetail" style="display:none;"></div>
+  <div class="offline-banner" id="offlineBanner">Working offline — changes are saved on this device and upload automatically once the connection is back.</div>
+
+  <!-- DASHBOARD -->
+  <section class="pane active" id="pane-dashboard">
+    <h2 class="section-title">This week, at a glance</h2>
+    <p class="section-sub">Titles, copies, and what's moving.</p>
+
+    <div class="ledger-row" id="statRow">
+      <div class="ledger-stat"><div class="num" id="statTitles">0</div><div class="label">titles carried</div></div>
+      <div class="ledger-stat"><div class="num" id="statCopies">0</div><div class="label">copies in stock</div></div>
+      <div class="ledger-stat"><div class="num" id="statValue">$0</div><div class="label">inventory value</div></div>
+      <div class="ledger-stat"><div class="num" id="statRevenue">$0</div><div class="label">revenue, last 7 days</div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Running low</h3><span class="count" id="lowCount">0 titles</span></div>
+      <ul class="low-list" id="lowList"></ul>
+      <p class="empty-note" id="lowEmpty" style="display:none;">Nothing below its reorder line right now.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Recent sales</h3><span class="count" id="recentCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="recentTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>When</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="recentEmpty" style="display:none;">No sales recorded yet. They'll show up here as you log them.</p>
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section class="pane" id="pane-inventory">
+    <h2 class="section-title">Inventory</h2>
+    <p class="section-sub">Every title on the shelf, and what's left of it.</p>
+
+    <div class="controls-row">
+      <input type="search" class="search-input" id="invSearch" placeholder="Search title, author, or category…">
+      <button class="btn" id="btnAddBook">Add a book</button>
+    </div>
+
+    <div class="panel" id="bookPanel">
+      <h4 id="bookPanelTitle">Add a book</h4>
+      <div class="form-grid">
+        <div class="field"><label for="fTitle">Title</label><input type="text" id="fTitle" placeholder="The Hours"></div>
+        <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" placeholder="Michael Cunningham"></div>
+        <div class="field"><label for="fCategory">Category</label><input type="text" id="fCategory" placeholder="Fiction" list="catList"><datalist id="catList"></datalist></div>
+        <div class="field"><label for="fPrice">Price</label><input type="number" id="fPrice" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label for="fStock">Stock on hand</label><input type="number" id="fStock" min="0" step="1" placeholder="0"></div>
+        <div class="field"><label for="fReorder">Reorder line</label><input type="number" id="fReorder" min="0" step="1" placeholder="5"></div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn" id="btnSaveBook">Save book</button>
+        <button class="btn secondary" id="btnCancelBook">Cancel</button>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="ledger" id="invTable">
+        <thead>
+          <tr>
+            <th>Title</th><th>Category</th><th class="num">Price</th><th class="num">Stock</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="invEmpty" style="display:none;">No books yet. Add your first one above.</p>
+  </section>
+
+  <!-- RECORD SALE -->
+  <section class="pane" id="pane-sale">
+    <h2 class="section-title">Record a sale</h2>
+    <p class="section-sub">Pick a title, set the quantity, and it comes off the shelf.</p>
+
+    <div class="sale-picker">
+      <div class="field">
+        <label for="saleBook">Book</label>
+        <select id="saleBook"></select>
+      </div>
+      <div class="stock-hint" id="saleStockHint"></div>
+      <div class="field">
+        <label>Quantity</label>
+        <div class="qty-row">
+          <button type="button" id="qtyMinus" aria-label="Decrease quantity">–</button>
+          <input type="number" id="saleQty" value="1" min="1">
+          <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <label class="delivery-check">
+        <input type="checkbox" id="saleDelivery">
+        <span>This is a delivery — mark as pending until it's handed over</span>
+      </label>
+      <div class="sale-total"><span class="cur">Total </span><span id="saleTotal">$0.00</span></div>
+      <button class="btn" id="btnRecordSale">Record sale</button>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Sold today</h3><span class="count" id="todayCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="todayTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Time</th><th>Sold by</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="todayEmpty" style="display:none;">Nothing sold today yet.</p>
+    </div>
+  </section>
+
+  <!-- ORDERS -->
+  <section class="pane" id="pane-orders">
+    <h2 class="section-title">Orders</h2>
+    <p class="section-sub">Deliveries, separated from everyday counter sales.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>Pending</h3><span class="count" id="ordersPendingCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="ordersPendingTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Sold by</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="ordersPendingEmpty" style="display:none;">No pending deliveries right now.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Delivered</h3><span class="count" id="ordersDeliveredCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="ordersDeliveredTable">
+          <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Total</th><th>Sold by</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="ordersDeliveredEmpty" style="display:none;">No completed deliveries yet.</p>
+    </div>
+  </section>
+
+  <!-- SALES LOG -->
+  <section class="pane" id="pane-log">
+    <h2 class="section-title">Sales log</h2>
+    <p class="section-sub">Full history, most recent first.</p>
+
+    <div class="controls-row">
+      <input type="search" class="search-input" id="logSearch" placeholder="Search by book title…">
+      <button class="btn secondary" id="btnPrintLog" type="button">Print</button>
+    </div>
+
+    <div class="ledger-row" id="logStatRow">
+      <div class="ledger-stat"><div class="num" id="logCountStat">0</div><div class="label">sales logged</div></div>
+      <div class="ledger-stat"><div class="num" id="logRevenueStat">$0</div><div class="label">total revenue</div></div>
+      <div class="ledger-stat"><div class="num" id="logUnitsStat">0</div><div class="label">copies sold</div></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="ledger" id="logTable">
+        <thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="empty-note" id="logEmpty" style="display:none;">No sales in the log yet.</p>
+  </section>
+
+  <!-- STAFF (Owner only) -->
+  <section class="pane" id="pane-staff">
+    <h2 class="section-title">Staff</h2>
+    <p class="section-sub">Add logins for the people who work here — staff or additional owners.</p>
+
+    <div class="panel open" style="display:block;">
+      <h4>Add a login</h4>
+      <form id="staffForm">
+        <div class="form-grid">
+          <div class="field"><label for="staffName">Name</label><input type="text" id="staffName" placeholder="Staff member's name"></div>
+          <div class="field">
+            <label for="staffPass">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="staffPass" autocomplete="new-password" placeholder="At least 4 characters">
+              <button type="button" class="pw-toggle" data-target="staffPass" aria-label="Show password">Show</button>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label for="staffRole">Account type</label>
+          <select id="staffRole">
+            <option value="staff">Staff</option>
+            <option value="owner">Owner (full access, can manage logins)</option>
+          </select>
+        </div>
+        <p class="auth-error" id="staffError" style="display:none;"></p>
+        <div class="panel-actions"><button class="btn" type="submit">Add login</button></div>
+      </form>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>All logins</h3><span class="count" id="staffCount">0</span></div>
+      <div class="tbl-wrap">
+        <table class="ledger" id="staffTable">
+          <thead><tr><th>Name</th><th>Type</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-note" id="staffEmpty" style="display:none;">No logins yet — add one above.</p>
+    </div>
+  </section>
+
+  <!-- SUPPORT (for everyone) -->
+  <section class="pane" id="pane-support">
+    <h2 class="section-title">Support</h2>
+    <p class="section-sub">Having a technical problem? Get in touch with the developer.</p>
+    <div class="block">
+      <div class="block-head"><h3>Contact the developer</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="supWhatsapp" style="display:none;">Chat on WhatsApp</button>
+        <button class="btn secondary" type="button" id="supEmail" style="display:none;">Send an email</button>
+      </div>
+      <p id="supNone" style="font-size:13px;color:var(--ink-soft);margin:0;display:none;">Contact details haven't been set up yet.</p>
+      <p style="font-size:12px;color:var(--ink-soft);margin:12px 0 0 0;">The developer can sign in with a support login to look at this app and help fix </p>
+    </div>
+  </section>
+
+  <!-- DEVELOPER (support account only) -->
+  <section class="pane" id="pane-dev">
+    <h2 class="section-title">Developer</h2>
+    <p class="section-sub">Diagnostics and support tools.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>System</h3></div>
+      <div class="tbl-wrap"><table class="ledger" id="devInfo"><tbody></tbody></table></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Recent errors</h3><span class="count" id="devErrCount">0</span></div>
+      <div class="panel-actions" style="margin:0 0 8px 0;flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devErrClear">Clear log</button>
+        <button class="btn secondary" type="button" id="devErrTest">Trigger test error</button>
+        <button class="btn secondary" type="button" id="devCopy">Copy report</button>
+      </div>
+      <pre id="devErrLog" style="white-space:pre-wrap;font-size:12px;margin:0;max-height:220px;overflow:auto;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Tools</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devExport">Download backup (JSON)</button>
+        <button class="btn secondary" type="button" id="devResync">Re-sync this device to cloud</button>
+        <button class="btn secondary" type="button" id="devClear">Clear local cache &amp; reload</button>
+      </div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Reset a login's password</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devResetUser">Login</label><select id="devResetUser"></select></div>
+        <div class="field"><label for="devResetPass">New password</label><input type="password" id="devResetPass" autocomplete="new-password" placeholder="At least 4 characters"></div>
+      </div>
+      <p class="auth-error" id="devResetError" style="display:none;"></p>
+      <div class="panel-actions"><button class="btn" type="button" id="devResetBtn">Reset password</button></div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Change a login's type</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devRoleUser">Login</label><select id="devRoleUser"></select></div>
+        <div class="field"><label for="devRoleSel">Type</label><select id="devRoleSel"><option value="staff">Staff</option><option value="owner">Owner</option></select></div>
+      </div>
+      <div class="panel-actions"><button class="btn" type="button" id="devRoleBtn">Change type</button></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Health check</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devCheck">Run health check</button>
+        <button class="btn secondary" type="button" id="devFixTotals">Fix sale totals</button>
+        <button class="btn secondary" type="button" id="devFixStock">Fix negative stock</button>
+        <button class="btn secondary" type="button" id="devFixNames">Fix login names</button>
+      </div>
+      <pre id="devCheckOut" style="white-space:pre-wrap;font-size:12px;margin:0;max-height:220px;overflow:auto;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Cloud</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn" type="button" id="devCloudTest">Test connection &amp; compare counts</button>
+        <button class="btn secondary" type="button" id="devRetry">Retry connection</button>
+        <button class="btn secondary" type="button" id="devReload">Reload app</button>
+      </div>
+      <pre id="devCloudOut" style="white-space:pre-wrap;font-size:12px;margin:0;"></pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Import &amp; export</h3></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devCsvSales">Sales CSV</button>
+        <button class="btn secondary" type="button" id="devCsvBooks">Books CSV</button>
+        <label class="btn secondary" for="devImportFile" style="cursor:pointer;">Import backup (JSON)</label>
+        <input type="file" id="devImportFile" accept="application/json,.json" style="display:none;">
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Licence &amp; trial (this device)</h3></div>
+      <p id="devLicInfo" style="font-size:13px;margin:0 0 8px 0;"></p>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devLicOn">Mark licensed</button>
+        <button class="btn secondary" type="button" id="devLicReset">Restart trial</button>
+        <button class="btn secondary" type="button" id="devLicOff">Remove licence</button>
+      </div>
+    </div>
+
+    <div class="panel open" style="display:block;">
+      <h4>Edit a record directly</h4>
+      <div class="form-grid">
+        <div class="field"><label for="devEdKind">Type</label><select id="devEdKind"><option value="books">Book</option><option value="sales">Sale</option><option value="users">Login</option></select></div>
+        <div class="field"><label for="devEdRec">Record</label><select id="devEdRec"></select></div>
+      </div>
+      <div class="field" style="margin-top:12px;"><label for="devEdText">Data (JSON)</label><textarea id="devEdText" rows="10" style="width:100%;font-family:monospace;font-size:12px;box-sizing:border-box;"></textarea></div>
+      <div class="panel-actions" style="flex-wrap:wrap;">
+        <button class="btn secondary" type="button" id="devEdLoad">Load</button>
+        <button class="btn" type="button" id="devEdSave">Save</button>
+        <button class="btn secondary" type="button" id="devEdDelete">Delete record</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Stored on this device</h3></div>
+      <div class="tbl-wrap"><table class="ledger" id="devStorage"><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="pane" id="pane-about">
+    <h2 class="section-title">About</h2>
+    <p class="section-sub">App details and credits.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>This app</h3></div>
+      <p style="font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;">
+        Tracks stock and sales — inventory, sales recording, staff logins, and reporting, all in one place, working whether you're online or not.
+      </p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Powered by</h3></div>
+      <p style="font-size: 15px; font-weight: 600; margin: 0 0 4px 0;">Cloudnest Technologies</p>
+      <p style="font-size: 12.5px; color: var(--ink-soft); margin: 0 0 8px 0;">Custom business software, built to order.</p>
+      <p style="font-size: 12px; color: var(--ink-soft); margin: 0;">Developed by Ashaolu Daniel and Ashaolu Joshua</p>
+    </div>
+  </section>
+</main>
+
+</div>
+
+<div class="confirm-overlay" id="confirmModal">
+  <div class="confirm-card">
+    <p id="confirmMessage"></p>
+    <div class="panel-actions">
+      <button class="btn" id="confirmYes" type="button">Delete</button>
+      <button class="btn secondary" id="confirmNo" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- State ----------
+  let books = [];   // {id, title, author, category, price, stock, reorder}
+  let sales = [];   // {id, bookId, title, qty, unitPrice, total, ts, soldBy}
+  let users = [];   // {id, name, nameLower, passHash}
+  let currentUser = null; // {id, name} once logged in
+  let db = null;
+  let editingBookId = null;
+  let ready = false;
+  let authMode = "login"; // "login" | "signup"
+  let usersLoaded = false;
+
+  // ---------- Developer support account ----------
+  // Set by the app's creator: run dev-setup.html, then paste its two lines here.
+  // Leave both empty to switch the developer account off. Only the password's SHA-256
+  // hash is stored. The account is shown openly in the Staff tab and About page.
+  const DEV_NAME = "Daniel";
+  const DEV_HASH = "e937adea6647b118b1eb9e9331d87708083db237bddefcd24a25c8e2eca2ca22";
+  const devEnabled = !!(DEV_NAME && DEV_HASH);
+  // How the client reaches you from the Support tab. WhatsApp number in international format
+  // without + or spaces (e.g. "2348012345678"). Leave empty to hide that button.
+  const DEV_WHATSAPP = "2347073206415";
+  const DEV_EMAIL = "ashaoludaniel2@gmail.com";
+  const devErrors = []; // recent technical errors, shown in the Developer tab
+  function logDevError(msg) { devErrors.unshift(new Date().toLocaleString() + " — " + msg); if (devErrors.length > 50) devErrors.pop(); }
+  window.addEventListener("error", (e) => logDevError(e.message || "Script error"));
+  window.addEventListener("unhandledrejection", (e) => logDevError("Promise: " + ((e.reason && (e.reason.message || e.reason.code)) || e.reason)));
+
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $all = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+  const fmtMoney = (n) => {
+    const val = Math.round((n || 0) * 100) / 100;
+    return "\u20A6" + val.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+  const fmtInt = (n) => String(Math.round(n || 0));
+
+  function toast(msg) {
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  function uid() {
+    return (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+  }
+
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.addEventListener("click", (e) => {
+    if (prefersReducedMotion) return;
+    const btn = e.target.closest("button.btn, .qty-row button");
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.4;
+    const span = document.createElement("span");
+    span.className = "btn-ripple";
+    span.style.width = span.style.height = size + "px";
+    span.style.left = (e.clientX - rect.left - size / 2) + "px";
+    span.style.top = (e.clientY - rect.top - size / 2) + "px";
+    btn.appendChild(span);
+    span.addEventListener("animationend", () => span.remove());
+  });
+
+  // ---------- Local fallback persistence (per-device, only if db capability is unavailable) ----------
+  const LOCAL_KEY = "bookshop-ledger-fallback-v1";
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        books = parsed.books || [];
+        sales = parsed.sales || [];
+        users = parsed.users || [];
+      }
+    } catch (e) { /* ignore */ }
+  }
+  function saveLocal() {
+    try {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify({ books, sales, users }));
+    } catch (e) { /* ignore */ }
+  }
+  function persistUsers() {
+    if (db) {
+      const col = db.collection("users");
+      users.forEach((u) => { col.doc(u.id).set(stripId(u)).then(syncSaved, syncFail); });
+    } else {
+      saveLocal();
+    }
+  }
+
+  // ---------- Staff management (Owner only) ----------
+  function updateRoleUI() {
+    const isDev = !!(currentUser && currentUser.role === "developer");
+    const isOwner = isDev || !!(currentUser && currentUser.role === "owner");
+    $("#navStaffBtn").style.display = isOwner ? "" : "none";
+    $("#navDevBtn").style.display = isDev ? "" : "none";
+    if (typeof renderStaff === "function") renderStaff();
+  }
+
+  function renderStaff() {
+    const list = users.slice().sort((a, b) => (a.role === "owner" ? 0 : 1) - (b.role === "owner" ? 0 : 1) || a.name.localeCompare(b.name));
+    const tbody = $("#staffTable tbody");
+    tbody.innerHTML = "";
+    list.forEach((u) => {
+      const tr = document.createElement("tr");
+      const isSelf = !!(currentUser && currentUser.id === u.id);
+      const roleLabel = u.role === "owner" ? "Owner" : "Staff";
+      const action = `<div class="row-actions"><button type="button" data-act="remove-staff" data-id="${u.id}" class="danger">${isSelf ? "Delete mine" : "Delete"}</button></div>`;
+      tr.innerHTML = `<td>${escapeHtml(u.name)}${isSelf ? ' <span style="color:var(--ink-soft);font-size:12px;">(you)</span>' : ""}</td><td>${roleLabel}</td><td>${action}</td>`;
+      tbody.appendChild(tr);
+    });
+    $("#staffCount").textContent = fmtInt(list.length);
+    $("#staffEmpty").style.display = list.length ? "none" : "block";
+  }
+
+  async function removeStaff(id) {
+    const u = users.find((x) => x.id === id);
+    if (!u) return;
+    const isSelf = !!(currentUser && currentUser.id === id);
+    if (u.role === "owner" && users.filter((x) => x.role === "owner").length <= 1 && users.length > 1) { toast("Add another owner before deleting the last owner."); return; }
+    const ok = await askConfirm(isSelf ? "Delete your own login? You'll be signed out." : `Delete ${u.name}'s login? They won't be able to sign in anymore.`);
+    if (!ok) return;
+    users = users.filter((x) => x.id !== id);
+    if (db) { db.collection("users").doc(id).delete().then(syncSaved, syncFail); } else { saveLocal(); }
+    if (isSelf) { $("#btnLogout").click(); }
+    renderAll();
+    toast("Login deleted.");
+  }
+
+  $("#staffTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="remove-staff"]');
+    if (btn) removeStaff(btn.dataset.id);
+  });
+
+  $("#staffForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("#staffName").value.trim();
+    const pass = $("#staffPass").value;
+    const errEl = $("#staffError");
+    errEl.style.display = "none";
+    if (!name) { errEl.textContent = "Enter a name."; errEl.style.display = "block"; return; }
+    if (findUserByName(name) || (devEnabled && normalizeName(name) === normalizeName(DEV_NAME))) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+    if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+    const passHash = await hashPassword(pass);
+    const role = $("#staffRole").value === "owner" ? "owner" : "staff";
+    const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role };
+    users.push(u);
+    persistUsers();
+    renderAll();
+    $("#staffForm").reset();
+    toast(`Added ${name} as ${role}.`);
+  });
+
+  // ---------- Developer tools (developer account only) ----------
+  function renderDev() {
+    if (!(currentUser && currentUser.role === "developer")) return;
+    const pill = document.getElementById("syncPill");
+    let licence = "Licensed";
+    try { if (localStorage.getItem("bookshop-ledger-licensed") !== "1") licence = "Trial"; } catch (e) { licence = "Unknown"; }
+    const info = [
+      ["Storage", db ? "Cloud database" : "This device only (offline fallback)"],
+      ["Sync status", pill ? (pill.textContent.trim() + (pill.dataset.detail ? " — " + pill.dataset.detail : "")) : "—"],
+      ["Online", navigator.onLine ? "Yes" : "No"],
+      ["Books / Sales / Logins", `${books.length} / ${sales.length} / ${users.length}`],
+      ["Licence", licence],
+      ["Browser", navigator.userAgent],
+    ];
+    $("#devInfo tbody").innerHTML = info.map((r) => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td></tr>`).join("");
+    $("#devErrLog").textContent = devErrors.length ? devErrors.join("\n") : "No errors recorded this session.";
+    $("#devErrCount").textContent = fmtInt(devErrors.length);
+    renderDevExtra();
+    $("#devResetUser").innerHTML = users.map((u) => `<option value="${u.id}">${escapeHtml(u.name)} (${u.role === "owner" ? "Owner" : "Staff"})</option>`).join("");
+  }
+  $("#devExport").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), books, sales, users }, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "ledger-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
+  $("#devResync").addEventListener("click", async () => {
+    if (!db) { toast("No cloud connection to sync to."); return; }
+    if (!(await askConfirm("Push everything on this device to the cloud, overwriting matching records?"))) return;
+    persistBooks(); persistUsers();
+    sales.forEach((x) => persistSaleUpdate(x));
+    toast("Re-sync started.");
+  });
+  $("#devClear").addEventListener("click", async () => {
+    if (!(await askConfirm("Clear this device's local cache and reload? Cloud data is not affected."))) return;
+    try { localStorage.removeItem(LOCAL_KEY); localStorage.removeItem(SESSION_KEY); } catch (e) {}
+    location.reload();
+  });
+  $("#devResetBtn").addEventListener("click", async () => {
+    const errEl = $("#devResetError");
+    errEl.style.display = "none";
+    const u = users.find((x) => x.id === $("#devResetUser").value);
+    const pass = $("#devResetPass").value;
+    if (!u) { errEl.textContent = "Pick a login."; errEl.style.display = "block"; return; }
+    if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+    u.passHash = await hashPassword(pass);
+    persistUsers();
+    $("#devResetPass").value = "";
+    toast(`Password reset for ${u.name}.`);
+  });
+
+  // ---------- More developer tools ----------
+  const devArr = (kind) => (kind === "books" ? books : kind === "sales" ? sales : users);
+  function devDownload(name, text, type) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+  function devCsv(name, headers, rows) {
+    const esc = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    devDownload(name, [headers].concat(rows).map((r) => r.map(esc).join(",")).join("\n"), "text/csv");
+  }
+  function devSaveRec(kind, rec) {
+    if (db) db.collection(kind).doc(rec.id).set(stripId(rec)).then(syncSaved, syncFail); else saveLocal();
+  }
+  function devDelRec(kind, id) {
+    if (db) db.collection(kind).doc(id).delete().then(syncSaved, syncFail); else saveLocal();
+  }
+  const devErrText = (e) => (e && (e.code || e.message)) || String(e);
+
+  function renderDevExtra() {
+    $("#devRoleUser").innerHTML = users.map((u) => `<option value="${u.id}">${escapeHtml(u.name)} (${u.role === "owner" ? "Owner" : "Staff"})</option>`).join("");
+    devLicRender();
+    devFillRecs();
+    devStorageRender();
+  }
+
+  // Health check
+  function devHealth() {
+    const issues = [];
+    const seen = {};
+    books.forEach((b) => {
+      const t = (b.title || "").trim().toLowerCase();
+      if (!t) issues.push(`Book ${b.id} has no title`);
+      else { if (seen[t]) issues.push(`Duplicate book title: "${b.title}"`); seen[t] = 1; }
+      if ((b.stock || 0) < 0) issues.push(`Negative stock: "${b.title}" (${b.stock})`);
+      if (typeof b.price !== "number" || isNaN(b.price)) issues.push(`Bad price on "${b.title}"`);
+    });
+    sales.forEach((x) => {
+      if (Math.abs((x.total || 0) - (x.qty || 0) * (x.unitPrice || 0)) > 0.01) issues.push(`Sale total mismatch: "${x.title}" (${x.total} vs ${(x.qty || 0) * (x.unitPrice || 0)})`);
+      if (!x.ts) issues.push(`Sale "${x.title}" has no date`);
+    });
+    const names = {};
+    users.forEach((u) => {
+      if (!u.passHash) issues.push(`Login "${u.name}" has no password`);
+      const k = normalizeName(u.name);
+      if (names[k]) issues.push(`Duplicate login name: ${u.name}`);
+      names[k] = 1;
+      if (u.nameLower !== k) issues.push(`Login "${u.name}" has a stale lowercase name`);
+    });
+    if (users.length && !users.some((u) => u.role === "owner")) issues.push("No owner account exists");
+    return issues;
+  }
+  function devRunCheck() {
+    const issues = devHealth();
+    $("#devCheckOut").textContent = issues.length ? issues.length + " problem(s):\n" + issues.join("\n") : "No problems found.";
+  }
+  $("#devCheck").addEventListener("click", devRunCheck);
+  $("#devFixTotals").addEventListener("click", () => {
+    let n = 0;
+    sales.forEach((x) => {
+      const t = Math.round((x.qty || 0) * (x.unitPrice || 0) * 100) / 100;
+      if (Math.abs((x.total || 0) - t) > 0.01) { x.total = t; persistSaleUpdate(x); n++; }
+    });
+    renderAll(); devRunCheck(); toast(`Fixed ${n} sale total(s).`);
+  });
+  $("#devFixStock").addEventListener("click", () => {
+    let n = 0;
+    books.forEach((b) => { if ((b.stock || 0) < 0) { b.stock = 0; n++; } });
+    if (n) persistBooks();
+    renderAll(); devRunCheck(); toast(`Fixed ${n} book(s).`);
+  });
+  $("#devFixNames").addEventListener("click", () => {
+    let n = 0;
+    users.forEach((u) => { const k = normalizeName(u.name); if (u.nameLower !== k) { u.nameLower = k; n++; } });
+    if (n) persistUsers();
+    devRunCheck(); toast(`Fixed ${n} login(s).`);
+  });
+
+  // Cloud
+  $("#devCloudTest").addEventListener("click", async () => {
+    const out = $("#devCloudOut");
+    if (!db) { out.textContent = "No cloud database connected (working on this device only)."; return; }
+    out.textContent = "Testing…";
+    const lines = [];
+    for (const name of ["books", "sales", "users"]) {
+      const t0 = Date.now();
+      try {
+        const snap = await db.collection(name).get();
+        const n = snap.size != null ? snap.size : (snap.docs ? snap.docs.length : "?");
+        const local = devArr(name).length;
+        lines.push(`${name}: ${n} in cloud, ${local} on this device${n !== local ? "  ⚠ differs" : ""} (${Date.now() - t0} ms)`);
+      } catch (e) { lines.push(`${name}: read failed — ${devErrText(e)}`); }
+    }
+    try {
+      const t1 = Date.now();
+      await db.collection("diagnostics").doc("ping").set({ ts: Date.now() });
+      await db.collection("diagnostics").doc("ping").delete();
+      lines.push(`Write test OK (${Date.now() - t1} ms)`);
+    } catch (e) { lines.push("Write test failed — " + devErrText(e)); }
+    out.textContent = lines.join("\n");
+  });
+  $("#devRetry").addEventListener("click", () => { initDb(true); toast("Retrying connection…"); });
+  $("#devReload").addEventListener("click", () => location.reload());
+
+  // Import / export
+  $("#devCsvSales").addEventListener("click", () => {
+    devCsv("sales-" + new Date().toISOString().slice(0, 10) + ".csv", ["Book", "Qty", "Unit price", "Total", "Date", "Sold by", "Status"],
+      sales.slice().sort((a, b) => b.ts - a.ts).map((x) => [x.title, x.qty, x.unitPrice, x.total, x.ts ? new Date(x.ts).toISOString() : "", x.soldBy || "", x.deliveryStatus === "pending" ? "Pending" : "Delivered"]));
+  });
+  $("#devCsvBooks").addEventListener("click", () => {
+    devCsv("books-" + new Date().toISOString().slice(0, 10) + ".csv", ["Title", "Author", "Category", "Price", "Stock", "Reorder level"],
+      books.map((b) => [b.title, b.author, b.category, b.price, b.stock, b.reorder]));
+  });
+  $("#devImportFile").addEventListener("change", async (e) => {
+    const f = e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    let data;
+    try { data = JSON.parse(await f.text()); } catch (err) { toast("That isn't a valid backup file."); return; }
+    const nb = Array.isArray(data.books) ? data.books : [], ns = Array.isArray(data.sales) ? data.sales : [], nu = Array.isArray(data.users) ? data.users : [];
+    if (!(await askConfirm(`Merge ${nb.length} books, ${ns.length} sales and ${nu.length} logins from this backup into the current data? Records with the same id are overwritten.`, "Merge"))) return;
+    const merge = (arr, inc) => inc.forEach((r) => {
+      if (!r || !r.id) return;
+      const i = arr.findIndex((x) => x.id === r.id);
+      if (i >= 0) arr[i] = r; else arr.push(r);
+    });
+    merge(books, nb); merge(sales, ns); merge(users, nu);
+    persistBooks(); persistUsers(); sales.forEach((x) => persistSaleUpdate(x));
+    renderAll(); renderDev(); toast("Backup merged.");
+  });
+
+  // Errors & report
+  $("#devErrClear").addEventListener("click", () => { devErrors.length = 0; renderDev(); });
+  $("#devErrTest").addEventListener("click", () => {
+    setTimeout(() => { throw new Error("Test error from developer tools"); }, 0);
+    setTimeout(renderDev, 150);
+  });
+  $("#devCopy").addEventListener("click", async () => {
+    const text = $all("#devInfo tbody tr").map((tr) => tr.cells[0].textContent + ": " + tr.cells[1].textContent).join("\n") + "\n\nErrors:\n" + (devErrors.join("\n") || "none");
+    try { await navigator.clipboard.writeText(text); toast("Report copied."); } catch (e) { window.prompt("Copy this report:", text); }
+  });
+
+  // Login type
+  $("#devRoleBtn").addEventListener("click", () => {
+    const u = users.find((x) => x.id === $("#devRoleUser").value);
+    const role = $("#devRoleSel").value;
+    if (!u) return;
+    if (u.role === "owner" && role !== "owner" && users.filter((x) => x.role === "owner").length <= 1) { toast("Keep at least one owner."); return; }
+    u.role = role;
+    persistUsers(); renderAll(); renderDev();
+    toast(`${u.name} is now ${role === "owner" ? "an owner" : "staff"}.`);
+  });
+
+  // Licence & trial
+  function devLicRender() {
+    let lic = false, start = null;
+    try { lic = localStorage.getItem(LICENSED_KEY) === "1"; start = localStorage.getItem(TRIAL_START_KEY); } catch (e) {}
+    const left = start ? Math.max(0, TRIAL_DAYS - Math.floor((Date.now() - parseInt(start, 10)) / 86400000)) : null;
+    $("#devLicInfo").textContent = lic ? "Licensed on this device." : start ? `Trial — ${left} day(s) left on this device.` : "Trial not started on this device.";
+  }
+  async function devLicSet(msg, fn) {
+    if (!(await askConfirm(msg, "Continue"))) return;
+    try { fn(); } catch (e) {}
+    location.reload();
+  }
+  $("#devLicOn").addEventListener("click", () => devLicSet("Mark this device as licensed and reload?", () => localStorage.setItem(LICENSED_KEY, "1")));
+  $("#devLicReset").addEventListener("click", () => devLicSet("Restart the trial from now on this device and reload?", () => { localStorage.removeItem(LICENSED_KEY); localStorage.setItem(TRIAL_START_KEY, String(Date.now())); }));
+  $("#devLicOff").addEventListener("click", () => devLicSet("Remove the licence from this device and reload?", () => localStorage.removeItem(LICENSED_KEY)));
+
+  // Record editor
+  function devFillRecs() {
+    const kind = $("#devEdKind").value;
+    const prev = $("#devEdRec").value;
+    $("#devEdRec").innerHTML = devArr(kind).slice(0, 500).map((r) => {
+      const label = kind === "books" ? r.title : kind === "sales" ? `${r.title} · ${r.ts ? new Date(r.ts).toLocaleDateString() : "no date"}` : r.name;
+      return `<option value="${escapeHtml(r.id)}">${escapeHtml(label || r.id)}</option>`;
+    }).join("");
+    if (prev && devArr(kind).some((r) => r.id === prev)) $("#devEdRec").value = prev;
+  }
+  function devCurrentRec() {
+    const kind = $("#devEdKind").value;
+    return { kind, rec: devArr(kind).find((r) => r.id === $("#devEdRec").value) };
+  }
+  $("#devEdKind").addEventListener("change", () => { devFillRecs(); $("#devEdText").value = ""; });
+  $("#devEdLoad").addEventListener("click", () => {
+    const { rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    $("#devEdText").value = JSON.stringify(rec, null, 2);
+  });
+  $("#devEdSave").addEventListener("click", () => {
+    const { kind, rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    let obj;
+    try { obj = JSON.parse($("#devEdText").value); } catch (e) { toast("That isn't valid JSON."); return; }
+    if (!obj || obj.id !== rec.id) { toast("Keep the same id."); return; }
+    if (kind === "users") {
+      obj.nameLower = normalizeName(obj.name);
+      if (devEnabled && obj.nameLower === normalizeName(DEV_NAME)) { toast("That name is reserved."); return; }
+    }
+    const arr = devArr(kind);
+    arr[arr.findIndex((r) => r.id === rec.id)] = obj;
+    devSaveRec(kind, obj);
+    renderAll(); devFillRecs();
+    toast("Record saved.");
+  });
+  $("#devEdDelete").addEventListener("click", async () => {
+    const { kind, rec } = devCurrentRec();
+    if (!rec) { toast("No record selected."); return; }
+    if (!(await askConfirm("Permanently delete this record?", "Delete"))) return;
+    const arr = devArr(kind);
+    arr.splice(arr.findIndex((r) => r.id === rec.id), 1);
+    devDelRec(kind, rec.id);
+    $("#devEdText").value = "";
+    renderAll(); devFillRecs();
+    toast("Record deleted.");
+  });
+
+  // Local storage inspector
+  function devStorageRender() {
+    const rows = [];
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); rows.push([k, (localStorage.getItem(k) || "").length]); } } catch (e) {}
+    $("#devStorage tbody").innerHTML = rows.map((r) => `<tr><td>${escapeHtml(r[0])}</td><td class="num">${r[1]} chars</td><td><div class="row-actions"><button type="button" class="danger" data-key="${escapeHtml(r[0])}">Remove</button></div></td></tr>`).join("") || '<tr><td colspan="3">Nothing stored.</td></tr>';
+  }
+  $("#devStorage").addEventListener("click", async (e) => {
+    const b = e.target.closest("button[data-key]");
+    if (!b) return;
+    if (!(await askConfirm(`Remove stored item "${b.dataset.key}" from this device?`, "Remove"))) return;
+    try { localStorage.removeItem(b.dataset.key); } catch (x) {}
+    devStorageRender();
+  });
+
+  // ---------- Support tab ----------
+  (function setupSupport() {
+    const msg = () => {
+      const store = ($("#authBrandName") && $("#authBrandName").textContent) || "The Ledger";
+      return `Hello, I need help with ${store}.` + (currentUser ? ` (Logged in as ${currentUser.name})` : "");
+    };
+    if (DEV_WHATSAPP) {
+      $("#supWhatsapp").style.display = "";
+      $("#supWhatsapp").addEventListener("click", () => { window.open("https://wa.me/" + DEV_WHATSAPP + "?text=" + encodeURIComponent(msg()), "_blank", "noopener"); });
+    }
+    if (DEV_EMAIL) {
+      $("#supEmail").style.display = "";
+      $("#supEmail").addEventListener("click", () => { window.location.href = "mailto:" + DEV_EMAIL + "?subject=" + encodeURIComponent("App support") + "&body=" + encodeURIComponent(msg()); });
+    }
+    if (!DEV_WHATSAPP && !DEV_EMAIL) $("#supNone").style.display = "block";
+  })();
+
+  // ---------- Developer setup helper ----------
+  // Open this file with #devsetup on the end of the address to generate the DEV_NAME / DEV_HASH
+  // lines. It only prints text to paste into the code; it grants no access by itself.
+  function openDevSetup() {
+    if (document.getElementById("devSetupBox")) return;
+    const box = document.createElement("div");
+    box.id = "devSetupBox";
+    box.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px;";
+    box.innerHTML = `<div style="background:#fff;color:#111;max-width:520px;width:100%;border-radius:12px;padding:20px;font-family:system-ui,sans-serif;max-height:90vh;overflow:auto;">
+      <h3 style="margin:0 0 6px 0;">Developer account setup</h3>
+      <p style="font-size:13px;margin:0 0 10px 0;">Enter your name and a password. Paste the two lines it makes over the empty DEV_NAME and DEV_HASH lines in this file.</p>
+      <input id="dsName" type="text" placeholder="Your name" autocomplete="off" style="width:100%;padding:10px;margin-bottom:8px;box-sizing:border-box;">
+      <input id="dsPass" type="password" placeholder="Password (6+ characters)" autocomplete="new-password" style="width:100%;padding:10px;margin-bottom:8px;box-sizing:border-box;">
+      <div style="display:flex;gap:8px;"><button type="button" id="dsGo" style="padding:10px 14px;">Generate</button><button type="button" id="dsClose" style="padding:10px 14px;">Close</button></div>
+      <pre id="dsOut" style="background:#f2f2f2;padding:10px;white-space:pre-wrap;word-break:break-all;font-size:12px;margin:10px 0 0 0;"></pre></div>`;
+    document.body.appendChild(box);
+    $("#dsClose").addEventListener("click", () => { box.remove(); });
+    $("#dsGo").addEventListener("click", async () => {
+      const n = $("#dsName").value.trim(), pw = $("#dsPass").value;
+      if (!n || pw.length < 6) { $("#dsOut").textContent = "Enter a name and a password of at least 6 characters."; return; }
+      const h = await hashPassword(pw);
+      $("#dsOut").textContent = "const DEV_NAME = " + JSON.stringify(n) + ";\nconst DEV_HASH = \"" + h + "\";";
+    });
+  }
+  if (location.hash === "#devsetup") openDevSetup();
+  window.addEventListener("hashchange", () => { if (location.hash === "#devsetup") openDevSetup(); });
+
+  // ---------- Tabs ----------
+  function closeNavDrawer() {
+    $("#tabs").classList.remove("open");
+    $("#navBackdrop").classList.remove("show");
+  }
+  function openNavDrawer() {
+    $("#tabs").classList.add("open");
+    $("#navBackdrop").classList.add("show");
+  }
+  $("#navToggle").addEventListener("click", () => {
+    if ($("#tabs").classList.contains("open")) closeNavDrawer(); else openNavDrawer();
+  });
+  $("#navBackdrop").addEventListener("click", closeNavDrawer);
+
+  $all("nav.tabs .tabs-list button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
+      $all("section.pane").forEach((p) => p.classList.remove("active"));
+      btn.classList.add("active");
+      $("#pane-" + btn.dataset.pane).classList.add("active");
+      if (btn.dataset.pane === "sale") renderSalePane();
+      if (btn.dataset.pane === "dev") renderDev();
+      closeNavDrawer();
+    });
+  });
+
+  // ---------- Rendering ----------
+  function renderAll() {
+    renderDashboard();
+    renderInventory();
+    renderSalePane();
+    renderOrders();
+    renderLog();
+    renderStaff();
+    renderStaffPicks();
+  }
+
+  function lowStockBooks() {
+    return books.filter((b) => (b.stock || 0) <= (b.reorder != null ? b.reorder : 5));
+  }
+
+  function renderDashboard() {
+    const titles = books.length;
+    const copies = books.reduce((s, b) => s + (b.stock || 0), 0);
+    const value = books.reduce((s, b) => s + (b.stock || 0) * (b.price || 0), 0);
+    const weekAgo = Date.now() - 7 * 24 * 3600 * 1000;
+    const revenue = sales.filter((s) => s.ts >= weekAgo).reduce((s, x) => s + (x.total || 0), 0);
+
+    $("#statTitles").textContent = fmtInt(titles);
+    $("#statCopies").textContent = fmtInt(copies);
+    $("#statValue").textContent = fmtMoney(value);
+    $("#statRevenue").textContent = fmtMoney(revenue);
+
+    const low = lowStockBooks().sort((a, b) => (a.stock || 0) - (b.stock || 0));
+    const lowList = $("#lowList");
+    lowList.innerHTML = "";
+    $("#lowCount").textContent = low.length + (low.length === 1 ? " title" : " titles");
+    $("#lowEmpty").style.display = low.length ? "none" : "block";
+    low.slice(0, 8).forEach((b) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${escapeHtml(b.title)}</span><span class="amt">${fmtInt(b.stock)} left</span>`;
+      lowList.appendChild(li);
+    });
+
+    const recent = [...sales].sort((a, b) => b.ts - a.ts).slice(0, 6);
+    const tbody = $("#recentTable tbody");
+    tbody.innerHTML = "";
+    $("#recentCount").textContent = fmtInt(sales.length);
+    $("#recentEmpty").style.display = recent.length ? "none" : "block";
+    recent.forEach((s) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? "" : str).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+
+  function relTime(ts) {
+    const d = new Date(ts);
+    const now = new Date();
+    const sameDay = d.toDateString() === now.toDateString();
+    const time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    if (sameDay) return time;
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + ", " + time;
+  }
+
+  function renderInventory() {
+    const q = ($("#invSearch").value || "").trim().toLowerCase();
+    const tbody = $("#invTable tbody");
+    tbody.innerHTML = "";
+    const filtered = books
+      .filter((b) => !q || (b.title || "").toLowerCase().includes(q) || (b.author || "").toLowerCase().includes(q) || (b.category || "").toLowerCase().includes(q))
+      .sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+
+    $("#invEmpty").style.display = books.length ? "none" : "block";
+
+    filtered.forEach((b) => {
+      const low = (b.stock || 0) <= (b.reorder != null ? b.reorder : 5);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><div class="title-cell">${escapeHtml(b.title)}</div><div class="author-cell">${escapeHtml(b.author || "")}</div></td>
+        <td>${b.category ? `<span class="cat-tag">${escapeHtml(b.category)}</span>` : ""}</td>
+        <td class="num">${fmtMoney(b.price)}</td>
+        <td class="num"><span class="stock-badge ${low ? "low" : ""}">${fmtInt(b.stock)}</span></td>
+        <td>
+          <div class="row-actions">
+            <button data-act="edit" data-id="${b.id}">Edit</button>
+            <button data-act="delete" data-id="${b.id}" class="danger">Remove</button>
+          </div>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+
+    // category datalist
+    const cats = Array.from(new Set(books.map((b) => b.category).filter(Boolean))).sort();
+    $("#catList").innerHTML = cats.map((c) => `<option value="${escapeHtml(c)}">`).join("");
+  }
+
+  $("#todayTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+  $("#logTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+
+  $("#invTable").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.act === "edit") openBookPanel(id);
+    if (btn.dataset.act === "delete") deleteBook(id);
+  });
+
+  $("#invSearch").addEventListener("input", renderInventory);
+
+  function openBookPanel(id) {
+    editingBookId = id || null;
+    const panel = $("#bookPanel");
+    panel.classList.add("open");
+    if (id) {
+      const b = books.find((x) => x.id === id);
+      if (!b) return;
+      $("#bookPanelTitle").textContent = "Edit book";
+      $("#fTitle").value = b.title || "";
+      $("#fAuthor").value = b.author || "";
+      $("#fCategory").value = b.category || "";
+      $("#fPrice").value = b.price != null ? b.price : "";
+      $("#fStock").value = b.stock != null ? b.stock : "";
+      $("#fReorder").value = b.reorder != null ? b.reorder : "";
+    } else {
+      $("#bookPanelTitle").textContent = "Add a book";
+      ["fTitle", "fAuthor", "fCategory", "fPrice", "fStock", "fReorder"].forEach((id2) => $("#" + id2).value = "");
+    }
+    $("#fTitle").focus();
+  }
+
+  function closeBookPanel() {
+    $("#bookPanel").classList.remove("open");
+    editingBookId = null;
+  }
+
+  $("#btnAddBook").addEventListener("click", () => openBookPanel(null));
+  $("#btnCancelBook").addEventListener("click", closeBookPanel);
+
+  $("#btnSaveBook").addEventListener("click", () => {
+    const title = $("#fTitle").value.trim();
+    if (!title) { toast("A title is required."); $("#fTitle").focus(); return; }
+    const data = {
+      title,
+      author: $("#fAuthor").value.trim(),
+      category: $("#fCategory").value.trim(),
+      price: parseFloat($("#fPrice").value) || 0,
+      stock: parseInt($("#fStock").value, 10) || 0,
+      reorder: $("#fReorder").value === "" ? 5 : (parseInt($("#fReorder").value, 10) || 0),
+    };
+    if (editingBookId) {
+      updateBook(editingBookId, data);
+      toast("Book updated.");
+    } else {
+      data.id = uid();
+      addBook(data);
+      toast("Book added.");
+    }
+    closeBookPanel();
+  });
+
+  function addBook(data) {
+    books.push(data);
+    persistBooks();
+    renderAll();
+  }
+  function updateBook(id, data) {
+    const idx = books.findIndex((b) => b.id === id);
+    if (idx === -1) return;
+    books[idx] = { ...books[idx], ...data };
+    persistBooks();
+    renderAll();
+  }
+  function askConfirm(message, label) {
+    return new Promise((resolve) => {
+      const overlay = $("#confirmModal");
+      $("#confirmMessage").textContent = message;
+      overlay.classList.add("open");
+      const yesBtn = $("#confirmYes");
+      const noBtn = $("#confirmNo");
+      yesBtn.textContent = label || "Delete";
+      function cleanup(result) {
+        overlay.classList.remove("open");
+        yesBtn.removeEventListener("click", onYes);
+        noBtn.removeEventListener("click", onNo);
+        overlay.removeEventListener("click", onOverlay);
+        resolve(result);
+      }
+      function onYes() { cleanup(true); }
+      function onNo() { cleanup(false); }
+      function onOverlay(e) { if (e.target === overlay) cleanup(false); }
+      yesBtn.addEventListener("click", onYes);
+      noBtn.addEventListener("click", onNo);
+      overlay.addEventListener("click", onOverlay);
+    });
+  }
+
+  async function deleteBook(id) {
+    const b = books.find((x) => x.id === id);
+    if (!b) return;
+    const ok = await askConfirm(`Remove "${b.title}" from inventory? This won't affect past sales records.`);
+    if (!ok) return;
+    books = books.filter((x) => x.id !== id);
+    removeBookPersist(id);
+    renderAll();
+    toast("Book removed.");
+  }
+
+  function persistBooks() {
+    if (db) {
+      const col = db.collection("books");
+      books.forEach((b) => {
+        col.doc(b.id).set(stripId(b)).then(syncSaved, syncFail);
+      });
+    } else {
+      saveLocal();
+    }
+  }
+  function removeBookPersist(id) {
+    if (db) {
+      db.collection("books").doc(id).delete().then(syncSaved, syncFail);
+    } else {
+      saveLocal();
+    }
+  }
+  function stripId(obj) {
+    const { id, ...rest } = obj;
+    return rest;
+  }
+
+  // ---------- Record Sale pane ----------
+  function renderSalePane() {
+    const sel = $("#saleBook");
+    const prev = sel.value;
+    const sellable = books.filter((b) => (b.stock || 0) > 0).sort((a, b) => a.title.localeCompare(b.title));
+    sel.innerHTML = sellable.length
+      ? sellable.map((b) => `<option value="${b.id}">${escapeHtml(b.title)} — ${fmtInt(b.stock)} in stock</option>`).join("")
+      : `<option value="">No books in stock</option>`;
+    if (prev && sellable.some((b) => b.id === prev)) sel.value = prev;
+    updateSaleHint();
+    renderTodaySales();
+  }
+
+  function currentSaleBook() {
+    return books.find((b) => b.id === $("#saleBook").value);
+  }
+
+  function updateSaleHint() {
+    const b = currentSaleBook();
+    const qtyInput = $("#saleQty");
+    if (!b) {
+      $("#saleStockHint").textContent = "Add a book with stock to record a sale.";
+      $("#saleTotal").textContent = fmtMoney(0);
+      return;
+    }
+    qtyInput.max = b.stock;
+    if (parseInt(qtyInput.value, 10) > b.stock) qtyInput.value = b.stock;
+    const hint = $("#saleStockHint");
+    hint.textContent = `${fmtInt(b.stock)} in stock at ${fmtMoney(b.price)} each`;
+    hint.classList.toggle("low", (b.stock || 0) <= (b.reorder != null ? b.reorder : 5));
+    const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    $("#saleTotal").textContent = fmtMoney(qty * (b.price || 0));
+  }
+
+  $("#saleBook").addEventListener("change", updateSaleHint);
+  $("#saleQty").addEventListener("input", updateSaleHint);
+  $("#qtyMinus").addEventListener("click", () => {
+    const inp = $("#saleQty");
+    inp.value = Math.max(1, (parseInt(inp.value, 10) || 1) - 1);
+    updateSaleHint();
+  });
+  $("#qtyPlus").addEventListener("click", () => {
+    const inp = $("#saleQty");
+    const b = currentSaleBook();
+    const max = b ? b.stock : 9999;
+    inp.value = Math.min(max, (parseInt(inp.value, 10) || 1) + 1);
+    updateSaleHint();
+  });
+
+  $("#btnRecordSale").addEventListener("click", () => {
+    const b = currentSaleBook();
+    if (!b) { toast("No book selected."); return; }
+    const qty = Math.max(1, parseInt($("#saleQty").value, 10) || 1);
+    if (qty > (b.stock || 0)) { toast("Not enough stock for that quantity."); return; }
+    const sale = {
+      id: uid(),
+      bookId: b.id,
+      title: b.title,
+      qty,
+      unitPrice: b.price || 0,
+      total: qty * (b.price || 0),
+      ts: Date.now(),
+      soldBy: currentUser ? currentUser.name : "",
+      isDelivery: $("#saleDelivery").checked,
+      deliveryStatus: $("#saleDelivery").checked ? "pending" : "delivered",
+    };
+    sales.push(sale);
+    updateBook(b.id, { stock: (b.stock || 0) - qty });
+    persistSaleAdd(sale);
+    $("#saleQty").value = 1;
+    $("#saleDelivery").checked = false;
+    renderAll();
+    toast(`Sold ${qty} × "${b.title}".`);
+  });
+
+  function persistSaleUpdate(sale) {
+    if (db) {
+      db.collection("sales").doc(sale.id).set(stripId(sale)).then(syncSaved, syncFail);
+    } else {
+      saveLocal();
+    }
+  }
+  function toggleDeliveryStatus(id) {
+    const s = sales.find((x) => x.id === id);
+    if (!s) return;
+    s.deliveryStatus = s.deliveryStatus === "pending" ? "delivered" : "pending";
+    persistSaleUpdate(s);
+    renderAll();
+  }
+
+  function orderRowHtml(s) {
+    const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+    const d = new Date(s.ts);
+    const dateStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    return `<tr><td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${escapeHtml(s.soldBy || "—")}</td><td>${dateStr}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td></tr>`;
+  }
+
+  function renderOrders() {
+    const orders = sales.filter((s) => s.isDelivery);
+    const pending = orders.filter((s) => s.deliveryStatus === "pending").sort((a, b) => b.ts - a.ts);
+    const delivered = orders.filter((s) => s.deliveryStatus !== "pending").sort((a, b) => b.ts - a.ts);
+
+    $("#ordersPendingTable tbody").innerHTML = pending.map(orderRowHtml).join("");
+    $("#ordersPendingCount").textContent = fmtInt(pending.length);
+    $("#ordersPendingEmpty").style.display = pending.length ? "none" : "block";
+
+    $("#ordersDeliveredTable tbody").innerHTML = delivered.map(orderRowHtml).join("");
+    $("#ordersDeliveredCount").textContent = fmtInt(delivered.length);
+    $("#ordersDeliveredEmpty").style.display = delivered.length ? "none" : "block";
+  }
+
+  $("#ordersPendingTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+  $("#ordersDeliveredTable").addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-act="toggle-status"]');
+    if (btn) toggleDeliveryStatus(btn.dataset.id);
+  });
+
+  function persistSaleAdd(sale) {
+    if (db) {
+      db.collection("sales").doc(sale.id).set(stripId(sale)).then(syncSaved, syncFail);
+    } else {
+      saveLocal();
+    }
+  }
+
+  function renderTodaySales() {
+    const start = new Date(); start.setHours(0, 0, 0, 0);
+    const todays = sales.filter((s) => s.ts >= start.getTime()).sort((a, b) => b.ts - a.ts);
+    const tbody = $("#todayTable tbody");
+    tbody.innerHTML = "";
+    $("#todayCount").textContent = fmtInt(todays.length);
+    $("#todayEmpty").style.display = todays.length ? "none" : "block";
+    todays.forEach((s) => {
+      const tr = document.createElement("tr");
+      const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.total)}</td><td>${relTime(s.ts)}</td><td>${escapeHtml(s.soldBy || "—")}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ---------- Sales Log pane ----------
+  function renderLog() {
+    const q = ($("#logSearch").value || "").trim().toLowerCase();
+    const filtered = sales.filter((s) => !q || (s.title || "").toLowerCase().includes(q)).sort((a, b) => b.ts - a.ts);
+    const tbody = $("#logTable tbody");
+    tbody.innerHTML = "";
+    $("#logEmpty").style.display = filtered.length ? "none" : "block";
+    filtered.forEach((s) => {
+      const d = new Date(s.ts);
+      const tr = document.createElement("tr");
+      const status = s.deliveryStatus === "pending" ? "pending" : "delivered";
+      tr.innerHTML = `<td>${escapeHtml(s.title)}</td><td class="num">${fmtInt(s.qty)}</td><td class="num">${fmtMoney(s.unitPrice)}</td><td class="num">${fmtMoney(s.total)}</td><td>${d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })} ${d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}</td><td>${escapeHtml(s.soldBy || "—")}</td><td><button type="button" class="status-badge ${status}" data-act="toggle-status" data-id="${s.id}">${status === "pending" ? "Pending" : "Delivered"}</button></td>`;
+      tbody.appendChild(tr);
+    });
+    $("#logCountStat").textContent = fmtInt(sales.length);
+    $("#logRevenueStat").textContent = fmtMoney(sales.reduce((s, x) => s + (x.total || 0), 0));
+    $("#logUnitsStat").textContent = fmtInt(sales.reduce((s, x) => s + (x.qty || 0), 0));
+  }
+  $("#logSearch").addEventListener("input", renderLog);
+  $("#btnPrintLog").addEventListener("click", () => {
+    const q = ($("#logSearch").value || "").trim().toLowerCase();
+    const rows = sales.filter((x) => !q || (x.title || "").toLowerCase().includes(q)).sort((a, b) => b.ts - a.ts);
+    const storeName = ($("#authBrandName") && $("#authBrandName").textContent) || "The Ledger";
+    const body = rows.map((x) => {
+      const d = new Date(x.ts);
+      const when = d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) + " " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+      return `<tr><td>${escapeHtml(x.title)}</td><td class="num">${fmtInt(x.qty)}</td><td class="num">${fmtMoney(x.unitPrice)}</td><td class="num">${fmtMoney(x.total)}</td><td>${when}</td><td>${escapeHtml(x.soldBy || "—")}</td><td>${x.deliveryStatus === "pending" ? "Pending" : "Delivered"}</td></tr>`;
+    }).join("");
+    const revenue = rows.reduce((t, x) => t + (x.total || 0), 0);
+    const units = rows.reduce((t, x) => t + (x.qty || 0), 0);
+    const area = $("#printArea");
+    area.innerHTML = `<h1>${escapeHtml(storeName)} — Sales log</h1>
+      <p class="pa-sub">Printed ${escapeHtml(new Date().toLocaleString())}${q ? " · filtered by “" + escapeHtml(q) + "”" : ""}</p>
+      <p class="pa-stats"><strong>${fmtInt(rows.length)}</strong> sales · <strong>${fmtMoney(revenue)}</strong> revenue · <strong>${fmtInt(units)}</strong> copies sold</p>
+      <table><thead><tr><th>Book</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th><th>Date</th><th>Sold by</th><th>Status</th></tr></thead><tbody>${body || '<tr><td colspan="7">No sales to print.</td></tr>'}</tbody></table>`;
+    setTimeout(() => { try { window.print(); } catch (err) { toast("Printing isn't available here."); } }, 50);
+  });
+  window.addEventListener("afterprint", () => { $("#printArea").innerHTML = ""; });
+
+  // ---------- Store name & logo (editable; also drives the app's title, favicon, and install manifest) ----------
+  const NAME_KEY = "bookshop-ledger-name";
+  const LOGO_KEY = "bookshop-ledger-logo";
+  const DEFAULT_LOGO = "📚";
+
+  function getCssVar(name) {
+    try { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); } catch (e) { return ""; }
+  }
+
+  function roundedRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawIcon(size, emoji, maskable) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    const pad = maskable ? size * 0.08 : 0;
+    const bg = getCssVar("--ink") || "#0F2439";
+    ctx.fillStyle = bg;
+    roundedRectPath(ctx, pad, pad, size - 2 * pad, size - 2 * pad, size * 0.22);
+    ctx.fill();
+    ctx.font = `${Math.floor(size * (maskable ? 0.42 : 0.55))}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(emoji || DEFAULT_LOGO, size / 2, size / 2 + size * 0.03);
+    return canvas.toDataURL("image/png");
+  }
+
+  function setLinkHref(rel, href) {
+    let link = document.querySelector(`link[rel="${rel}"]`);
+    if (!link) { link = document.createElement("link"); link.rel = rel; document.head.appendChild(link); }
+    link.href = href;
+  }
+
+  function currentBrand() {
+    return {
+      name: ($("#shopName").value || "The Ledger").trim() || "The Ledger",
+      logo: ($("#logoBtn").textContent || DEFAULT_LOGO).trim() || DEFAULT_LOGO,
+    };
+  }
+
+  function applyBrandToUi(name, logo) {
+    document.title = name;
+    $("#authBrandName").textContent = name;
+    $("#authBrandLogo").textContent = logo;
+    $("#trialBrandName").textContent = name;
+    $("#trialBrandLogo").textContent = logo;
+    try {
+      const appleTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+      if (appleTitle) appleTitle.setAttribute("content", name);
+    } catch (e) { /* ignore */ }
+  }
+
+  function regenerateManifest() {
+    const { name, logo } = currentBrand();
+    let icon192, icon512, icon512mask;
+    try {
+      icon192 = drawIcon(192, logo, false);
+      icon512 = drawIcon(512, logo, false);
+      icon512mask = drawIcon(512, logo, true);
+    } catch (e) {
+      return; // canvas unavailable — keep the existing manifest/icons as-is
+    }
+    const manifest = {
+      name: name + " — Bookshop Inventory",
+      short_name: name,
+      description: "Track stock and sales for " + name + ".",
+      start_url: ".",
+      scope: ".",
+      display: "standalone",
+      orientation: "portrait-primary",
+      background_color: getCssVar("--paper") || "#EAF2FB",
+      theme_color: getCssVar("--gold") || "#2F7DE1",
+      icons: [
+        { src: icon192, sizes: "192x192", type: "image/png" },
+        { src: icon512, sizes: "512x512", type: "image/png" },
+        { src: icon512mask, sizes: "512x512", type: "image/png", purpose: "maskable" },
+      ],
+    };
+    try {
+      const manifestJson = JSON.stringify(manifest);
+      const manifestHref = "data:application/manifest+json;base64," + btoa(unescape(encodeURIComponent(manifestJson)));
+      setLinkHref("manifest", manifestHref);
+      setLinkHref("apple-touch-icon", icon192);
+      setLinkHref("icon", icon192);
+    } catch (e) { /* ignore */ }
+  }
+
+  function applyBranding() {
+    const { name, logo } = currentBrand();
+    applyBrandToUi(name, logo);
+    regenerateManifest();
+  }
+
+  // Load any saved name/logo before first render
+  try {
+    const savedName = localStorage.getItem(NAME_KEY);
+    if (savedName) $("#shopName").value = savedName;
+  } catch (e) {}
+  try {
+    const savedLogo = localStorage.getItem(LOGO_KEY);
+    if (savedLogo) $("#logoBtn").textContent = savedLogo;
+  } catch (e) {}
+  applyBranding();
+
+  $("#shopName").addEventListener("change", () => {
+    const val = $("#shopName").value.trim() || "The Ledger";
+    $("#shopName").value = val;
+    try { localStorage.setItem(NAME_KEY, val); } catch (e) {}
+    applyBranding();
+  });
+
+  // ---------- Logo picker ----------
+  $("#logoBtn").addEventListener("click", () => {
+    $("#logoInput").value = $("#logoBtn").textContent.trim();
+    $("#logoPanel").classList.add("open");
+    $("#logoInput").focus();
+  });
+  $all(".logo-suggestions button").forEach((b) => {
+    b.addEventListener("click", () => { $("#logoInput").value = b.dataset.emoji; });
+  });
+  $("#logoCancel").addEventListener("click", () => { $("#logoPanel").classList.remove("open"); });
+  $("#logoSave").addEventListener("click", () => {
+    const val = ($("#logoInput").value || "").trim() || DEFAULT_LOGO;
+    $("#logoBtn").textContent = val;
+    try { localStorage.setItem(LOGO_KEY, val); } catch (e) {}
+    applyBranding();
+    $("#logoPanel").classList.remove("open");
+    toast("Logo updated.");
+  });
+  document.addEventListener("click", (e) => {
+    const panel = $("#logoPanel");
+    if (!panel.classList.contains("open")) return;
+    if (e.target.closest("#logoPanel") || e.target.closest("#logoBtn")) return;
+    panel.classList.remove("open");
+  });
+
+  // ---------- Auth ----------
+  const SESSION_KEY = "bookshop-ledger-session";
+
+  async function hashPassword(pw) {
+    try {
+      const enc = new TextEncoder().encode(pw);
+      const buf = await crypto.subtle.digest("SHA-256", enc);
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    } catch (e) {
+      // Fallback for contexts without SubtleCrypto (e.g. some offline/file:// views).
+      // Not cryptographically secure — a basic screen lock only.
+      let h = 0;
+      for (let i = 0; i < pw.length; i++) h = (Math.imul(31, h) + pw.charCodeAt(i)) | 0;
+      return "fb_" + (h >>> 0).toString(16);
+    }
+  }
+
+  const normalizeName = (s) => (s || "").trim().toLowerCase();
+  const findUserByName = (name) => users.find((u) => u.nameLower === normalizeName(name));
+
+  function showApp() {
+    $("#authScreen").classList.add("hidden");
+    $("#appRoot").classList.add("show");
+  }
+  function showAuth() {
+    $("#authScreen").classList.remove("hidden");
+    $("#appRoot").classList.remove("show");
+  }
+  function setSessionName() {
+    if (!currentUser) { $("#sessionName").textContent = ""; return; }
+    const tag = currentUser.role === "owner" ? " (Owner)" : currentUser.role === "developer" ? " (Developer)" : "";
+    $("#sessionName").textContent = currentUser.name + tag;
+  }
+
+  let loginRole = "owner"; // "owner" | "staff" — which tab of the login screen is showing
+
+  function renderStaffPicks() {
+    const box = $("#staffPicks");
+    if (authMode !== "login" || loginRole !== "staff") { box.style.display = "none"; return; }
+    const staffList = users.filter((u) => u.role !== "owner").sort((a, b) => a.name.localeCompare(b.name));
+    const typed = normalizeName($("#authName").value);
+    box.style.display = "block";
+    box.innerHTML = staffList.length
+      ? `<div class="picks-label">Tap your name</div><div class="chips">${staffList.map((u) => `<button type="button" class="chip${normalizeName(u.name) === typed ? " selected" : ""}" data-name="${escapeHtml(u.name)}">${escapeHtml(u.name)}</button>`).join("")}</div>`
+      : `<div class="none">No staff logins yet — ask the owner to add you.</div>`;
+  }
+
+  function setLoginRole(role) {
+    loginRole = role;
+    $("#authError").style.display = "none";
+    $("#authName").value = "";
+    $("#authPass").value = "";
+    updateAuthHeading();
+  }
+
+  $all("#roleSwitch button").forEach((b) => b.addEventListener("click", () => setLoginRole(b.dataset.role)));
+  $("#staffPicks").addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    $("#authName").value = chip.dataset.name;
+    renderStaffPicks();
+    $("#authPass").focus();
+  });
+  $("#authName").addEventListener("input", () => { if (loginRole === "staff") renderStaffPicks(); });
+
+  function updateAuthHeading() {
+    const confirmField = $("#authConfirmField");
+    // Self-signup only exists to create the very first (Owner) account.
+    // After that, staff logins come only from the Owner's Staff tab.
+    $("#authToggleRow").style.display = users.length === 0 ? "block" : "none";
+    $("#roleSwitch").style.display = authMode === "login" ? "flex" : "none";
+    $all("#roleSwitch button").forEach((b) => {
+      const on = b.dataset.role === loginRole;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    renderStaffPicks();
+    if (authMode === "signup") {
+      $("#authHeading").textContent = users.length ? "Create your account" : "Welcome — set up the first account";
+      $("#authSub").textContent = "Add your name and a password to get started.";
+      $("#authSubmit").textContent = "Create account";
+      confirmField.style.display = "block";
+      $("#authToggleLead").textContent = "Already have an account?";
+      $("#authToggleBtn").textContent = "Log in";
+    } else {
+      const staffMode = loginRole === "staff";
+      $("#authHeading").textContent = staffMode ? "Staff login" : "Owner login";
+      $("#authSub").textContent = staffMode ? "Pick your name, then enter your password." : "Log in to manage stock, staff and reports.";
+      $("#authSubmit").textContent = staffMode ? "Log in as staff" : "Log in as owner";
+      confirmField.style.display = "none";
+      $("#authToggleLead").textContent = "New here?";
+      $("#authToggleBtn").textContent = "Create an account";
+    }
+  }
+
+  function attemptAutoLogin() {
+    try {
+      const raw = localStorage.getItem(SESSION_KEY);
+      if (raw) {
+        const sess = JSON.parse(raw);
+        if (sess.id === "developer" && devEnabled) {
+          currentUser = { id: "developer", name: DEV_NAME, role: "developer" };
+          setSessionName(); updateRoleUI(); showApp();
+          return true;
+        }
+        const u = users.find((x) => x.id === sess.id);
+        if (u) {
+          currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
+          setSessionName();
+          updateRoleUI();
+          showApp();
+          return true;
+        }
+      }
+    } catch (e) { /* ignore */ }
+    return false;
+  }
+
+  function onUsersReady() {
+    if (usersLoaded) return;
+    usersLoaded = true;
+    if (!attemptAutoLogin()) {
+      authMode = users.length ? "login" : "signup";
+      updateAuthHeading();
+      showAuth();
+    }
+  }
+
+  $all(".pw-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = $("#" + btn.dataset.target);
+      if (!input) return;
+      const nowVisible = input.type === "password";
+      input.type = nowVisible ? "text" : "password";
+      btn.textContent = nowVisible ? "Hide" : "Show";
+      btn.setAttribute("aria-label", nowVisible ? "Hide password" : "Show password");
+    });
+  });
+
+  $("#authForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("#authName").value.trim();
+    const pass = $("#authPass").value;
+    const errEl = $("#authError");
+    errEl.style.display = "none";
+
+    if (!name) { errEl.textContent = "Enter your name."; errEl.style.display = "block"; return; }
+    if (!pass) { errEl.textContent = "Enter a password."; errEl.style.display = "block"; return; }
+
+    if (authMode === "signup") {
+      const confirmPass = $("#authConfirm").value;
+      if (findUserByName(name) || (devEnabled && normalizeName(name) === normalizeName(DEV_NAME))) { errEl.textContent = "That name is already taken."; errEl.style.display = "block"; return; }
+      if (pass.length < 4) { errEl.textContent = "Use at least 4 characters."; errEl.style.display = "block"; return; }
+      if (pass !== confirmPass) { errEl.textContent = "Passwords don't match."; errEl.style.display = "block"; return; }
+      const passHash = await hashPassword(pass);
+      const u = { id: uid(), name, nameLower: normalizeName(name), passHash, role: users.length === 0 ? "owner" : "staff" };
+      users.push(u);
+      persistUsers();
+      currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
+      setSessionName();
+      updateRoleUI();
+      showApp();
+      $("#authForm").reset();
+      toast(`Welcome, ${name}.`);
+    } else {
+      if (devEnabled && normalizeName(name) === normalizeName(DEV_NAME)) {
+        const dh = await hashPassword(pass);
+        if (dh !== DEV_HASH) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
+        currentUser = { id: "developer", name: DEV_NAME, role: "developer" };
+        try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: "developer" })); } catch (e2) {}
+        setSessionName(); updateRoleUI(); showApp();
+        $("#authForm").reset();
+        toast("Welcome, " + DEV_NAME + ".");
+        return;
+      }
+      const u = findUserByName(name);
+      if (!u) { errEl.textContent = loginRole === "staff" ? "No staff login with that name — ask the owner to add you." : "No owner account with that name."; errEl.style.display = "block"; return; }
+      const passHash = await hashPassword(pass);
+      if (passHash !== u.passHash) { errEl.textContent = "That password doesn't match."; errEl.style.display = "block"; return; }
+      const isOwnerAcct = u.role === "owner";
+      if (loginRole === "owner" && !isOwnerAcct) { errEl.textContent = "That's a staff account — switch to the Staff tab."; errEl.style.display = "block"; return; }
+      if (loginRole === "staff" && isOwnerAcct) { errEl.textContent = "That's the owner account — switch to the Owner tab."; errEl.style.display = "block"; return; }
+      currentUser = { id: u.id, name: u.name, role: u.role || "staff" };
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ id: u.id })); } catch (e2) {}
+      setSessionName();
+      updateRoleUI();
+      showApp();
+      $("#authForm").reset();
+      toast(`Welcome back, ${u.name}.`);
+    }
+  });
+
+  $("#authToggleBtn").addEventListener("click", () => {
+    authMode = authMode === "login" ? "signup" : "login";
+    $("#authError").style.display = "none";
+    $("#authForm").reset();
+    updateAuthHeading();
+    $("#authName").focus();
+  });
+
+  $("#btnLogout").addEventListener("click", () => {
+    closeNavDrawer();
+    currentUser = null;
+    updateRoleUI();
+    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+    authMode = users.length ? "login" : "signup";
+    updateAuthHeading();
+    showAuth();
+    $("#authName").focus();
+    $all("nav.tabs button").forEach((b) => b.classList.remove("active"));
+    $all("section.pane").forEach((p) => p.classList.remove("active"));
+    $("nav.tabs button[data-pane='dashboard']").classList.add("active");
+    $("#pane-dashboard").classList.add("active");
+  });
+
+  // ---------- Trial / license gate ----------
+  // This copy is unlocked by whoever holds the unlock code below (only its SHA-256
+  // hash is stored here, not the code itself). Change TRIAL_DAYS and LICENSE_HASH
+  // per client before handing over a build, and keep that client's own code private.
+  const TRIAL_DAYS = 3;
+  const LICENSE_HASH = "b8a3bb9625f6a5198b60565c877ee35dc1c0ac181471cfc5bf26d82167b268ed";
+  const TRIAL_START_KEY = "bookshop-ledger-trial-start";
+  const LICENSED_KEY = "bookshop-ledger-licensed";
+
+  const normalizeCode = (s) => (s || "").trim().toUpperCase().replace(/\s+/g, "");
+
+  function isLicensed() {
+    try { return localStorage.getItem(LICENSED_KEY) === "1"; } catch (e) { return false; }
+  }
+  function hideTrialScreen() { $("#trialScreen").classList.remove("show"); }
+  function updateTrialBanner(remainingDays) {
+    const banner = $("#trialBanner");
+    if (remainingDays == null) { banner.classList.remove("show"); return; }
+    $("#trialBannerText").textContent = remainingDays <= 0 ? "Trial ending today" : `Trial — ${remainingDays} day${remainingDays === 1 ? "" : "s"} left`;
+    banner.classList.add("show");
+  }
+
+  function isTrialExpired() {
+    if (isLicensed()) return false;
+    let start;
+    try { start = localStorage.getItem(TRIAL_START_KEY); } catch (e) { start = null; }
+    if (!start) return false;
+    const elapsedDays = (Date.now() - parseInt(start, 10)) / (1000 * 60 * 60 * 24);
+    return elapsedDays >= TRIAL_DAYS;
+  }
+
+  // Opens the lock screen. When the trial has genuinely run out this is a hard
+  // block (no way back except a valid code). When opened early/voluntarily —
+  // via the banner's "Enter code" link — it offers a way to back out instead.
+  function openTrialScreen() {
+    const expired = isTrialExpired();
+    if (expired) {
+      $("#trialHeading").textContent = "Your trial has ended";
+      $("#trialSub").textContent = "This copy was a free trial. Enter your unlock code to keep using it.";
+      $("#trialCancelRow").style.display = "none";
+    } else {
+      $("#trialHeading").textContent = "Enter your unlock code";
+      $("#trialSub").textContent = "Already paid? Enter your code below to unlock the app now.";
+      $("#trialCancelRow").style.display = "block";
+    }
+    $("#trialScreen").classList.add("show");
+  }
+
+  $("#trialUnlockLink").addEventListener("click", () => openTrialScreen());
+  $("#trialCancel").addEventListener("click", () => hideTrialScreen());
+
+  function checkLicense() {
+    if (isLicensed()) { hideTrialScreen(); updateTrialBanner(null); return; }
+    let start;
+    try {
+      start = localStorage.getItem(TRIAL_START_KEY);
+      if (!start) {
+        start = String(Date.now());
+        localStorage.setItem(TRIAL_START_KEY, start);
+      }
+    } catch (e) {
+      start = String(Date.now());
+    }
+    const elapsedDays = (Date.now() - parseInt(start, 10)) / (1000 * 60 * 60 * 24);
+    const remaining = Math.max(0, Math.ceil(TRIAL_DAYS - elapsedDays));
+    if (elapsedDays >= TRIAL_DAYS) {
+      openTrialScreen();
+    } else {
+      hideTrialScreen();
+      updateTrialBanner(remaining);
+    }
+  }
+
+  $("#trialForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const code = normalizeCode($("#trialCode").value);
+    const errEl = $("#trialError");
+    errEl.style.display = "none";
+    if (!code) { errEl.textContent = "Enter your unlock code."; errEl.style.display = "block"; return; }
+    const hash = await hashPassword(code);
+    if (hash === LICENSE_HASH) {
+      try { localStorage.setItem(LICENSED_KEY, "1"); } catch (e2) {}
+      hideTrialScreen();
+      updateTrialBanner(null);
+      $("#trialForm").reset();
+      toast("Unlocked — thanks!");
+    } else {
+      errEl.textContent = "That code doesn't match. Check with the seller.";
+      errEl.style.display = "block";
+    }
+  });
+
+  // ---------- Sync status (diagnostic) ----------
+  let writeError = null;
+  function setSync(state, detail) {
+    if (state === "ok" && writeError) return;
+    const pill = document.getElementById("syncPill");
+    if (!pill) return;
+    pill.className = "sync-pill " + state;
+    pill.innerHTML = '<span class="dot">●</span> <span class="lbl">' + (state === "ok" ? "Synced" : state === "wait" ? "Connecting…" : state === "offline" ? "Offline" : "Not syncing") + '</span>';
+    pill.title = detail || "";
+    pill.dataset.detail = detail || "";
+    const line = document.getElementById("syncDetail");
+    if (line) { line.textContent = detail || ""; line.style.display = state === "error" ? "block" : "none"; }
+  }
+  function syncFail(e) {
+    writeError = (e && (e.code || e.message)) || "unknown error";
+    logDevError("Cloud save failed: " + writeError);
+    setSync("error", "Save to cloud failed: " + writeError);
+    toast("Not saved to cloud: " + writeError);
+  }
+  function syncSaved() {
+    writeError = null;
+    setSync("ok", "Saved to cloud");
+  }
+
+  // ---------- DB wiring ----------
+  // The Firebase code is fetched at runtime. If one source is blocked or offline we try
+  // the next, and keep retrying in the background so the app connects on its own later.
+  const FB_VER = "10.12.2";
+  const FB_SOURCES = [
+    "https://www.gstatic.com/firebasejs/" + FB_VER + "/",
+    "https://cdn.jsdelivr.net/npm/firebase@" + FB_VER + "/",
+    "https://unpkg.com/firebase@" + FB_VER + "/",
+  ];
+  const FB_CONFIG = {
+    apiKey: "AIzaSyAJnuCOizblOFrcIvygAlV0D7_M98ZyT6c",
+    authDomain: "rubyrush-609b6.firebaseapp.com",
+    projectId: "rubyrush-609b6",
+    storageBucket: "rubyrush-609b6.firebasestorage.app",
+    messagingSenderId: "490646836441",
+    appId: "1:490646836441:web:09f2f6915e66d2f8a49ac8",
+  };
+
+  function loadScript(src, ms) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      let done = false;
+      const t = setTimeout(() => finish(false), ms);
+      function finish(ok) {
+        if (done) return;
+        done = true;
+        clearTimeout(t);
+        if (ok) resolve(); else { el.remove(); reject(new Error("could not load " + src)); }
+      }
+      el.src = src;
+      el.onload = () => finish(true);
+      el.onerror = () => finish(false);
+      document.head.appendChild(el);
+    });
+  }
+
+  async function loadFirebase() {
+    const ready = () => typeof firebase !== "undefined" && firebase.firestore;
+    if (ready()) return true;
+    for (const base of FB_SOURCES) {
+      try {
+        if (typeof firebase === "undefined") await loadScript(base + "firebase-app-compat.js", 12000);
+        await loadScript(base + "firebase-firestore-compat.js", 20000);
+        if (ready()) return true;
+      } catch (e) { /* try the next source */ }
+    }
+    return false;
+  }
+
+  let initBusy = false;
+  let retryTimer = null;
+  let onlineHooked = false;
+  let cloudGaveUp = false;      // set when the cloud refused us (e.g. rules) — no point retrying
+  let localAtConnect = null;    // data made offline, uploaded once the cloud first answers
+
+  function scheduleRetry() {
+    const attempt = () => {
+      if (db || cloudGaveUp) { clearInterval(retryTimer); retryTimer = null; return; }
+      initDb(true);
+    };
+    if (!retryTimer) retryTimer = setInterval(attempt, 20000);
+    if (!onlineHooked) {
+      onlineHooked = true;
+      window.addEventListener("online", () => { if (!db && !cloudGaveUp) initDb(true); });
+    }
+  }
+
+  function mergeLocalInto(colName, snap, localArr) {
+    // Only trust a real server answer, never a cached one, so nothing newer gets overwritten.
+    if (!localAtConnect || !db || snap.metadata.fromCache) return;
+    const key = "merged_" + colName;
+    if (localAtConnect[key]) return;
+    localAtConnect[key] = true;
+    const ids = new Set(snap.docs.map((d) => d.id));
+    localArr.forEach((x) => {
+      if (!ids.has(x.id)) db.collection(colName).doc(x.id).set(stripId(x)).then(syncSaved, syncFail);
+    });
+  }
+
+  async function initDb(isRetry) {
+    if (initBusy) return;
+    initBusy = true;
+    try { await connectCloud(isRetry); } finally { initBusy = false; }
+  }
+
+  async function connectCloud(isRetry) {
+    let firebaseDb = null;
+    const loaded = await loadFirebase();
+    if (!loaded) {
+      setSync("offline", "Can't reach the Firebase scripts — working offline, retrying automatically.");
+    } else {
+      try {
+        if (!(firebase.apps && firebase.apps.length)) firebase.initializeApp(FB_CONFIG);
+        firebaseDb = firebase.firestore();
+        // Keep a local copy and queue writes made offline.
+        try { firebaseDb.enablePersistence({ synchronizeTabs: true }).catch(() => {}); } catch (e) {}
+      } catch (e) {
+        firebaseDb = null;
+        setSync("error", "Firebase init failed: " + (e && e.message ? e.message : e));
+      }
+    }
+
+    if (firebaseDb) {
+      db = firebaseDb;
+    } else {
+      try {
+        db = await claude.use("db");
+      } catch (e) {
+        db = null;
+      }
+    }
+
+    if (!db) {
+      if (!isRetry) {
+        loadLocal();
+        renderAll();
+        onUsersReady();
+        $("#offlineBanner").classList.add("show");
+      }
+      scheduleRetry();
+      return;
+    }
+
+    if (isRetry) {
+      // We were running on this device only; keep that data so it can be uploaded.
+      localAtConnect = { books: books.slice(), sales: sales.slice(), users: users.slice() };
+      $("#offlineBanner").classList.remove("show");
+      setSync("wait", "Connecting…");
+    }
+
+    let fellBack = false;
+    function fallBackToLocal(err) {
+      if (fellBack) return;
+      fellBack = true;
+      cloudGaveUp = true;
+      setSync("error", "Cloud read failed: " + (err && (err.code || err.message) ? (err.code || err.message) : "unknown error"));
+      db = null;
+      loadLocal();
+      renderAll();
+      onUsersReady();
+      $("#offlineBanner").classList.add("show");
+    }
+    db.collection("books").onSnapshot(
+      (snap) => {
+        if (fellBack) return;
+        books = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        setSync(snap.metadata.fromCache ? "wait" : "ok", snap.metadata.fromCache ? "Waiting for the server…" : "Live — connected to cloud");
+        if (localAtConnect) mergeLocalInto("books", snap, localAtConnect.books);
+        renderAll();
+      },
+      fallBackToLocal
+    );
+    db.collection("sales").onSnapshot(
+      (snap) => {
+        if (fellBack) return;
+        sales = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        if (localAtConnect) mergeLocalInto("sales", snap, localAtConnect.sales);
+        renderAll();
+      },
+      fallBackToLocal
+    );
+    db.collection("users").onSnapshot(
+      (snap) => {
+        if (fellBack) return;
+        users = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        if (localAtConnect) mergeLocalInto("users", snap, localAtConnect.users);
+        onUsersReady();
+        renderAll();
+      },
+      fallBackToLocal
+    );
+  }
+
+  checkLicense();
+  renderAll();
+  initDb(false);
+})();
+</script>
+<script>
+/* ---------- Update checker ----------
+   On each release: bump APP_VERSION below AND "latest" in version.json in your repo.
+   Set VERSION_URL to your repo's raw version.json link. */
+(function () {
+  "use strict";
+  const APP_VERSION = "1.0.0";
+  const VERSION_URL = "https://raw.githubusercontent.com/danicodescmd2/TheLedger-Android/main/version.json";
+
+  const newer = (a, b) => {
+    const x = String(a).split(".").map(Number), y = String(b).split(".").map(Number);
+    for (let i = 0; i < 3; i++) {
+      if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
+    }
+    return false;
+  };
+
+  async function checkForUpdate() {
+    if (VERSION_URL.indexOf("YOU/REPO") !== -1) return; // not configured yet
+    try {
+      const r = await fetch(VERSION_URL + "?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) return;
+      const v = await r.json();
+      if (!v || !v.latest || !newer(v.latest, APP_VERSION)) return;
+      if (document.getElementById("updateBar")) return;
+
+      const bar = document.createElement("div");
+      bar.id = "updateBar";
+      bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));background:#A97E2F;color:#fff;z-index:99999;display:flex;gap:12px;justify-content:space-between;align-items:center;font:15px system-ui,sans-serif;box-shadow:0 -2px 8px rgba(0,0,0,.2)";
+
+      const msg = document.createElement("span");
+      msg.textContent = "Update " + v.latest + " available" + (v.notes ? ": " + v.notes : "");
+      msg.style.flex = "1";
+
+      const link = document.createElement("a");
+      link.href = v.url || "#";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Update";
+      link.style.cssText = "color:#fff;font-weight:bold;text-decoration:underline";
+
+      const close = document.createElement("button");
+      close.textContent = "\u2715";
+      close.setAttribute("aria-label", "Dismiss");
+      close.style.cssText = "background:none;border:0;color:#fff;font-size:18px";
+      close.onclick = () => bar.remove();
+
+      bar.append(msg, link, close);
+      document.body.appendChild(bar);
+    } catch (e) { /* offline or blocked: ignore */ }
+  }
+
+  window.addEventListener("load", () => setTimeout(checkForUpdate, 2000));
+})();
+</script>
+</body>
+</html>
