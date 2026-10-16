@@ -1,5 +1,6 @@
 package com.theledger.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,18 +12,20 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private WebView web;
 
     public class Bridge {
         @JavascriptInterface
         public void printPage() {
-            runOnUiThread(() -> {
-                PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
-                pm.print("Sales log", web.createPrintDocumentAdapter("Sales log"),
-                        new PrintAttributes.Builder().build());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
+                    pm.print("Sales log", web.createPrintDocumentAdapter("Sales log"),
+                            new PrintAttributes.Builder().build());
+                }
             });
         }
     }
@@ -59,4 +62,4 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (web.canGoBack()) web.goBack(); else super.onBackPressed();
     }
-  }
+}
